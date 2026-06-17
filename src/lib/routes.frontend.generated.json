@@ -1,0 +1,50 @@
+[
+  {
+    "href": "/",
+    "displayRoute": "/"
+  },
+  {
+    "href": "/[slug]",
+    "displayRoute": "/:slug"
+  },
+  {
+    "href": "/about",
+    "displayRoute": "/about"
+  },
+  {
+    "href": "/blog",
+    "displayRoute": "/blog"
+  },
+  {
+    "href": "/blog/[slug]",
+    "displayRoute": "/blog/:slug"
+  },
+  {
+    "href": "/categories/[slug]",
+    "displayRoute": "/categories/:slug"
+  },
+  {
+    "href": "/contact",
+    "displayRoute": "/contact"
+  },
+  {
+    "href": "/login",
+    "displayRoute": "/login"
+  },
+  {
+    "href": "/pages/[slug]",
+    "displayRoute": "/pages/:slug"
+  },
+  {
+    "href": "/services",
+    "displayRoute": "/services"
+  },
+  {
+    "href": "/services/[slug]",
+    "displayRoute": "/services/:slug"
+  },
+  {
+    "href": "/test",
+    "displayRoute": "/test"
+  }
+]

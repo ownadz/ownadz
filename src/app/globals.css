@@ -22,5 +22,81 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  line-height: 1.55;
 }
+
+/* Improve typography for homepage sections (based on existing ownadz-* classes) */
+.ownadz-hero,
+.ownadz-trusted,
+.ownadz-about,
+.ownadz_digital,
+.ownadz-result,
+.ownadz-process,
+.ownadz_cta,
+.ownadz-contact {
+  font-family: inherit;
+}
+
+/* Headings: slightly tighter leading for a premium look */
+.ownadz-hero h1,
+.ownadz-title,
+.ownadz-about h2,
+.ownadz-contact h2,
+.ownadz-result h2,
+.ownadz-process h2,
+.ownadz_cta h2,
+.ownadz_digital h2 {
+  letter-spacing: -0.02em;
+}
+
+/* Reduce oversized headings without touching JSX tailwind classes (we override with CSS) */
+.ownadz-hero h1 {
+  font-size: clamp(2.25rem, 4vw, 3.75rem) !important;
+  line-height: 1.05;
+}
+
+.ownadz-about h2,
+.ownadz-contact h2,
+.ownadz-result h2,
+.ownadz-process h2,
+.ownadz_cta h2,
+.ownadz_digital h2,
+.ownadz-title {
+  font-size: clamp(1.9rem, 2.8vw, 3.2rem) !important;
+  line-height: 1.08;
+}
+
+.ownadz-result-card-number {
+  line-height: 1;
+}
+
+.ownadz-hero h3,
+.ownadz-about h3,
+.ownadz_digital h3,
+.ownadz-result h3,
+.ownadz-process h3,
+.ownadz-contact h3 {
+  line-height: 1.15;
+}
+
+/* Reduce very big numeric/card headings (results) */
+.ownadz-result-card-number,
+.ownadz-result-card h3 {
+  font-size: clamp(1.9rem, 3.4vw, 3.0rem) !important;
+}
+
+
+/* Paragraph/text: slightly higher line-height for readability */
+.ownadz-description,
+.ownadz-about p,
+.ownadz_digital p,
+.ownadz-result p,
+.ownadz-process p,
+.ownadz-contact p,
+.ownadz_cta p {
+  line-height: 1.7;
+}
+
+
