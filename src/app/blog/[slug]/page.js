@@ -1,6 +1,6 @@
 import { getPostBySlug } from "@/services/postService";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 import { getImagePreview } from "@/services/storageService";
 import { FaRegCalendarAlt } from "react-icons/fa";

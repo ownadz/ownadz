@@ -1,7 +1,7 @@
 import { getMainPageBySlug } from "@/services/mainPageManagementService";
 import { notFound } from "next/navigation";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 import routesManifest from "@/lib/routes.frontend.generated.json";
 

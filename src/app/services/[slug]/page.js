@@ -2,7 +2,7 @@ import {
   getServiceBySlug,
 } from "@/services/serviceService";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 // Required for `output: 'export'`
 // (prevents Next from failing the build for missing static params)
