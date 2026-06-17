@@ -20,6 +20,12 @@ export default function DeleteCategoryButton({
 
     await deleteCategory(id);
 
+    await fetch("/api/revalidate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ path: "/admin/categories" }),
+    });
+
     router.refresh();
   };
 

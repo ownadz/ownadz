@@ -13,6 +13,13 @@ export default function DeleteMainPageButton({ id }) {
 
     try {
       await deleteMainPage(id);
+
+      await fetch("/api/revalidate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ path: "/admin/pages" }),
+      });
+
       alert("Main page deleted successfully!");
       router.refresh();
     } catch (error) {

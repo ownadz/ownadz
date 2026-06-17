@@ -1,6 +1,7 @@
 import { databases } from "@/lib/appwrite/client";
 import { APPWRITE_CONFIG } from "@/lib/appwrite/config";
 import { ID, Query } from "appwrite";
+import { unstable_noStore as noStore } from "next/cache";
 
 export const createPage = async (data) => {
   return await databases.createDocument(
@@ -12,6 +13,7 @@ export const createPage = async (data) => {
 };
 
 export const getPages = async () => {
+  noStore();
   return await databases.listDocuments(
     APPWRITE_CONFIG.databaseId,
     APPWRITE_CONFIG.pagesCollectionId

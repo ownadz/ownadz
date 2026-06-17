@@ -1,6 +1,7 @@
 import { databases } from "@/lib/appwrite/client";
 import { APPWRITE_CONFIG } from "@/lib/appwrite/config";
-import { ID, Query } from "appwrite";
+import { ID } from "appwrite";
+import { unstable_noStore as noStore } from "next/cache";
 
 export const createService = async (data) => {
   return await databases.createDocument(
@@ -12,6 +13,7 @@ export const createService = async (data) => {
 };
 
 export const getServices = async () => {
+  noStore();
   return await databases.listDocuments(
     APPWRITE_CONFIG.databaseId,
     APPWRITE_CONFIG.servicesCollectionId
@@ -19,32 +21,25 @@ export const getServices = async () => {
 };
 
 export const getService = async (id) => {
-
+  noStore();
   return await databases.getDocument(
     APPWRITE_CONFIG.databaseId,
     APPWRITE_CONFIG.servicesCollectionId,
     id
   );
-
 };
 
 export const getServiceBySlug = async (slug) => {
+  noStore();
   const response = await databases.listDocuments(
     APPWRITE_CONFIG.databaseId,
     APPWRITE_CONFIG.servicesCollectionId
   );
 
-  console.log(response.documents);
-
-  return response.documents.find(
-    (item) => item.slug === slug
-  );
+  return response.documents.find((item) => item.slug === slug);
 };
 
-export const updateService = async (
-  id,
-  data
-) => {
+export const updateService = async (id, data) => {
   return await databases.updateDocument(
     APPWRITE_CONFIG.databaseId,
     APPWRITE_CONFIG.servicesCollectionId,
@@ -62,6 +57,7 @@ export const deleteService = async (id) => {
 };
 
 export const getServicesCount = async () => {
+  noStore();
   const response = await databases.listDocuments(
     APPWRITE_CONFIG.databaseId,
     APPWRITE_CONFIG.servicesCollectionId
@@ -69,3 +65,4 @@ export const getServicesCount = async () => {
 
   return response.total;
 };
+

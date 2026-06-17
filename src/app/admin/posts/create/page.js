@@ -140,6 +140,11 @@ blog_faq_des5,
     });
 
     alert("Post Created Successfully");
+    await fetch("/api/revalidate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ path: "/admin/posts" }),
+    });
   } catch (error) {
     console.error(error);
     alert(error.message);

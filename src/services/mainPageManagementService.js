@@ -47,7 +47,10 @@ const expandMainPage = (doc) => {
   }
 };
 
+import { unstable_noStore as noStore } from "next/cache";
+
 export const getAllMainPages = async () => {
+  noStore();
   try {
     const response = await databases.listDocuments(
       APPWRITE_CONFIG.databaseId,
@@ -64,6 +67,7 @@ export const getAllMainPages = async () => {
 };
 
 export const getMainPageBySlug = async (slug) => {
+  noStore();
   if (!slug) return null;
 
   try {

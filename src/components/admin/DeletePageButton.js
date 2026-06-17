@@ -19,6 +19,12 @@ export default function DeletePageButton({
 
     await deletePage(id);
 
+    await fetch("/api/revalidate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ path: "/admin/pages" }),
+    });
+
     router.refresh();
   };
 
