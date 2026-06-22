@@ -24,9 +24,11 @@ const [whyChooseOpen, setWhyChooseOpen] =
   const [faqOpen, setFaqOpen] = useState(false);
 
 const [bannerOpen, setBannerOpen] = useState(true);
+const [ourServiceOpen, setOurServiceOpen] = useState(false);
 
 const [aboutOpen, setAboutOpen] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
+  const [serviceProcessOpen, setServiceProcessOpen] = useState(false);
 
   const router = useRouter();
 
@@ -286,16 +288,69 @@ const [service_faq_q8, setServiceFaqQ8] =
 const [service_faq_d8, setServiceFaqD8] =
   useState(service?.service_faq_d8 || "");
 
+  const [our_service_main_title, setOurServiceMainTitle] = useState(service?.our_service_main_title || "");
+const [our_service_main_des, setOurServiceMainDes] = useState(service?.our_service_main_des || "");
+
+const [our_service_list1, setOurServiceList1] = useState(service?.our_service_list1 || "");
+const [our_service_list2, setOurServiceList2] = useState(service?.our_service_list2 || "");
+const [our_service_list3, setOurServiceList3] = useState(service?.our_service_list3 || "");
+const [our_service_list4, setOurServiceList4] = useState(service?.our_service_list4 || "");
+const [our_service_list5, setOurServiceList5] = useState(service?.our_service_list5 || "");
+const [our_service_list6, setOurServiceList6] = useState(service?.our_service_list6 || "");
+const [our_service_list7, setOurServiceList7] = useState(service?.our_service_list7 || "");
+const [our_service_list8, setOurServiceList8] = useState(service?.our_service_list8 || "");
+const [our_service_list9, setOurServiceList9] = useState(service?.our_service_list9 || "");
+const [our_service_list10, setOurServiceList10] = useState(service?.our_service_list10 || "");
+const [our_service_list11, setOurServiceList11] = useState(service?.our_service_list11 || "");
+const [our_service_list12, setOurServiceList12] = useState(service?.our_service_list12 || "");
+const [our_service_list13, setOurServiceList13] = useState(service?.our_service_list13 || "");
+const [our_service_list14, setOurServiceList14] = useState(service?.our_service_list14 || "");
+const [our_service_list15, setOurServiceList15] = useState(service?.our_service_list15 || "");
+const [our_service_list16, setOurServiceList16] = useState(service?.our_service_list16 || "");
+const [our_service_list17, setOurServiceList17] = useState(service?.our_service_list17 || "");
+const [our_service_list18, setOurServiceList18] = useState(service?.our_service_list18 || "");
+const [our_service_list19, setOurServiceList19] = useState(service?.our_service_list19 || "");
+const [our_service_list20, setOurServiceList20] = useState(service?.our_service_list20 || "");
+
+const [service_canonical, setServiceCanonical] = useState(service?.service_canonical || "");
+const [service_og_title, setServiceOgTitle] = useState(service?.service_og_title || "");
+const [service_og_description, setServiceOgDescription] = useState(service?.service_og_description || "");
+const [service_og_type, setServiceOgType] = useState(service?.service_og_type || "");
+const [service_og_url, setServiceOgUrl] = useState(service?.service_og_url || "");
+const [service_og_site_name, setServiceOgSiteName] = useState(service?.service_og_site_name || "");
+const [service_og_image, setServiceOgImage] = useState(null);
+const [service_schema, setServiceSchema] = useState(service?.service_schema || "");
+
+const [service_process_title, setServiceProcessTitle] = useState(service?.service_process_title || "");
+const [service_process_des, setServiceProcessDes] = useState(service?.service_process_des || "");
+
+const [service_process_title1, setServiceProcessTitle1] = useState(service?.service_process_title1 || "");
+const [service_process_des1, setServiceProcessDes1] = useState(service?.service_process_des1 || "");
+
+const [service_process_title2, setServiceProcessTitle2] = useState(service?.service_process_title2 || "");
+const [service_process_des2, setServiceProcessDes2] = useState(service?.service_process_des2 || "");
+
+const [service_process_title3, setServiceProcessTitle3] = useState(service?.service_process_title3 || "");
+const [service_process_des3, setServiceProcessDes3] = useState(service?.service_process_des3 || "");
+
+const [service_process_title4, setServiceProcessTitle4] = useState(service?.service_process_title4 || "");
+const [service_process_des4, setServiceProcessDes4] = useState(service?.service_process_des4 || "");
+
 const [service_success_des4, setServiceSuccessDes4] =
   useState(service?.service_success_des4 || "");
- const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
 
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
+    try {
+
+    // Ensure SEO values from SEO tab are actually saved to service document
+    // (Previously the SEO tab state exists, but the submit payload might not include all fields correctly)
+    // Also ensure we persist latest slug (seo tab allows editing slug)
 
     let featuredImageId =
       service.featuredImage;
+
 
     let bannerImageId =
       service.service_banner_img;
@@ -480,6 +535,49 @@ service_faq_d7,
 
 service_faq_q8,
 service_faq_d8,
+
+our_service_main_title,
+our_service_main_des,
+our_service_list1,
+our_service_list2,
+our_service_list3,
+our_service_list4,
+our_service_list5,
+our_service_list6,
+our_service_list7,
+our_service_list8,
+our_service_list9,
+our_service_list10,
+our_service_list11,
+our_service_list12,
+our_service_list13,
+our_service_list14,
+our_service_list15,
+our_service_list16,
+our_service_list17,
+our_service_list18,
+our_service_list19,
+our_service_list20,
+
+service_canonical,
+service_og_title,
+service_og_description,
+service_og_type,
+service_og_url,
+service_og_site_name,
+service_og_image,
+service_schema,
+
+service_process_title,
+service_process_des,
+service_process_title1,
+service_process_des1,
+service_process_title2,
+service_process_des2,
+service_process_title3,
+service_process_des3,
+service_process_title4,
+service_process_des4,
       }
     );
 
@@ -1244,6 +1342,206 @@ service_faq_d8,
   )}
 
 </div>
+
+
+
+        <div className="border border-slate-200 rounded-2xl overflow-hidden bg-dark shadow-sm">
+  <button
+    type="button"
+    onClick={() => setOurServiceOpen(!ourServiceOpen)}
+    className="w-full flex items-center justify-between px-6 py-5 bg-black text-white"
+  >
+    <div className="text-left">
+      <h2 className="text-xl font-bold">Our Service Section</h2>
+      <p className="text-sm text-slate-300 mt-1">
+        Manage Our Service Content
+      </p>
+    </div>
+
+    <span className="text-2xl font-bold">
+      {ourServiceOpen ? "−" : "+"}
+    </span>
+  </button>
+
+  {ourServiceOpen && (
+    <div className="p-6 space-y-8">
+      {/* Main Content */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold border-b pb-2">
+          Our Service Content
+        </h3>
+
+        <input
+          type="text"
+          value={our_service_main_title}
+          onChange={(e) => setOurServiceMainTitle(e.target.value)}
+          placeholder="Our Service Main Title"
+          className="w-full border p-3 rounded-xl"
+        />
+
+        <textarea
+          value={our_service_main_des}
+          onChange={(e) => setOurServiceMainDes(e.target.value)}
+          placeholder="Our Service Main Description"
+          className="w-full border p-3 rounded-xl min-h-[120px]"
+        />
+      </div>
+
+      {/* Service List */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold border-b pb-2">
+          Our Service List
+        </h3>
+
+        <div className="grid md:grid-cols-2 gap-4">
+          <input
+            type="text"
+            value={our_service_list1}
+            onChange={(e) => setOurServiceList1(e.target.value)}
+            placeholder="Service List 1"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list2}
+            onChange={(e) => setOurServiceList2(e.target.value)}
+            placeholder="Service List 2"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list3}
+            onChange={(e) => setOurServiceList3(e.target.value)}
+            placeholder="Service List 3"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list4}
+            onChange={(e) => setOurServiceList4(e.target.value)}
+            placeholder="Service List 4"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list5}
+            onChange={(e) => setOurServiceList5(e.target.value)}
+            placeholder="Service List 5"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list6}
+            onChange={(e) => setOurServiceList6(e.target.value)}
+            placeholder="Service List 6"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list7}
+            onChange={(e) => setOurServiceList7(e.target.value)}
+            placeholder="Service List 7"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list8}
+            onChange={(e) => setOurServiceList8(e.target.value)}
+            placeholder="Service List 8"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list9}
+            onChange={(e) => setOurServiceList9(e.target.value)}
+            placeholder="Service List 9"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list10}
+            onChange={(e) => setOurServiceList10(e.target.value)}
+            placeholder="Service List 10"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list11}
+            onChange={(e) => setOurServiceList11(e.target.value)}
+            placeholder="Service List 11"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list12}
+            onChange={(e) => setOurServiceList12(e.target.value)}
+            placeholder="Service List 12"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list13}
+            onChange={(e) => setOurServiceList13(e.target.value)}
+            placeholder="Service List 13"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list14}
+            onChange={(e) => setOurServiceList14(e.target.value)}
+            placeholder="Service List 14"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list15}
+            onChange={(e) => setOurServiceList15(e.target.value)}
+            placeholder="Service List 15"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list16}
+            onChange={(e) => setOurServiceList16(e.target.value)}
+            placeholder="Service List 16"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list17}
+            onChange={(e) => setOurServiceList17(e.target.value)}
+            placeholder="Service List 17"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list18}
+            onChange={(e) => setOurServiceList18(e.target.value)}
+            placeholder="Service List 18"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list19}
+            onChange={(e) => setOurServiceList19(e.target.value)}
+            placeholder="Service List 19"
+            className="w-full border p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            value={our_service_list20}
+            onChange={(e) => setOurServiceList20(e.target.value)}
+            placeholder="Service List 20"
+            className="w-full border p-3 rounded-xl"
+          />
+        </div>
+      </div>
+    </div>
+  )}
+</div>
+
+
+
 <div className="border border-slate-200 rounded-2xl overflow-hidden bg-dark shadow-sm">
 
   <button
@@ -1435,6 +1733,194 @@ service_faq_d8,
   )}
 
 </div>
+
+
+<div className="border border-slate-200 rounded-2xl overflow-hidden bg-dark shadow-sm">
+  <button
+    type="button"
+    onClick={() => setServiceProcessOpen(!serviceProcessOpen)}
+    className="w-full flex items-center justify-between px-6 py-5 bg-black text-white"
+  >
+    <div className="text-left">
+      <h2 className="text-xl font-bold">Service Process Section</h2>
+      <p className="text-sm text-slate-300 mt-1">
+        Manage Service Process Content
+      </p>
+    </div>
+
+    <span className="text-2xl font-bold">
+      {serviceProcessOpen ? "−" : "+"}
+    </span>
+  </button>
+
+  {serviceProcessOpen && (
+    <div className="p-6 space-y-8">
+      {/* Main Content */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold border-b pb-2">
+          Process Section Content
+        </h3>
+
+        <div className="space-y-2">
+          <label className="block text-sm font-semibold text-white">
+            Process Main Title
+          </label>
+          <input
+            type="text"
+            value={service_process_title}
+            onChange={(e) => setServiceProcessTitle(e.target.value)}
+            placeholder="Process Main Title"
+            className="w-full border p-3 rounded-xl"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label className="block text-sm font-semibold text-white">
+            Process Main Description
+          </label>
+          <textarea
+            value={service_process_des}
+            onChange={(e) => setServiceProcessDes(e.target.value)}
+            placeholder="Process Main Description"
+            className="w-full border p-3 rounded-xl min-h-[120px]"
+          />
+        </div>
+      </div>
+
+      {/* Process Steps */}
+      <div className="space-y-6">
+        <h3 className="text-lg font-semibold border-b pb-2">
+          Process Steps
+        </h3>
+
+        <div className="grid gap-6">
+          {/* Step 1 */}
+          <div className="border border-slate-700 rounded-2xl p-5 space-y-4">
+            <h4 className="text-lg font-semibold text-white">Step 1</h4>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-white">
+                Step 1 Title
+              </label>
+              <input
+                type="text"
+                value={service_process_title1}
+                onChange={(e) => setServiceProcessTitle1(e.target.value)}
+                placeholder="Step 1 Title"
+                className="w-full border p-3 rounded-xl"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-white">
+                Step 1 Description
+              </label>
+              <textarea
+                value={service_process_des1}
+                onChange={(e) => setServiceProcessDes1(e.target.value)}
+                placeholder="Step 1 Description"
+                className="w-full border p-3 rounded-xl min-h-[120px]"
+              />
+            </div>
+          </div>
+
+          {/* Step 2 */}
+          <div className="border border-slate-700 rounded-2xl p-5 space-y-4">
+            <h4 className="text-lg font-semibold text-white">Step 2</h4>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-white">
+                Step 2 Title
+              </label>
+              <input
+                type="text"
+                value={service_process_title2}
+                onChange={(e) => setServiceProcessTitle2(e.target.value)}
+                placeholder="Step 2 Title"
+                className="w-full border p-3 rounded-xl"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-white">
+                Step 2 Description
+              </label>
+              <textarea
+                value={service_process_des2}
+                onChange={(e) => setServiceProcessDes2(e.target.value)}
+                placeholder="Step 2 Description"
+                className="w-full border p-3 rounded-xl min-h-[120px]"
+              />
+            </div>
+          </div>
+
+          {/* Step 3 */}
+          <div className="border border-slate-700 rounded-2xl p-5 space-y-4">
+            <h4 className="text-lg font-semibold text-white">Step 3</h4>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-white">
+                Step 3 Title
+              </label>
+              <input
+                type="text"
+                value={service_process_title3}
+                onChange={(e) => setServiceProcessTitle3(e.target.value)}
+                placeholder="Step 3 Title"
+                className="w-full border p-3 rounded-xl"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-white">
+                Step 3 Description
+              </label>
+              <textarea
+                value={service_process_des3}
+                onChange={(e) => setServiceProcessDes3(e.target.value)}
+                placeholder="Step 3 Description"
+                className="w-full border p-3 rounded-xl min-h-[120px]"
+              />
+            </div>
+          </div>
+
+          {/* Step 4 */}
+          <div className="border border-slate-700 rounded-2xl p-5 space-y-4">
+            <h4 className="text-lg font-semibold text-white">Step 4</h4>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-white">
+                Step 4 Title
+              </label>
+              <input
+                type="text"
+                value={service_process_title4}
+                onChange={(e) => setServiceProcessTitle4(e.target.value)}
+                placeholder="Step 4 Title"
+                className="w-full border p-3 rounded-xl"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-white">
+                Step 4 Description
+              </label>
+              <textarea
+                value={service_process_des4}
+                onChange={(e) => setServiceProcessDes4(e.target.value)}
+                placeholder="Step 4 Description"
+                className="w-full border p-3 rounded-xl min-h-[120px]"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+</div>
+
+
+
 <div className="border border-slate-200 rounded-2xl overflow-hidden bg-dark shadow-sm">
 
   <button
@@ -1688,80 +2174,200 @@ service_faq_d8,
       {activeTab === "seo" && (
 
         <div className="space-y-5 border border-slate-200 rounded-2xl p-6 bg-dark shadow-sm">
+  <h2 className="text-xl font-bold">SEO Settings</h2>
 
-          <h2 className="text-xl font-bold">
-            SEO Settings
-          </h2>
+  {/* Title */}
+  <div className="space-y-2">
+    <label className="block text-sm font-semibold text-white">
+      Title
+    </label>
+    <input
+      type="text"
+      placeholder="Title"
+      value={title}
+      onChange={(e) => setTitle(e.target.value)}
+      className="w-full border p-3 rounded-xl"
+    />
+  </div>
 
-          <input
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={(e) =>
-              setTitle(e.target.value)
-            }
-            className="w-full border p-3 rounded-xl"
-          />
+  {/* Slug */}
+  <div className="space-y-2">
+    <label className="block text-sm font-semibold text-white">
+      Slug
+    </label>
+    <input
+      type="text"
+      placeholder="Slug"
+      value={slug}
+      onChange={(e) => setSlug(e.target.value)}
+      className="w-full border p-3 rounded-xl"
+    />
+  </div>
 
-          <input
-            type="text"
-            placeholder="Slug"
-            value={slug}
-            onChange={(e) =>
-              setSlug(e.target.value)
-            }
-            className="w-full border p-3 rounded-xl"
-          />
+  {/* Content */}
+  <div className="space-y-2">
+    <label className="block text-sm font-semibold text-white">
+      Content
+    </label>
+    <textarea
+      placeholder="Content"
+      value={content}
+      onChange={(e) => setContent(e.target.value)}
+      className="w-full border p-3 rounded-xl min-h-[180px]"
+    />
+  </div>
 
-          <textarea
-            placeholder="Content"
-            value={content}
-            onChange={(e) =>
-              setContent(e.target.value)
-            }
-            className="w-full border p-3 rounded-xl min-h-[180px]"
-          />
+  {/* SEO Title */}
+  <div className="space-y-2">
+    <label className="block text-sm font-semibold text-white">
+      SEO Title
+    </label>
+    <input
+      type="text"
+      placeholder="SEO Title"
+      value={seoTitle}
+      onChange={(e) => setSeoTitle(e.target.value)}
+      className="w-full border p-3 rounded-xl"
+    />
+  </div>
 
-          <input
-            type="text"
-            placeholder="SEO Title"
-            value={seoTitle}
-            onChange={(e) =>
-              setSeoTitle(e.target.value)
-            }
-            className="w-full border p-3 rounded-xl"
-          />
+  {/* SEO Description */}
+  <div className="space-y-2">
+    <label className="block text-sm font-semibold text-white">
+      SEO Description
+    </label>
+    <textarea
+      placeholder="SEO Description"
+      value={seoDescription}
+      onChange={(e) => setSeoDescription(e.target.value)}
+      className="w-full border p-3 rounded-xl min-h-[120px]"
+    />
+  </div>
 
-          <textarea
-            placeholder="SEO Description"
-            value={seoDescription}
-            onChange={(e) =>
-              setSeoDescription(
-                e.target.value
-              )
-            }
-            className="w-full border p-3 rounded-xl min-h-[120px]"
-          />
+  {/* Canonical URL */}
+  <div className="space-y-2">
+    <label className="block text-sm font-semibold text-white">
+      Canonical URL
+    </label>
+    <input
+      type="text"
+      value={service_canonical}
+      onChange={(e) => setServiceCanonical(e.target.value)}
+      placeholder="Canonical URL"
+      className="w-full border p-3 rounded-xl"
+    />
+  </div>
 
-          <select
-            value={status}
-            onChange={(e) =>
-              setStatus(
-                e.target.value
-              )
-            }
-            className="w-full border p-3 rounded-xl"
-          >
-            <option value="published">
-              Published
-            </option>
+  {/* OG Title */}
+  <div className="space-y-2">
+    <label className="block text-sm font-semibold text-white">
+      OG Title
+    </label>
+    <input
+      type="text"
+      value={service_og_title}
+      onChange={(e) => setServiceOgTitle(e.target.value)}
+      placeholder="OG Title"
+      className="w-full border p-3 rounded-xl"
+    />
+  </div>
 
-            <option value="draft">
-              Draft
-            </option>
-          </select>
+  {/* OG Description */}
+  <div className="space-y-2">
+    <label className="block text-sm font-semibold text-white">
+      OG Description
+    </label>
+    <textarea
+      value={service_og_description}
+      onChange={(e) => setServiceOgDescription(e.target.value)}
+      placeholder="OG Description"
+      className="w-full border p-3 rounded-xl min-h-[120px]"
+    />
+  </div>
 
-        </div>
+  {/* OG Type */}
+  <div className="space-y-2">
+    <label className="block text-sm font-semibold text-white">
+      OG Type
+    </label>
+    <input
+      type="text"
+      value={service_og_type}
+      onChange={(e) => setServiceOgType(e.target.value)}
+      placeholder="OG Type (example: website)"
+      className="w-full border p-3 rounded-xl"
+    />
+  </div>
+
+  {/* OG URL */}
+  <div className="space-y-2">
+    <label className="block text-sm font-semibold text-white">
+      OG URL
+    </label>
+    <input
+      type="text"
+      value={service_og_url}
+      onChange={(e) => setServiceOgUrl(e.target.value)}
+      placeholder="OG URL"
+      className="w-full border p-3 rounded-xl"
+    />
+  </div>
+
+  {/* OG Site Name */}
+  <div className="space-y-2">
+    <label className="block text-sm font-semibold text-white">
+      OG Site Name
+    </label>
+    <input
+      type="text"
+      value={service_og_site_name}
+      onChange={(e) => setServiceOgSiteName(e.target.value)}
+      placeholder="OG Site Name"
+      className="w-full border p-3 rounded-xl"
+    />
+  </div>
+
+  {/* OG Image */}
+  <div className="space-y-2">
+    <label className="block text-sm font-semibold text-white">
+      OG Image
+    </label>
+    <input
+      type="text"
+      placeholder="OG Image Link"
+      onChange={(e) => setServiceOgImage(e.target.value)}
+      className="w-full border p-3 rounded-xl"
+    />
+  </div>
+
+  {/* Schema JSON */}
+  <div className="space-y-2">
+    <label className="block text-sm font-semibold text-white">
+      Schema JSON
+    </label>
+    <textarea
+      value={service_schema}
+      onChange={(e) => setServiceSchema(e.target.value)}
+      placeholder="Schema JSON"
+      className="w-full border p-3 rounded-xl min-h-[180px]"
+    />
+  </div>
+
+  {/* Status */}
+  <div className="space-y-2">
+    <label className="block text-sm font-semibold text-white">
+      Status
+    </label>
+    <select
+      value={status}
+      onChange={(e) => setStatus(e.target.value)}
+      className="w-full border p-3 rounded-xl"
+    >
+      <option value="published">Published</option>
+      <option value="draft">Draft</option>
+    </select>
+  </div>
+</div>
 
       )}
 

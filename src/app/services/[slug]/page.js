@@ -21,27 +21,46 @@ import { getHomepage } from "@/services/homepageService";
 
 
 export async function generateMetadata({
-  
   params,
 }) {
-
   const { slug } = await params;
+  const service = await getServiceBySlug(slug);
 
-  const service =
-    await getServiceBySlug(slug);
-
+  // Map Appwrite service SEO fields into Next.js metadata.
+  // These fields already exist in backend per your note.
   return {
-    title:
-      service?.seoTitle ||
-      service?.title,
+    title: service?.seoTitle || service?.title,
+    description: service?.seoDescription || undefined,
+    keywords: service?.seoKeywords || undefined,
 
-    description:
-      service?.seoDescription,
+    alternates: {
+      canonical: service?.service_canonical || undefined,
+    },
 
-    keywords:
-      service?.title,
+    openGraph: {
+      title: service?.service_og_title || service?.seoTitle || service?.title,
+      description: service?.service_og_description || service?.seoDescription || undefined,
+      // Next.js validates allowed OG types.
+      // Your backend value was saved as "Webiste" (typo). Normalize safely.
+      type:
+        typeof service?.service_og_type === "string"
+          ? service.service_og_type.trim().toLowerCase() === "webiste" // common typo
+            ? "website"
+            : service.service_og_type.trim().toLowerCase()
+          : "website",
+      url: service?.service_og_url || undefined,
+      siteName: service?.service_og_site_name || undefined,
+      images: service?.service_og_image
+        ? [{ url: service?.service_og_image, alt: service?.seoTitle || undefined }]
+        : undefined,
+    },
+
+
+    // Next doesn't parse arbitrary schema strings automatically; but we can pass it in scripts.
+    // We only set generic metadata here.
   };
 }
+
 
 export default async function ServiceDetailsPage({
   params,
@@ -231,114 +250,15 @@ export default async function ServiceDetailsPage({
 
     </div>
 
-    {/* Cards */}
 
-    <div className="ownadz_service_about_cards mt-20 grid gap-8 lg:grid-cols-3">
-
-  {/* Card 1 */}
-  <div className="ownadz_service_about_card group relative overflow-hidden rounded-[36px] border border-[#ffbd59]/20 bg-white transition-all duration-500 hover:-translate-y-4 hover:shadow-[0_35px_80px_rgba(255,189,89,0.20)]">
-
-    {service?.service_about_card_image1 && (
-      <div className="relative overflow-hidden">
-        <img
-          src={getImagePreview(service?.service_about_card_image1)}
-          alt={service?.service_about_cardtitle1}
-          className="h-[100px] w-full object-cover transition-all duration-700 group-hover:scale-110"
-        />
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-
-        <div className="absolute bottom-6 left-6">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ffbd59] text-xl font-black text-black shadow-lg">
-            01
-          </div>
-        </div>
-      </div>
-    )}
-
-    <div className="p-8">
-      <h3 className="text-3xl font-black leading-tight text-black transition-colors duration-300 group-hover:text-[#ffbd59]">
-        {service?.service_about_cardtitle1}
-      </h3>
-
-      <p className="mt-5 text-lg leading-8 text-black/70">
-        {service?.Service_about_carddes1}
-      </p>
-    </div>
-
-  </div>
-
-  {/* Card 2 */}
-  <div className="ownadz_service_about_card group relative overflow-hidden rounded-[36px] border border-[#ffbd59]/20 bg-white transition-all duration-500 hover:-translate-y-4 hover:shadow-[0_35px_80px_rgba(255,189,89,0.20)]">
-
-    {service?.service_about_card_image2 && (
-      <div className="relative overflow-hidden">
-        <img
-          src={getImagePreview(service?.service_about_card_image2)}
-          alt={service?.service_about_cardtitle2}
-          className="h-[100px] w-full object-cover transition-all duration-700 group-hover:scale-110"
-        />
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-
-        <div className="absolute bottom-6 left-6">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ffbd59] text-xl font-black text-black shadow-lg">
-            02
-          </div>
-        </div>
-      </div>
-    )}
-
-    <div className="p-8">
-      <h3 className="text-3xl font-black leading-tight text-black transition-colors duration-300 group-hover:text-[#ffbd59]">
-        {service?.service_about_cardtitle2}
-      </h3>
-
-      <p className="mt-5 text-lg leading-8 text-black/70">
-        {service?.Service_about_carddes2}
-      </p>
-    </div>
-
-  </div>
-
-  {/* Card 3 */}
-  <div className="ownadz_service_about_card group relative overflow-hidden rounded-[36px] border border-[#ffbd59]/20 bg-white transition-all duration-500 hover:-translate-y-4 hover:shadow-[0_35px_80px_rgba(255,189,89,0.20)]">
-
-    {service?.service_about_card_image3 && (
-      <div className="relative overflow-hidden">
-        <img
-          src={getImagePreview(service?.service_about_card_image3)}
-          alt={service?.service_about_cardtitle3}
-          className="h-[100px] w-full object-cover transition-all duration-700 group-hover:scale-110"
-        />
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-
-        <div className="absolute bottom-6 left-6">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ffbd59] text-xl font-black text-black shadow-lg">
-            03
-          </div>
-        </div>
-      </div>
-    )}
-
-    <div className="p-8">
-      <h3 className="text-3xl font-black leading-tight text-black transition-colors duration-300 group-hover:text-[#ffbd59]">
-        {service?.service_about_cardtitle3}
-      </h3>
-
-      <p className="mt-5 text-lg leading-8 text-black/70">
-        {service?.Service_about_carddes3}
-      </p>
-    </div>
-
-  </div>
-
-</div>
 
   </div>
 
 </section>
+
+
+
+
 
 <section className="ownadz_service_whychoose relative overflow-hidden py-24">
 
@@ -388,23 +308,7 @@ export default async function ServiceDetailsPage({
         {
           title: service?.service_whychoose_cardtitle4,
           des: service?.service_whychoose_carddes4,
-        },
-        {
-          title: service?.service_whychoose_cardtitle5,
-          des: service?.service_whychoose_carddes5,
-        },
-        {
-          title: service?.service_whychoose_cardtitle6,
-          des: service?.service_whychoose_carddes6,
-        },
-        {
-          title: service?.service_whychoose_cardtitle7,
-          des: service?.service_whychoose_carddes7,
-        },
-        {
-          title: service?.service_whychoose_cardtitle8,
-          des: service?.service_whychoose_carddes8,
-        },
+        }
       ].map((item, index) => (
 
         <div
@@ -446,6 +350,183 @@ export default async function ServiceDetailsPage({
 
 </section>
 
+
+<section className="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-24">
+  {/* Soft Background Effects */}
+  <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute -left-16 top-10 h-72 w-72 rounded-full bg-[#ffbd59]/20 blur-3xl"></div>
+    <div className="absolute right-0 top-1/4 h-80 w-80 rounded-full bg-[#ffbd59]/10 blur-3xl"></div>
+    <div className="absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-black/[0.03] blur-3xl"></div>
+  </div>
+
+  <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    {/* Header */}
+    <div className="mx-auto max-w-3xl text-center">
+      <h2 className="mt-5 text-3xl font-black leading-tight text-black sm:text-4xl lg:text-5xl">
+        {service?.our_service_main_title}
+      </h2>
+
+      <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-black/70 sm:text-lg sm:leading-8">
+        {service?.our_service_main_des}
+      </p>
+    </div>
+
+    {/* Services Grid */}
+    <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {[
+        service?.our_service_list1,
+        service?.our_service_list2,
+        service?.our_service_list3,
+        service?.our_service_list4,
+        service?.our_service_list5,
+        service?.our_service_list6,
+        service?.our_service_list7,
+        service?.our_service_list8,
+        service?.our_service_list9,
+        service?.our_service_list10,
+        service?.our_service_list11,
+        service?.our_service_list12,
+        service?.our_service_list13,
+        service?.our_service_list14,
+        service?.our_service_list15,
+        service?.our_service_list16,
+        service?.our_service_list17,
+        service?.our_service_list18,
+        service?.our_service_list19,
+        service?.our_service_list20,
+      ]
+        .filter(Boolean)
+        .map((item, index) => (
+          <div
+            key={index}
+            className="group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-black/10 bg-white px-5 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-500 hover:-translate-y-1 hover:border-[#ffbd59]/60 hover:shadow-[0_18px_40px_rgba(255,189,89,0.16)]"
+          >
+            {/* Check Icon */}
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#ffbd59]/20 transition-all duration-500 group-hover:bg-[#ffbd59]">
+              <svg
+                className="h-5 w-5 text-black"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 12l4 4L19 7"
+                />
+              </svg>
+            </div>
+
+            {/* Service Name */}
+            <h3 className="text-base font-bold leading-7 text-black sm:text-lg">
+              {item}
+            </h3>
+
+            {/* Hover Glow */}
+            <div className="absolute -bottom-10 -right-10 h-24 w-24 rounded-full bg-[#ffbd59]/20 blur-2xl opacity-0 transition-all duration-500 group-hover:opacity-100"></div>
+          </div>
+        ))}
+    </div>
+  </div>
+</section>
+
+
+<section className="ownadz_service_process relative overflow-hidden py-20 lg:py-24 bg-[#f8f9ff]">
+  {/* Background Effects */}
+  <div className="absolute left-0 top-0 h-[420px] w-[420px] rounded-full bg-[#ffbd59]/10 blur-3xl"></div>
+  <div className="absolute right-0 bottom-0 h-[350px] w-[350px] rounded-full bg-[#2458ff]/5 blur-3xl"></div>
+
+  <div className="ownadz_service_process_container relative mx-auto max-w-7xl px-6 lg:px-8">
+    
+    {/* Heading */}
+    <div className="ownadz_service_process_header max-w-4xl">
+      <h2 className="text-4xl font-black leading-tight text-black md:text-5xl lg:text-6xl">
+        {service?.service_process_title}
+      </h2>
+
+      {service?.service_process_des && (
+        <p className="mt-5 max-w-3xl text-lg leading-8 text-black/70">
+          {service?.service_process_des}
+        </p>
+      )}
+    </div>
+
+    {/* Process Cards */}
+    <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+      
+      {/* Step 1 */}
+      {service?.service_process_title1 && (
+        <div className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+          <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ffbd59] text-xl font-black text-black">
+            01
+          </div>
+          <h3 className="text-2xl font-black text-black">
+            {service?.service_process_title1}
+          </h3>
+          {service?.service_process_des1 && (
+            <p className="mt-4 text-base leading-7 text-black/70">
+              {service?.service_process_des1}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Step 2 */}
+      {service?.service_process_title2 && (
+        <div className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+          <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ffbd59] text-xl font-black text-black">
+            02
+          </div>
+          <h3 className="text-2xl font-black text-black">
+            {service?.service_process_title2}
+          </h3>
+          {service?.service_process_des2 && (
+            <p className="mt-4 text-base leading-7 text-black/70">
+              {service?.service_process_des2}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Step 3 */}
+      {service?.service_process_title3 && (
+        <div className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+          <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ffbd59] text-xl font-black text-black">
+            03
+          </div>
+          <h3 className="text-2xl font-black text-black">
+            {service?.service_process_title3}
+          </h3>
+          {service?.service_process_des3 && (
+            <p className="mt-4 text-base leading-7 text-black/70">
+              {service?.service_process_des3}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Step 4 */}
+      {service?.service_process_title4 && (
+        <div className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+          <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ffbd59] text-xl font-black text-black">
+            04
+          </div>
+          <h3 className="text-2xl font-black text-black">
+            {service?.service_process_title4}
+          </h3>
+          {service?.service_process_des4 && (
+            <p className="mt-4 text-base leading-7 text-black/70">
+              {service?.service_process_des4}
+            </p>
+          )}
+        </div>
+      )}
+
+    </div>
+  </div>
+</section>
+
   
   <section className="ownadz_service_success py-16 md:py-14 bg-white">
 
@@ -474,7 +555,7 @@ export default async function ServiceDetailsPage({
 
       <div className="ownadz_service_success_item text-center px-4 lg:border-r border-slate-100 group">
 
-        <h3 className="text-5xl md:text-4xl lg:text-5xl font-black text-[#2563eb] transition-all duration-300 group-hover:scale-110">
+        <h3 className="text-5xl md:text-4xl lg:text-5xl font-black text-[#ffbd59] transition-all duration-300 group-hover:scale-110">
 
           {service.service_success_card1}
 
@@ -490,7 +571,7 @@ export default async function ServiceDetailsPage({
 
       <div className="ownadz_service_success_item text-center px-4 lg:border-r border-slate-100 group">
 
-        <h3 className="text-5xl md:text-4xl lg:text-5xl font-black text-[#2563eb] transition-all duration-300 group-hover:scale-110">
+        <h3 className="text-5xl md:text-4xl lg:text-5xl font-black text-[#ffbd59] transition-all duration-300 group-hover:scale-110">
 
           {service.service_success_card2}
 
@@ -506,7 +587,7 @@ export default async function ServiceDetailsPage({
 
       <div className="ownadz_service_success_item text-center px-4 lg:border-r border-slate-100 group">
 
-        <h3 className="text-5xl md:text-4xl lg:text-5xl font-black text-[#2563eb] transition-all duration-300 group-hover:scale-110">
+        <h3 className="text-5xl md:text-4xl lg:text-5xl font-black text-[#ffbd59] transition-all duration-300 group-hover:scale-110">
 
           {service.service_success_card3}
 
@@ -522,7 +603,7 @@ export default async function ServiceDetailsPage({
 
       <div className="ownadz_service_success_item text-center px-4 group">
 
-        <h3 className="text-5xl md:text-4xl lg:text-5xl font-black text-[#2563eb] transition-all duration-300 group-hover:scale-110">
+        <h3 className="text-5xl md:text-4xl lg:text-5xl font-black text-[#ffbd59] transition-all duration-300 group-hover:scale-110">
 
           {service.service_success_card4}
 
@@ -539,6 +620,10 @@ export default async function ServiceDetailsPage({
   </div>
 
 </section>
+
+
+
+
 
 <section className="ownadz_service_faq py-16 lg:py-24 bg-[#f8fafc]">
 

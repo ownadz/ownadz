@@ -140,15 +140,15 @@ export default async function HomePage() {
       {/* LEFT CONTENT */}
       <div className="ownadz-left relative z-10 lg:col-span-6 text-center md:text-left">
         <div className="mb-8 flex justify-center md:justify-start">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#ffbd59]/20 bg-[#ffbd59]/5 backdrop-blur-md px-5 py-2 text-sm font-semibold text-[#ffbd59] shadow-[0_10px_30px_rgba(255,189,89,0.05)]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#ffbd59] shadow-[0_0_8px_#ffbd59]" />
-            {homepage?.home_banner_badge || ""}
-          </span>
+          <h1 style={{ fontSize: "14px !important", fontWeight: 600 }} className="inline-flex items-center gap-2 rounded-full border border-[#ffbd59]/20 bg-[#ffbd59]/5 backdrop-blur-md px-5 py-2 text-2xl font-bold text-[#ffbd59] shadow-[0_10px_30px_rgba(255,189,89,0.05)]">
+  <span className="h-1.5 w-1.5 rounded-full bg-[#ffbd59] shadow-[0_0_8px_#ffbd59]" />
+  {homepage?.home_banner_badge || ""}
+</h1>
         </div>
 
-        <h1 className="ownadz-title text-5xl font-black leading-[1.05] text-white md:text-6xl lg:text-5xl">
+        <h2 className="ownadz-title text-5xl font-black leading-[1.05] text-white md:text-8xl lg:text-7xl">
           {homepage?.home_banner_title || ""}
-        </h1>
+        </h2>
 
         <p className="ownadz-description mt-5 max-w-2xl leading-relaxed text-white/70 font-medium">
           {homepage?.home_banner_des || ""}
@@ -475,77 +475,83 @@ export default async function HomePage() {
       </section>
 
       {/* RESULTS SECTION */}
-      <section className="ownadz-result relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b bg-dark" />
+<section className="ownadz-result relative overflow-hidden bg-black">
+  <div className="absolute inset-0 bg-black" />
 
-        <div className="absolute left-0 top-0 h-[500px] w-[500px] rounded-full bg-[#ffbd59]/20 blur-3xl"></div>
-        <div className="absolute right-0 bottom-0 h-[450px] w-[450px] rounded-full bg-[#ffbd59]/15 blur-3xl"></div>
-        <div className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ffbd59]/10 blur-3xl"></div>
+  {/* Ambient Blur Glows */}
+  <div className="absolute left-0 top-0 h-[500px] w-[500px] rounded-full bg-[#ffbd59]/20 blur-3xl"></div>
+  <div className="absolute right-0 bottom-0 h-[450px] w-[450px] rounded-full bg-[#ffbd59]/15 blur-3xl"></div>
+  <div className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ffbd59]/10 blur-3xl"></div>
 
-        <div className="ownadz-result-container relative mx-auto max-w-7xl px-6 lg:px-8 py-24">
-          <div className="ownadz-result-header mx-auto max-w-4xl text-center">
-            <span className="ownadz-result-badge inline-flex rounded-full border border-[#ffbd59]/30 bg-[#ffbd59]/10 px-5 py-2 text-sm font-bold uppercase tracking-[0.25em] text-white">
-              RESULTS
-            </span>
-            <h2 className="ownadz-result-title mt-6 text-4xl font-black leading-tight text-white md:text-5xl lg:text-6xl">
-              {homepage?.home_result_badge}
-            </h2>
-            <p className="ownadz-result-description mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/70">
-              {homepage?.home_result_badgedes}
-            </p>
-          </div>
+  <div className="ownadz-result-container relative mx-auto max-w-7xl px-6 lg:px-8 py-24">
+    <div className="ownadz-result-header mx-auto max-w-4xl text-center">
+      <span className="ownadz-result-badge inline-flex rounded-full border border-[#ffbd59]/30 bg-[#ffbd59]/10 px-5 py-2 text-sm font-bold uppercase tracking-[0.25em] text-white">
+        RESULTS
+      </span>
+      <h2 className="ownadz-result-title mt-6 text-4xl font-black leading-tight text-white md:text-5xl lg:text-6xl">
+        {homepage?.home_result_badge}
+      </h2>
+      <p className="ownadz-result-description mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/70">
+        {homepage?.home_result_badgedes}
+      </p>
+    </div>
 
-          <div className="ownadz-result-grid mt-20 grid gap-7 sm:grid-cols-2 xl:grid-cols-4">
-            <div className="ownadz-result-card group relative overflow-hidden rounded-[32px] border border-white bg-white/90 backdrop-blur-xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-4 hover:border-[#ffbd59] hover:shadow-[0_35px_80px_rgba(255,189,89,0.25)]">
-              <div className="absolute right-0 top-0 h-32 w-32 translate-x-10 -translate-y-10 rounded-full bg-[#ffbd59]/10 transition-all duration-500 group-hover:scale-150"></div>
-              <div className="absolute bottom-0 left-0 h-24 w-24 -translate-x-8 translate-y-8 rounded-full bg-[#ffbd59]/5 transition-all duration-500 group-hover:scale-125"></div>
-              <h3 className="ownadz-result-card-number relative text-5xl font-black text-black md:text-6xl">
-                {homepage?.home_result_cardtitle}
-              </h3>
-              <div className="ownadz-result-card-line mt-5 h-1.5 w-14 rounded-full bg-[#ffbd59] transition-all duration-500 group-hover:w-24"></div>
-              <p className="ownadz-result-card-description mt-6 text-base leading-7 text-black/70">
-                {homepage?.result_carddes || homepage?.home_result_carddes}
-              </p>
-            </div>
+    {/* Cards Grid */}
+    <div className="ownadz-result-grid mt-20 grid gap-7 sm:grid-cols-2 xl:grid-cols-4">
+      {/* Card 1 */}
+      <div className="ownadz-result-card group relative overflow-hidden rounded-[32px] border border-white bg-white/90 backdrop-blur-xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-4 hover:border-[#ffbd59] hover:shadow-[0_35px_80px_rgba(255,189,89,0.25)]">
+        <div className="absolute right-0 top-0 h-32 w-32 translate-x-10 -translate-y-10 rounded-full bg-[#ffbd59]/10 transition-all duration-500 group-hover:scale-150"></div>
+        <div className="absolute bottom-0 left-0 h-24 w-24 -translate-x-8 translate-y-8 rounded-full bg-[#ffbd59]/5 transition-all duration-500 group-hover:scale-125"></div>
+        <h3 className="ownadz-result-card-number relative text-5xl font-black text-black md:text-6xl">
+          {homepage?.home_result_cardtitle}
+        </h3>
+        <div className="ownadz-result-card-line mt-5 h-1.5 w-14 rounded-full bg-[#ffbd59] transition-all duration-500 group-hover:w-24"></div>
+        <p className="ownadz-result-card-description mt-6 text-base leading-7 text-black/70">
+          {homepage?.result_carddes || homepage?.home_result_carddes}
+        </p>
+      </div>
 
-            <div className="ownadz-result-card group relative overflow-hidden rounded-[32px] border border-white bg-white/90 backdrop-blur-xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-4 hover:border-[#ffbd59] hover:shadow-[0_35px_80px_rgba(255,189,89,0.25)]">
-              <div className="absolute right-0 top-0 h-32 w-32 translate-x-10 -translate-y-10 rounded-full bg-[#ffbd59]/10 transition-all duration-500 group-hover:scale-150"></div>
-              <div className="absolute bottom-0 left-0 h-24 w-24 -translate-x-8 translate-y-8 rounded-full bg-[#ffbd59]/5 transition-all duration-500 group-hover:scale-125"></div>
-              <h3 className="text-5xl font-black text-black md:text-6xl">
-                {homepage?.home_result_cardtitle1}
-              </h3>
-              <div className="mt-5 h-1.5 w-14 rounded-full bg-[#ffbd59] transition-all duration-500 group-hover:w-24"></div>
-              <p className="mt-6 text-base leading-7 text-black/70">
-                {homepage?.home_result_carddes1}
-              </p>
-            </div>
+      {/* Card 2 */}
+      <div className="ownadz-result-card group relative overflow-hidden rounded-[32px] border border-white bg-white/90 backdrop-blur-xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-4 hover:border-[#ffbd59] hover:shadow-[0_35px_80px_rgba(255,189,89,0.25)]">
+        <div className="absolute right-0 top-0 h-32 w-32 translate-x-10 -translate-y-10 rounded-full bg-[#ffbd59]/10 transition-all duration-500 group-hover:scale-150"></div>
+        <div className="absolute bottom-0 left-0 h-24 w-24 -translate-x-8 translate-y-8 rounded-full bg-[#ffbd59]/5 transition-all duration-500 group-hover:scale-125"></div>
+        <h3 className="text-5xl font-black text-black md:text-6xl">
+          {homepage?.home_result_cardtitle1}
+        </h3>
+        <div className="mt-5 h-1.5 w-14 rounded-full bg-[#ffbd59] transition-all duration-500 group-hover:w-24"></div>
+        <p className="mt-6 text-base leading-7 text-black/70">
+          {homepage?.home_result_carddes1}
+        </p>
+      </div>
 
-            <div className="ownadz-result-card group relative overflow-hidden rounded-[32px] border border-white bg-white/90 backdrop-blur-xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-4 hover:border-[#ffbd59] hover:shadow-[0_35px_80px_rgba(255,189,89,0.25)]">
-              <div className="absolute right-0 top-0 h-32 w-32 translate-x-10 -translate-y-10 rounded-full bg-[#ffbd59]/10 transition-all duration-500 group-hover:scale-150"></div>
-              <div className="absolute bottom-0 left-0 h-24 w-24 -translate-x-8 translate-y-8 rounded-full bg-[#ffbd59]/5 transition-all duration-500 group-hover:scale-125"></div>
-              <h3 className="text-5xl font-black text-black md:text-6xl">
-                {homepage?.home_result_cardtitle2}
-              </h3>
-              <div className="mt-5 h-1.5 w-14 rounded-full bg-[#ffbd59] transition-all duration-500 group-hover:w-24"></div>
-              <p className="mt-6 text-base leading-7 text-black/70">
-                {homepage?.home_result_carddes2}
-              </p>
-            </div>
+      {/* Card 3 */}
+      <div className="ownadz-result-card group relative overflow-hidden rounded-[32px] border border-white bg-white/90 backdrop-blur-xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-4 hover:border-[#ffbd59] hover:shadow-[0_35px_80px_rgba(255,189,89,0.25)]">
+        <div className="absolute right-0 top-0 h-32 w-32 translate-x-10 -translate-y-10 rounded-full bg-[#ffbd59]/10 transition-all duration-500 group-hover:scale-150"></div>
+        <div className="absolute bottom-0 left-0 h-24 w-24 -translate-x-8 translate-y-8 rounded-full bg-[#ffbd59]/5 transition-all duration-500 group-hover:scale-125"></div>
+        <h3 className="text-5xl font-black text-black md:text-6xl">
+          {homepage?.home_result_cardtitle2}
+        </h3>
+        <div className="mt-5 h-1.5 w-14 rounded-full bg-[#ffbd59] transition-all duration-500 group-hover:w-24"></div>
+        <p className="mt-6 text-base leading-7 text-black/70">
+          {homepage?.home_result_carddes2}
+        </p>
+      </div>
 
-            <div className="ownadz-result-card group relative overflow-hidden rounded-[32px] border border-white bg-white/90 backdrop-blur-xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-4 hover:border-[#ffbd59] hover:shadow-[0_35px_80px_rgba(255,189,89,0.25)]">
-              <div className="absolute right-0 top-0 h-32 w-32 translate-x-10 -translate-y-10 rounded-full bg-[#ffbd59]/10 transition-all duration-500 group-hover:scale-150"></div>
-              <div className="absolute bottom-0 left-0 h-24 w-24 -translate-x-8 translate-y-8 rounded-full bg-[#ffbd59]/5 transition-all duration-500 group-hover:scale-125"></div>
-              <h3 className="text-5xl font-black text-black md:text-6xl">
-                {homepage?.home_result_cardtitle3}
-              </h3>
-              <div className="mt-5 h-1.5 w-14 rounded-full bg-[#ffbd59] transition-all duration-500 group-hover:w-24"></div>
-              <p className="mt-6 text-base leading-7 text-black/70">
-                {homepage?.home_result_carddes3}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Card 4 */}
+      <div className="ownadz-result-card group relative overflow-hidden rounded-[32px] border border-white bg-white/90 backdrop-blur-xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-4 hover:border-[#ffbd59] hover:shadow-[0_35px_80px_rgba(255,189,89,0.25)]">
+        <div className="absolute right-0 top-0 h-32 w-32 translate-x-10 -translate-y-10 rounded-full bg-[#ffbd59]/10 transition-all duration-500 group-hover:scale-150"></div>
+        <div className="absolute bottom-0 left-0 h-24 w-24 -translate-x-8 translate-y-8 rounded-full bg-[#ffbd59]/5 transition-all duration-500 group-hover:scale-125"></div>
+        <h3 className="text-5xl font-black text-black md:text-6xl">
+          {homepage?.home_result_cardtitle3}
+        </h3>
+        <div className="mt-5 h-1.5 w-14 rounded-full bg-[#ffbd59] transition-all duration-500 group-hover:w-24"></div>
+        <p className="mt-6 text-base leading-7 text-black/70">
+          {homepage?.home_result_carddes3}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* PROCESS SECTION */}
       <section className="ownadz-process relative overflow-hidden py-24 bg-white">

@@ -13,7 +13,7 @@ export default function Footer({ logoUrl, services = [], contactData = null }) {
 
 
   return (
-    <footer className="relative overflow-hidden bg-dark text-white border-t border-white/5 pt-16">
+    <footer className="relative overflow-hidden bg-black text-white border-t border-white/5 pt-16">
       
       {/* Upper Footer Layout Grid */}
       <div className="mx-auto max-w-[1280px] px-4 pb-20 sm:px-6 lg:px-8 py-8">

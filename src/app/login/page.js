@@ -13,23 +13,35 @@ export default function LoginPage() {
 const handleLogin = async (e) => {
   e.preventDefault();
 
-  // Clear client-side timer/timestamp before trying to create a new session.
   try {
     localStorage.removeItem("adminLoginAt");
   } catch {}
 
   try {
     const session = await loginUser(email, password);
-
     console.log("SESSION:", session);
 
-    // Start 1-hour admin session timer for auto-logout.
     try {
       localStorage.setItem("adminLoginAt", String(Date.now()));
     } catch {}
 
     alert("Login Success");
 
+    // 1. Force clear the Next.js server-side cache for the admin layout/dashboard
+    try {
+      await fetch("/api/revalidate", { // Adjust this path to match where your POST revalidate route is located
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ path: "/admin" }),
+      });
+    } catch (revalErr) {
+      console.error("Revalidation failed, attempting standard navigation...", revalErr);
+    }
+
+    // 2. Refresh the client-side router to wipe out stale client-side cache data
+    router.refresh();
+
+    // 3. Now route to the dashboard safely
     router.push("/admin/dashboard");
   } catch (error) {
     console.error(error);
