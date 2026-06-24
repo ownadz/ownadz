@@ -23,17 +23,15 @@ export default async function BlogPage() {
 
   <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center md:text-left">
     <div className="max-w-3xl">
-      <span className="inline-flex items-center rounded-full border border-[#ffbd59]/30 bg-[#ffbd59]/10 px-5 py-2 text-sm font-black uppercase tracking-[0.25em] text-[#ffbd59] mb-6 shadow-sm">
-        Knowledge Hub
-      </span>
+
       <h1 className="text-5xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.05]">
-        Insights & <br />
+        {/* Insights & <br /> */}
         <span className="text-[#ffbd59] bg-white/5 border border-white/10 px-4 py-0.5 inline-block rounded-2xl mt-2">
-          Strategies
+         Blog
         </span>
       </h1>
-      <p className="mt-6 text-lg sm:text-xl text-white/70 max-w-2xl font-medium leading-8">
-        Stay ahead of the curve with corporate digital marketing developments, web engineering trends, and modern brand growth solutions.
+      <p className="mt-6 text-lg sm:text-xl text-white/70 max-w-3xl font-medium leading-8">
+        Explore expert articles, tips and tricks, industry updates, motivational stories, and many other intriguing aspects related to technology, business, marketing, development, artificial intelligence, lifestyle, and many other industries.
       </p>
     </div>
   </div>

@@ -6,7 +6,7 @@ import Footer from "@/components/layout/Footer";
 import { getSEO } from "@/services/seoService";
 import { getAllMainPages } from "@/services/mainPageManagementService";
 import { getServices } from "@/services/serviceService";
-
+import { getSettings } from "@/services/settingsService";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,8 +19,6 @@ const geistMono = Geist_Mono({
 });
 
 export async function generateMetadata() {
-
-  // Keep existing SEO metadata
   try {
     const seo = await getSEO();
 
@@ -38,14 +36,12 @@ export async function generateMetadata() {
   }
 }
 
-
-export default async function RootLayout({
-  children,
-}) {
-  const [rawSeo, servicesResponse, mainPages] = await Promise.all([
+export default async function RootLayout({ children }) {
+  const [rawSeo, servicesResponse, mainPages, settings] = await Promise.all([
     getSEO(),
     getServices(),
     getAllMainPages(),
+    getSettings(),
   ]);
 
   const seo = rawSeo ? JSON.parse(JSON.stringify(rawSeo)) : null;
@@ -54,28 +50,63 @@ export default async function RootLayout({
   );
   const mainPagesData = JSON.parse(JSON.stringify(mainPages || []));
 
+  const gtmHead = settings?.google_tag_manager || "";
+  const gtmNoScript = settings?.google_tag_manager_noscript || "";
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Google Ads Base File */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18250008046"></script>
+        
+        {/* Google Ads Initialization String */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-18250008046');
+            `,
+          }}
+        />
+
+        {/* Hardcoded GTM Container (GTM-T76BVHT7) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+              var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+              j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-T76BVHT7');
+            `,
+          }}
+        />
+
+        {/* Dynamic Admin Dashboard GTM Input */}
+        {gtmHead ? (
+          <script dangerouslySetInnerHTML={{ __html: gtmHead }} />
+        ) : null}
+      </head>
+      
       <body className="min-h-full flex flex-col">
+        {gtmNoScript ? (
+          <noscript dangerouslySetInnerHTML={{ __html: gtmNoScript }} />
+        ) : null}
+
         <Header
           logoUrl={seo?.logoUrl}
           services={services}
           mainPages={mainPagesData}
         />
 
-        {/* Home favicon links injected on every page using homepage favicon fields.
-            Requires homepage document to be available in metadata; for now we render in the page-level head via `generateMetadata`.
-            (No-op placeholder removed.)
-        */}
         {children}
 
-        {/* Frontend footer only (no /admin routes) */}
         <Footer logoUrl={seo?.logoUrl} services={services} contactData={null} />
       </body>
-
     </html>
   );
 }

@@ -25,13 +25,9 @@ export default function SettingsPage() {
       linkedin: "",
       twitter: "",
       footerText: "",
+      google_tag_manager: "",
+      google_tag_manager_noscript: "",
     });
-
-  useEffect(() => {
-
-    loadSettings();
-
-  }, []);
 
   const loadSettings =
     async () => {
@@ -75,6 +71,12 @@ export default function SettingsPage() {
 
           footerText:
             data.footerText || "",
+
+          google_tag_manager:
+            data.google_tag_manager || "",
+
+          google_tag_manager_noscript:
+            data.google_tag_manager_noscript || "",
         });
 
       } catch (error) {
@@ -102,31 +104,17 @@ export default function SettingsPage() {
 
       try {
 
+        // Always update the existing settings document if it exists.
+        // Do not create a new document when saving from the admin settings page.
         if (docId) {
-
-          await updateSettings(
-            docId,
-            form
-          );
-
-          alert(
-            "Settings Updated"
-          );
-
+          await updateSettings(docId, form);
+          alert("Settings Updated");
         } else {
-
-          const created =
-            await createSettings(
-              form
-            );
-
-          setDocId(
-            created.$id
-          );
-
-          alert(
-            "Settings Saved"
-          );
+          // If docId is not loaded yet (first load edge-case), create once.
+          // After that, saving will always update the same document.
+          const created = await createSettings(form);
+          setDocId(created.$id);
+          alert("Settings Saved");
         }
 
       } catch (error) {
@@ -228,6 +216,22 @@ export default function SettingsPage() {
           value={form.footerText}
           onChange={handleChange}
           className="border p-2 w-full mb-4"
+        />
+
+        <textarea
+          name="google_tag_manager"
+          placeholder="Google Tag Manager (paste the code for <head>)"
+          value={form.google_tag_manager}
+          onChange={handleChange}
+          className="border p-2 w-full mb-4 min-h-[120px]"
+        />
+
+        <textarea
+          name="google_tag_manager_noscript"
+          placeholder="Google Tag Manager No Script (paste the <noscript>...</noscript> block)"
+          value={form.google_tag_manager_noscript}
+          onChange={handleChange}
+          className="border p-2 w-full mb-4 min-h-[120px]"
         />
 
         <button
