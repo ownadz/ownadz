@@ -6,8 +6,12 @@ import logo from "@/assets/ownadz-logo.jpg";
 import routes from "@/lib/routes.frontend.generated.json";
 
 export default function Footer({ logoUrl, services = [], contactData = null }) {
-  // Safe extraction of services data to map dynamically under links
-  const serviceLinks = services.slice(0, 5);
+  const servicesLinks = [
+    { href: "/services/affiliate-marketing", label: "Affiliate Marketing" },
+    { href: "/services/influencer-marketing", label: "Influencer Marketing" },
+    { href: "/services/performance-marketing", label: "Performance Marketing" },
+    { href: "/services/affiliate-marketing/seo-service", label: "SEO Service" },
+  ];
 
   const allFrontendRoutes = Array.isArray(routes) ? routes : [];
 
@@ -86,56 +90,28 @@ export default function Footer({ logoUrl, services = [], contactData = null }) {
 </div>
           </div>
 
-          {/* COLUMN 2: Quick Navigation Links Tree */}
-          {/* COLUMN 2: Quick Navigation Links Tree */}
-<div className="space-y-6">
-  <h3 className="text-xl font-black tracking-wide text-white relative after:content-[''] after:block after:h-0.5 after:w-10 after:bg-[#ffbd59] after:mt-2">
-    Quick Links
-  </h3>
-  <ul className="grid gap-3.5">
-    {allFrontendRoutes
-      .filter((r) => {
-        if (!r || typeof r.href !== "string") return false;
-        
-        // 1. Drop Next.js dynamic boilerplates
-        if (r.href.includes("[")) return false;
+          {/* COLUMN 2: Services Links */}
+          <div className="space-y-6">
+            <h3 className="text-xl font-black tracking-wide text-white relative after:content-[''] after:block after:h-0.5 after:w-10 after:bg-[#ffbd59] after:mt-2">
+              Services
+            </h3>
+            <ul className="grid gap-3.5">
+              {servicesLinks.map((s) => (
+                <li key={s.href}>
+                  <Link
+                    href={s.href}
+                    className="group inline-flex items-center gap-2 text-sm font-semibold text-white/70 transition-colors hover:text-[#ffbd59]"
+                    prefetch={false}
+                  >
+                    <span className="text-[#ffbd59] transition-transform duration-200 group-hover:translate-x-1">»</span>{" "}
+                    {s.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        // 2. Define standard pages and test routes to completely exclude
-        const excludedPaths = ["/", "/about", "/contact", "/blog", "/login", "/test"];
-        if (excludedPaths.includes(r.href)) return false;
-        
-        // 3. Exclude admin layouts and /services paths from this JSON loop
-        if (r.href.startsWith("/admin") || r.href.startsWith("/services")) return false;
 
-        return true;
-      })
-      .map((r) => (
-        <li key={r.href}>
-          <Link
-            href={r.href}
-            className="group inline-flex items-center gap-2 text-sm font-semibold text-white/70 transition-colors hover:text-[#ffbd59]"
-            prefetch={false}
-          >
-            <span className="text-[#ffbd59] transition-transform duration-200 group-hover:translate-x-1">»</span>{" "}
-            {r.displayRoute || r.href.replace("/", "").replace("-", " ")}
-          </Link>
-        </li>
-      ))}
-
-    {/* Fallback to render your real database services smoothly with clean URLs */}
-    {services.slice(0, 5).map((service) => (
-      <li key={service.slug}>
-        <Link 
-          href={`/services/${service.slug}`} 
-          className="group inline-flex items-center gap-2 text-sm font-semibold text-white/70 transition-colors hover:text-[#ffbd59]"
-        >
-          <span className="text-[#ffbd59] transition-transform duration-200 group-hover:translate-x-1">»</span>{" "}
-          {service.title || service.slug}
-        </Link>
-      </li>
-    ))}
-  </ul>
-</div>
 
           {/* COLUMN 3: Contact Metrics & Gateway Badges */}
           <div className="space-y-6">

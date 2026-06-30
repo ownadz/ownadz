@@ -5,25 +5,25 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import logo from "@/assets/ownadz-transparent-logo.png";
 
-export default function Header({ logoUrl, services = [], mainPages = [] }) {
+export default function Header({ logoUrl, mainPages = [] }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const pathname = usePathname();
 
-  if (
+  const hideHeader =
     pathname &&
-    (pathname === "/login" || pathname.startsWith("/login") || pathname.startsWith("/admin"))
-  ) {
-    return null;
-  }
+    (pathname === "/login" ||
+      pathname.startsWith("/login") ||
+      pathname.startsWith("/admin"));
 
-  const serviceItems = useMemo(
-    () =>
-      [...services].sort((a, b) =>
-        (a.title || "").localeCompare(b.title || "")
-      ),
-    [services]
-  );
+  if (hideHeader) return null;
+
+  const serviceItems = [
+    { slug: "services/affiliate-marketing", title: "Affiliate Marketing" },
+    { slug: "services/performance-marketing", title: "Performance Marketing" },
+    { slug: "services/seo-service", title: "SEO Service" },
+  ];
+
 
   const navPages = useMemo(() => {
     const keyPages = [
@@ -38,8 +38,18 @@ export default function Header({ logoUrl, services = [], mainPages = [] }) {
     }));
   }, []);
 
-  // Determine if the current route falls under any service subpages
-  const isServicesActive = pathname && pathname.startsWith("/services");
+  // Determine if the current route falls under any service pages
+  const isServicesActive =
+    pathname &&
+    [
+      "service/affiliate-marketing",
+      "service/influencer-marketing",
+      "service/performance-marketing",
+      "service/seo-service",
+      "service/whatsapp-marketing",
+      "service/email-marketing",
+      "service/lead-generation",
+    ].includes(pathname);
 
   return (
     <header className="sticky top-0 z-40 bg-white backdrop-blur-md border-b border-slate-100 transition-all duration-300">
@@ -59,7 +69,7 @@ export default function Header({ logoUrl, services = [], mainPages = [] }) {
           <nav className="flex items-center gap-1.5">
             
             {/* Services Hybrid Hover/Click Dropdown */}
-            <div className="relative group">
+                <div className="relative group">
               <button
                 type="button"
                 onClick={() => setServicesOpen((open) => !open)}
@@ -75,8 +85,8 @@ export default function Header({ logoUrl, services = [], mainPages = [] }) {
                     isServicesActive ? "text-[#ffbd59]" : "text-slate-500"
                   }`} 
                   viewBox="0 0 20 24" 
-                  fill="none" 
-                  stroke="currentColor" 
+                  fill="none"
+                  stroke="currentColor"
                   strokeWidth="2.5"
                 >
                   <path d="M19 9l-7 7-7-7" />
@@ -88,7 +98,7 @@ export default function Header({ logoUrl, services = [], mainPages = [] }) {
                 <div className="max-h-[320px] overflow-y-auto space-y-0.5 custom-scrollbar">
                   {serviceItems.length > 0 ? (
                     serviceItems.map((service) => {
-                      const serviceHref = `/services/${service.slug}`;
+                      const serviceHref = `/${service.slug}`;
                       const isChildActive = pathname === serviceHref;
 
                       return (
@@ -190,7 +200,7 @@ export default function Header({ logoUrl, services = [], mainPages = [] }) {
             <div className="space-y-0.5 rounded-xl bg-slate-50/50 p-1.5 pl-3 border border-slate-100/50">
               {serviceItems.length > 0 ? (
                 serviceItems.map((service) => {
-                  const serviceHref = `/services/${service.slug}`;
+                      const serviceHref = `/${service.slug}`;
                   const isChildActive = pathname === serviceHref;
 
                   return (

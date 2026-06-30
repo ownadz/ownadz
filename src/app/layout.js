@@ -5,7 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { getSEO } from "@/services/seoService";
 import { getAllMainPages } from "@/services/mainPageManagementService";
-import { getServices } from "@/services/serviceService";
+
 import { getSettings } from "@/services/settingsService";
 
 const geistSans = Geist({
@@ -37,17 +37,14 @@ export async function generateMetadata() {
 }
 
 export default async function RootLayout({ children }) {
-  const [rawSeo, servicesResponse, mainPages, settings] = await Promise.all([
+  const [rawSeo, mainPages, settings] = await Promise.all([
     getSEO(),
-    getServices(),
     getAllMainPages(),
     getSettings(),
   ]);
 
   const seo = rawSeo ? JSON.parse(JSON.stringify(rawSeo)) : null;
-  const services = (servicesResponse?.documents || []).map((doc) =>
-    JSON.parse(JSON.stringify(doc))
-  );
+
   const mainPagesData = JSON.parse(JSON.stringify(mainPages || []));
 
   const gtmHead = settings?.google_tag_manager || "";
@@ -99,13 +96,14 @@ export default async function RootLayout({ children }) {
 
         <Header
           logoUrl={seo?.logoUrl}
-          services={services}
           mainPages={mainPagesData}
         />
 
+
         {children}
 
-        <Footer logoUrl={seo?.logoUrl} services={services} contactData={null} />
+        <Footer logoUrl={seo?.logoUrl} contactData={null} />
+
       </body>
     </html>
   );
