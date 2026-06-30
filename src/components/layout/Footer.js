@@ -10,7 +10,8 @@ export default function Footer({ logoUrl, services = [], contactData = null }) {
     { href: "/services/affiliate-marketing", label: "Affiliate Marketing" },
     { href: "/services/influencer-marketing", label: "Influencer Marketing" },
     { href: "/services/performance-marketing", label: "Performance Marketing" },
-    { href: "/services/affiliate-marketing/seo-service", label: "SEO Service" },
+    { href: "/services/seo-service", label: "SEO Service" },
+    { href: "/services/social-media-marketing", label: "Social Media Marketing" },
   ];
 
   const allFrontendRoutes = Array.isArray(routes) ? routes : [];
