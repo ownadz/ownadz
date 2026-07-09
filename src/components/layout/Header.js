@@ -23,6 +23,8 @@ export default function Header({ logoUrl, mainPages = [] }) {
     { slug: "services/performance-marketing", title: "Performance Marketing" },
     { slug: "services/seo-service", title: "SEO Service" },
     { slug: "services/social-media-marketing", title: "Social Media Marketing" },
+     { slug: "services/web-development", title: "Web Development" },
+     { slug: "services/app-development", title: "App Development" }
   ];
 
 
@@ -51,6 +53,8 @@ export default function Header({ logoUrl, mainPages = [] }) {
       "service/email-marketing",
       "service/lead-generation",
       "service/social-media-marketing",
+      "services/web-development",
+      "services/app-development"
     ].includes(pathname);
 
   return (
