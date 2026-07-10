@@ -19,20 +19,20 @@ export default function Header({ logoUrl, mainPages = [] }) {
   if (hideHeader) return null;
 
   const serviceItems = [
-    { slug: "services/affiliate-marketing", title: "Affiliate Marketing" },
-    { slug: "services/performance-marketing", title: "Performance Marketing" },
-    { slug: "services/seo-service", title: "SEO Service" },
-    { slug: "services/social-media-marketing", title: "Social Media Marketing" },
-     { slug: "services/web-development", title: "Web Development" },
-     { slug: "services/app-development", title: "App Development" }
+    { slug: "services/affiliate-marketing/", title: "Affiliate Marketing" },
+    { slug: "services/performance-marketing/", title: "Performance Marketing" },
+    { slug: "services/seo-service/", title: "SEO Service" },
+    { slug: "services/social-media-marketing/", title: "Social Media Marketing" },
+     { slug: "services/web-development/", title: "Web Development" },
+     { slug: "services/app-development/", title: "App Development" }
   ];
 
 
   const navPages = useMemo(() => {
     const keyPages = [
-      { slug: "about", label: "About" },
-      { slug: "blog", label: "Blog", href: "/blog" },
-      { slug: "contact", label: "Contact", href: "/contact" },
+      { slug: "about/", label: "About" },
+      { slug: "blog/", label: "Blog", href: "/blog" },
+      { slug: "contact/", label: "Contact", href: "/contact" },
     ];
 
     return keyPages.map((page) => ({
@@ -45,16 +45,16 @@ export default function Header({ logoUrl, mainPages = [] }) {
   const isServicesActive =
     pathname &&
     [
-      "service/affiliate-marketing",
-      "service/influencer-marketing",
-      "service/performance-marketing",
-      "service/seo-service",
-      "service/whatsapp-marketing",
-      "service/email-marketing",
-      "service/lead-generation",
-      "service/social-media-marketing",
-      "services/web-development",
-      "services/app-development"
+      "service/affiliate-marketing/",
+      "service/influencer-marketing/",
+      "service/performance-marketing/",
+      "service/seo-service/",
+      "service/whatsapp-marketing/",
+      "service/email-marketing/",
+      "service/lead-generation/",
+      "service/social-media-marketing/",
+      "services/web-development/",
+      "services/app-development/"
     ].includes(pathname);
 
   return (
@@ -67,6 +67,7 @@ export default function Header({ logoUrl, mainPages = [] }) {
             src={logoUrl || logo.src}
             alt="OwnAdz Logo"
             className="h-10 w-auto object-contain md:h-15"
+            title="OwnAdz Digital Agency Logo"
           />
         </Link>
 

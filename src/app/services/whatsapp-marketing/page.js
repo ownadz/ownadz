@@ -14,10 +14,19 @@ const CONTENT = {
   ],
 };
 
+export async function generateMetadata() {
+  return {
+    alternates: {
+      canonical: "https://ownadz.com/services/whatsapp-marketing",
+    },
+  };
+}
+
 export default function WhatsappMarketingPage() {
   return (
     <>
       <MetaTags title={CONTENT.title} description={CONTENT.description} />
+
 
       <main className="min-h-screen bg-white">
         <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16 md:py-24">

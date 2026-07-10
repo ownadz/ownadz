@@ -1,8 +1,12 @@
-## TODO
+# TODO
 
-- [ ] Fix Next.js build error for `output: 'export'` by adding `generateStaticParams()` to dynamic route pages that currently miss it.
-- [ ] Update `src/app/[slug]/page.js` (the error points here) to include `export async function generateStaticParams()`.
-- [ ] Re-run `npm run build` to confirm the build passes.
-- [ ] Fix next export error by adding `generateStaticParams()` to the dynamic admin edit route pages (currently failing: `src/app/admin/pages/edit/[id]/page.js`).
+## Plan for adding fav icon on every page
 
+- [x] Verify current metadata/head handling (root layout uses `<head>` in `src/app/layout.js`; favicons added there).
+- [x] Add favicon links in `src/app/layout.js` `<head>` pointing to `/favicon.png`.
+- [x] Ensure runtime asset exists: `public/favicon.png`.
+- [x] Build/test: `npm run build` succeeds.
+
+## Note
+- Request “remove only services page” clarified: favicon should stay on **all pages** (including `/services/*`).
 

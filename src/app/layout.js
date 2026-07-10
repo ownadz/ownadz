@@ -56,10 +56,18 @@ export default async function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        {/* Favicons (applies to all pages) */}
+        <link rel="icon" href="/favicon.png" sizes="32x32" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
+        <meta name="theme-color" content="#ffffff" />
+
+
         {/* Google Ads Base File */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18250008046"></script>
         
         {/* Google Ads Initialization String */}
+
         <script
           dangerouslySetInnerHTML={{
             __html: `

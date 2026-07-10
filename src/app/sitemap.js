@@ -8,12 +8,15 @@ export default function sitemap() {
 
   const urls = [
     '',
-    'about',
-    'contact',
-    'services',
-    'pages',
-    'blog',
-    'categories',
+    'about/',
+    'contact/',
+    'blog/',
+    'services/affiliate-marketing/',
+    'services/performance-marketing/',
+    'services/seo-service/',
+    'services/social-media-marketing/',
+    'services/web-development/',
+    'services/app-development/',
   ].map((path) => `${baseUrl}/${path}`.replace(`${baseUrl}//`, `${baseUrl}/`).replace(`${baseUrl}/`, `${baseUrl}/`));
 
   // Next.js sitemap export format

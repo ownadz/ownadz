@@ -8,12 +8,12 @@
     "displayRoute": "/:slug"
   },
   {
-    "href": "/about",
-    "displayRoute": "/about"
+    "href": "/about/",
+    "displayRoute": "/about/"
   },
   {
-    "href": "/blog",
-    "displayRoute": "/blog"
+    "href": "/blog/",
+    "displayRoute": "/blog/"
   },
   {
     "href": "/blog/[slug]",
@@ -24,8 +24,8 @@
     "displayRoute": "/categories/:slug"
   },
   {
-    "href": "/contact",
-    "displayRoute": "/contact"
+    "href": "/contact/",
+    "displayRoute": "/contact/"
   },
   {
     "href": "/login",
@@ -36,40 +36,44 @@
     "displayRoute": "/pages/:slug"
   },
   {
-    "href": "/services",
-    "displayRoute": "/services"
+    "href": "/services/affiliate-marketing/",
+    "displayRoute": "/services/affiliate-marketing/"
   },
   {
-    "href": "/services/[slug]",
-    "displayRoute": "/services/:slug"
+    "href": "/services/app-development/",
+    "displayRoute": "/services/app-development/"
   },
   {
-    "href": "/services/affiliate-marketing",
-    "displayRoute": "/services/affiliate-marketing"
+    "href": "/services/digital-marketing/",
+    "displayRoute": "/services/digital-marketing/"
   },
   {
-    "href": "/services/digital-marketing",
-    "displayRoute": "/services/digital-marketing"
+    "href": "/services/email-marketing/",
+    "displayRoute": "/services/email-marketing/"
   },
   {
-    "href": "/services/email-marketing",
-    "displayRoute": "/services/email-marketing"
+    "href": "/services/influencer-marketing/",
+    "displayRoute": "/services/influencer-marketing/"
   },
   {
-    "href": "/services/influencer-marketing",
-    "displayRoute": "/services/influencer-marketing"
+    "href": "/services/performance-marketing/",
+    "displayRoute": "/services/performance-marketing/"
   },
   {
-    "href": "/services/performance-marketing",
-    "displayRoute": "/services/performance-marketing"
+    "href": "/services/seo-service/",
+    "displayRoute": "/services/seo-service/"
   },
   {
-    "href": "/services/seo-service",
-    "displayRoute": "/services/seo-service"
+    "href": "/services/social-media-marketing/",
+    "displayRoute": "/services/social-media-marketing/"
   },
   {
-    "href": "/services/whatsapp-marketing",
-    "displayRoute": "/services/whatsapp-marketing"
+    "href": "/services/web-development/",
+    "displayRoute": "/services/web-development/"
+  },
+  {
+    "href": "/services/whatsapp-marketing/",
+    "displayRoute": "/services/whatsapp-marketing/"
   },
   {
     "href": "/test",

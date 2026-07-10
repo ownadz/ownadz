@@ -7,11 +7,12 @@ import routes from "@/lib/routes.frontend.generated.json";
 
 export default function Footer({ logoUrl, services = [], contactData = null }) {
   const servicesLinks = [
-    { href: "/services/affiliate-marketing", label: "Affiliate Marketing" },
-    { href: "/services/influencer-marketing", label: "Influencer Marketing" },
-    { href: "/services/performance-marketing", label: "Performance Marketing" },
-    { href: "/services/seo-service", label: "SEO Service" },
-    { href: "/services/social-media-marketing", label: "Social Media Marketing" },
+    { href: "/services/affiliate-marketing/", label: "Affiliate Marketing" },
+    { href: "/services/performance-marketing/", label: "Performance Marketing" },
+    { href: "/services/seo-service/", label: "SEO Service" },
+    { href: "/services/social-media-marketing/", label: "Social Media Marketing" },
+    { href: "/services/web-development/", label: "Web Development" },
+    { href: "/services/app-development/", label: "App Development" },
   ];
 
   const allFrontendRoutes = Array.isArray(routes) ? routes : [];
@@ -34,6 +35,7 @@ export default function Footer({ logoUrl, services = [], contactData = null }) {
     src={logoUrl || logo.src}
     alt="OwnAdz Logo"
     className="h-16 w-auto object-contain"
+    title="OwnAdz Digital Agency Logo"
   />
 </Link>
             <p className="max-w-md text-sm leading-7 text-white/70">

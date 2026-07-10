@@ -14,12 +14,21 @@ const CONTENT = {
   ],
 };
 
+export async function generateMetadata() {
+  return {
+    alternates: {
+      canonical: "https://ownadz.com/services/digital-marketing",
+    },
+  };
+}
+
 export default function DigitalMarketingPage() {
   return (
     <>
       <MetaTags title={CONTENT.title} description={CONTENT.description} />
 
       <main className="min-h-screen bg-white">
+
         <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16 md:py-24">
           <div className="max-w-5xl mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">

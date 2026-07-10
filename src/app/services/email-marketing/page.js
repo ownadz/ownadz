@@ -1,6 +1,14 @@
 import Link from "next/link";
 import MetaTags from "@/components/seo/MetaTags";
 
+export async function generateMetadata() {
+  return {
+    alternates: {
+      canonical: "https://ownadz.com/services/email-marketing",
+    },
+  };
+}
+
 const CONTENT = {
   slug: "email-marketing",
   title: "Email Marketing",

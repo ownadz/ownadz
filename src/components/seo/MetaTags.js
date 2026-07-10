@@ -1,6 +1,7 @@
 export default function MetaTags({ title, description, keywords }) {
-  // This component is kept for compatibility with page components that
-  // render meta tags directly. App Router metadata is generated through
-  // `generateMetadata`, so this can safely render nothing.
+  // Keep compatibility with existing pages.
+  // App Router metadata should be generated via `generateMetadata` in the page itself.
   return null;
 }
+
+

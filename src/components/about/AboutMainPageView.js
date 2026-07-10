@@ -51,7 +51,7 @@ export default function AboutPage() {
                 <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full inline-block">
                   {CONTENT.subTitle}
                 </span>
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
+                <h1 className="text-3xl sm:text-5xl lg:text-5xl font-black tracking-tight leading-[1.1] text-white">
                   {CONTENT.title}
                 </h1>
                 <p className="text-slate-300 text-base sm:text-lg lg:text-xl leading-relaxed max-w-xl">

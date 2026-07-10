@@ -1,6 +1,14 @@
 import Link from "next/link";
 import MetaTags from "@/components/seo/MetaTags";
 
+export async function generateMetadata() {
+  return {
+    alternates: {
+      canonical: "https://ownadz.com/services/influencer-marketing",
+    },
+  };
+}
+
 const CONTENT = {
   slug: "influencer-marketing",
   title: "Influencer Marketing",
@@ -23,7 +31,7 @@ export default function InfluencerMarketingPage() {
         <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white py-16 sm:py-24 lg:py-32">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.14),transparent_50%)]" />
           <div className="max-w-5xl mx-auto px-4 text-center">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6 leading-[1.1] text-white">
+              <h1 className="text-3xl sm:text-5xl lg:text-5xl font-black tracking-tight mb-6 leading-[1.1] text-white">
                 {CONTENT.title}
               </h1>
               <p className="text-base sm:text-lg lg:text-xl mb-10 text-slate-300 leading-relaxed max-w-2xl">

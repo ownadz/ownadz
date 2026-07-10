@@ -1,10 +1,19 @@
 import Link from "next/link";
 import MetaTags from "@/components/seo/MetaTags";
 
+export async function generateMetadata() {
+  return {
+    alternates: {
+      canonical: "https://ownadz.com/services/social-media-marketing",
+    },
+  };
+}
+
 // Comprehensive Social Media Marketing Content Object
 const CONTENT = {
   slug: "social-media-marketing",
   title: "Social Media Marketing & Social Media Optimization Services",
+
   subTitle: "Grow Your Brand with Strategic Social Media Marketing",
   description: "Bypass the static noise. Interact directly with your exact target market, build deep relational trust, and engineer an ongoing conversion stream through creative asset deployment and proven audience data algorithms.",
   heroBullets: [
@@ -117,7 +126,7 @@ export default function SocialMediaMarketingPage() {
               <span className="inline-block text-[10px] sm:text-xs font-bold uppercase tracking-widest text-amber-400 mb-4 bg-amber-400/10 px-3 py-1 rounded-full">
                 {CONTENT.subTitle}
               </span>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6 leading-[1.1] text-white">
+              <h1 className="text-3xl sm:text-5xl lg:text-5xl font-black tracking-tight mb-6 leading-[1.1] text-white">
                 {CONTENT.title}
               </h1>
               <p className="text-base sm:text-lg lg:text-xl mb-10 text-slate-300 leading-relaxed max-w-2xl">
@@ -382,20 +391,34 @@ export default function SocialMediaMarketingPage() {
         </section>
 
         {/* --- FAQ ACCORDION SECTION --- */}
-        <section className="max-w-3xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-950 text-center mb-10 sm:mb-12 tracking-tight">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            {CONTENT.faqs.map((faq, index) => (
-              <div key={index} className="bg-white p-5 sm:p-6 rounded-xl border border-slate-200 shadow-sm">
-                <h3 className="font-bold text-slate-950 text-sm sm:text-base mb-2 flex gap-2">
-                  <span className="text-blue-600 select-none">Q:</span>{faq.q}
-                </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed pl-5 border-l border-slate-100">{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+         <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+  <h2 className="text-2xl sm:text-3xl font-black text-slate-950 text-center mb-10 sm:mb-12 tracking-tight">
+    Frequently Asked Questions
+  </h2>
 
+  <div className="space-y-5">
+    {CONTENT.faqs.map((faq, index) => (
+      <div
+        key={index}
+        className="group rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
+      >
+        <h3 className="flex items-start gap-3 text-base sm:text-lg font-bold text-slate-900 mb-4">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white text-sm font-bold">
+            {index + 1}
+          </span>
+
+          <span>{faq.q}</span>
+        </h3>
+
+        <div className="ml-11 border-l-4 border-blue-100 pl-5">
+          <p className="text-sm sm:text-base leading-7 text-slate-600">
+            {faq.a}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
         {/* --- FINAL CONVERSION FOOTER BANNER --- */}
         <section className="bg-gradient-to-br from-blue-700 to-blue-900 text-white py-16 sm:py-20 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(255,189,89,0.08),transparent_60%)]" />

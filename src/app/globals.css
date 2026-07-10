@@ -53,7 +53,7 @@ body {
 
 /* Reduce oversized headings without touching JSX tailwind classes (we override with CSS) */
 .ownadz-hero h1 {
-  font-size: clamp(2.25rem, 4vw, 3.75rem) !important;
+  /* font-size: clamp(2.25rem, 4vw, 3.75rem) !important; */
   line-height: 1.05;
 }
 

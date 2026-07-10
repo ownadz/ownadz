@@ -56,7 +56,7 @@ export default function ContactPage() {
       <span className="inline-flex items-center rounded-full border border-[#ffbd59]/30 bg-[#ffbd59]/10 px-5 py-2 text-sm font-black uppercase tracking-[0.25em] text-[#ffbd59] mb-6 shadow-sm">
         Get In Touch
       </span>
-      <h1 className="text-5xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.05]">
+      <h1 className="text-5xl font-black tracking-tight text-white sm:text-5xl lg:text-5xl leading-[1.05]">
         Let’s Build Something <br />
         <span className="text-[#ffbd59] bg-white/5 border border-white/10 px-4 py-0.5 inline-block rounded-2xl mt-2">
           Together
@@ -117,9 +117,12 @@ export default function ContactPage() {
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                   >
                     <option value="" disabled className="text-slate-900">Select Services *</option>
+                    <option value="Affiliate Marketing" className="text-slate-900">Affiliate Marketing</option>
+                    <option value="Performance Marketing" className="text-slate-900">Performance Marketing</option>
+                    <option value="SEO Service" className="text-slate-900">SEO Service</option>
+                    <option value="Social Media Marketing" className="text-slate-900">Social Media Marketing</option>
                     <option value="Web Development" className="text-slate-900">Web Development</option>
-                    <option value="Digital Marketing" className="text-slate-900">Digital Marketing</option>
-                    <option value="Mobile App Development" className="text-slate-900">Mobile App Development</option>
+                    <option value="App Development" className="text-slate-900">App Development</option>
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-white/50">
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><path d="M19 9l-7 7-7-7" /></svg>
