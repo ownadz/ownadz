@@ -67,24 +67,79 @@ const CONTENT = {
 
 export async function generateMetadata() {
   return {
+    title: "App Development Services | Android & iOS App Development | OwnAdz",
+    description: "Build high-performance Android, iOS, and cross-platform mobile apps with OwnAdz. We develop secure, scalable, and user-friendly applications tailored to your business goals.",
+    keywords: "app development services, mobile app development, android app development, ios app development, cross platform app development, flutter app development, react native development, custom mobile app development, app development company, OwnAdz",
     alternates: {
-      canonical: "https://ownadz.com/services/app-development",
+      canonical: "https://www.ownadz.com/services/app-development",
     },
   };
 }
 
 export default function AppDevelopmentPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What app development services does OwnAdz offer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OwnAdz offers Android, iOS, Flutter, React Native, and custom mobile app development services for startups and enterprises."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you develop apps for both Android and iOS?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we build native and cross-platform applications for Android and iOS devices."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to develop a mobile app?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Development timelines typically range from 4 to 16 weeks depending on the project's complexity."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will my app be secure and scalable?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we develop secure, scalable, and high-performance mobile applications following industry best practices."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why choose OwnAdz for app development?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OwnAdz delivers custom app solutions with modern technologies, intuitive UI/UX, agile development, and ongoing support."
+        }
+      }
+    ]
+  };
+
   return (
     <>
       {/* Search Engine Optimization Injection */}
       <MetaTags 
-        title={`${CONTENT.title} | Ownadz`} 
-        description={CONTENT.description} 
+        title="App Development Services | Android & iOS App Development | OwnAdz" 
+        description="Build high-performance Android, iOS, and cross-platform mobile apps with OwnAdz. We develop secure, scalable, and user-friendly applications tailored to your business goals." 
+      />
+
+      {/* Structured Schema Markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       <main className="min-h-screen bg-[#fafbfc] text-slate-900 font-sans antialiased selection:bg-blue-500 selection:text-white">
 
-        
         {/* --- HERO SECTION --- */}
         <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white py-16 sm:py-24 lg:py-32">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.14),transparent_50%)]" />
@@ -108,12 +163,7 @@ export default function AppDevelopmentPage() {
                 >
                   Get a Free Consultation
                 </Link>
-                <Link
-                  href="/pages/what-we-do"
-                  className="inline-flex justify-center items-center border border-slate-700 bg-slate-900/50 backdrop-blur px-8 py-4 rounded-xl font-semibold hover:bg-slate-800 transition text-center text-sm sm:text-base"
-                >
-                  Learn More
-                </Link>
+
               </div>
 
               {/* Highlighting Content Bullets Inline */}
@@ -287,34 +337,34 @@ export default function AppDevelopmentPage() {
         </section>
 
         {/* --- FAQ ACCORDION SECTION --- */}
-         <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-  <h2 className="text-2xl sm:text-3xl font-black text-slate-950 text-center mb-10 sm:mb-12 tracking-tight">
-    Frequently Asked Questions
-  </h2>
+        <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-950 text-center mb-10 sm:mb-12 tracking-tight">
+            Frequently Asked Questions
+          </h2>
 
-  <div className="space-y-5">
-    {CONTENT.faqs.map((faq, index) => (
-      <div
-        key={index}
-        className="group rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
-      >
-        <h3 className="flex items-start gap-3 text-base sm:text-lg font-bold text-slate-900 mb-4">
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white text-sm font-bold">
-            {index + 1}
-          </span>
+          <div className="space-y-5">
+            {CONTENT.faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="group rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
+              >
+                <h3 className="flex items-start gap-3 text-base sm:text-lg font-bold text-slate-900 mb-4">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white text-sm font-bold">
+                    {index + 1}
+                  </span>
 
-          <span>{faq.q}</span>
-        </h3>
+                  <span>{faq.q}</span>
+                </h3>
 
-        <div className="ml-11 border-l-4 border-blue-100 pl-5">
-          <p className="text-sm sm:text-base leading-7 text-slate-600">
-            {faq.a}
-          </p>
-        </div>
-      </div>
-    ))}
-  </div>
-</section>
+                <div className="ml-11 border-l-4 border-blue-100 pl-5">
+                  <p className="text-sm sm:text-base leading-7 text-slate-600">
+                    {faq.a}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* --- FINAL CONVERSION FOOTER BANNER --- */}
         <section className="bg-gradient-to-br from-blue-700 to-blue-900 text-white py-16 sm:py-20 text-center relative overflow-hidden">

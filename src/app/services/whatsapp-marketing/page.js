@@ -17,7 +17,7 @@ const CONTENT = {
 export async function generateMetadata() {
   return {
     alternates: {
-      canonical: "https://ownadz.com/services/whatsapp-marketing",
+      canonical: "https://www.ownadz.com/services/whatsapp-marketing",
     },
   };
 }

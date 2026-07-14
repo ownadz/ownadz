@@ -3,8 +3,11 @@ import MetaTags from "@/components/seo/MetaTags";
 
 export async function generateMetadata() {
   return {
+    title: "Affiliate Marketing Services | Drive Sales & ROI | OwnAdz",
+    description: "Grow your business with OwnAdz Affiliate Marketing Services. Partner with trusted affiliates, increase sales, generate quality leads, and maximize ROI with performance-based campaigns.",
+    keywords: "affiliate marketing services, affiliate marketing agency, performance marketing, affiliate program management, CPA marketing, CPL marketing, CPS marketing, affiliate network, lead generation, performance advertising, digital marketing agency, affiliate campaign management, ROI marketing, online affiliate marketing, OwnAdz",
     alternates: {
-      canonical: "https://ownadz.com/services/affiliate-marketing/",
+      canonical: "https://www.ownadz.com/services/affiliate-marketing/",
     },
   };
 }
@@ -68,12 +71,65 @@ const CONTENT = {
 };
 
 export default function AffiliateMarketingPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is affiliate marketing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Affiliate marketing is a performance-based marketing strategy where businesses pay affiliates only when they generate a sale, lead, or other predefined action."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does OwnAdz manage affiliate marketing campaigns?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OwnAdz manages affiliate campaigns by recruiting quality publishers, tracking performance, optimizing conversions, preventing fraud, and delivering transparent performance reports."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What industries can benefit from affiliate marketing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Affiliate marketing is suitable for eCommerce, SaaS, finance, education, healthcare, travel, gaming, mobile apps, and many other industries."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why choose OwnAdz for affiliate marketing services?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OwnAdz provides data-driven affiliate strategies, trusted publishers, optimization, transparent reporting, and performance-focused growth."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you measure affiliate marketing success?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Success is measured using conversions, CPA, ROAS, revenue, lead quality, and ROI."
+        }
+      }
+    ]
+  };
+
   return (
     <>
       {/* Search Engine Optimization Injection */}
       <MetaTags 
-        title={`${CONTENT.title} | Ownadz`} 
-        description={CONTENT.description} 
+        title="Affiliate Marketing Services | Drive Sales & ROI | OwnAdz" 
+        description="Grow your business with OwnAdz Affiliate Marketing Services. Partner with trusted affiliates, increase sales, generate quality leads, and maximize ROI with performance-based campaigns." 
+      />
+
+      {/* Structured Schema Markup Injected Safe for Crawlers */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       <main className="min-h-screen bg-[#fafbfc] text-slate-900 font-sans antialiased selection:bg-blue-500 selection:text-white">
@@ -101,12 +157,7 @@ export default function AffiliateMarketingPage() {
                 >
                   Get a Free Consultation
                 </Link>
-                <Link
-                  href="/pages/what-we-do"
-                  className="inline-flex justify-center items-center border border-slate-700 bg-slate-900/50 backdrop-blur px-8 py-4 rounded-xl font-semibold hover:bg-slate-800 transition text-center text-sm sm:text-base"
-                >
-                  Learn More
-                </Link>
+                
               </div>
 
               {/* Highlighting Content Bullets Inline */}
@@ -267,33 +318,33 @@ export default function AffiliateMarketingPage() {
 
         {/* --- FAQ ACCORDION SECTION --- */}
         <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-  <h2 className="text-2xl sm:text-3xl font-black text-slate-950 text-center mb-10 sm:mb-12 tracking-tight">
-    Frequently Asked Questions
-  </h2>
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-950 text-center mb-10 sm:mb-12 tracking-tight">
+            Frequently Asked Questions
+          </h2>
 
-  <div className="space-y-5">
-    {CONTENT.faqs.map((faq, index) => (
-      <div
-        key={index}
-        className="group rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
-      >
-        <h3 className="flex items-start gap-3 text-base sm:text-lg font-bold text-slate-900 mb-4">
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white text-sm font-bold">
-            {index + 1}
-          </span>
+          <div className="space-y-5">
+            {CONTENT.faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="group rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
+              >
+                <h3 className="flex items-start gap-3 text-base sm:text-lg font-bold text-slate-900 mb-4">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white text-sm font-bold">
+                    {index + 1}
+                  </span>
 
-          <span>{faq.q}</span>
-        </h3>
+                  <span>{faq.q}</span>
+                </h3>
 
-        <div className="ml-11 border-l-4 border-blue-100 pl-5">
-          <p className="text-sm sm:text-base leading-7 text-slate-600">
-            {faq.a}
-          </p>
-        </div>
-      </div>
-    ))}
-  </div>
-</section>
+                <div className="ml-11 border-l-4 border-blue-100 pl-5">
+                  <p className="text-sm sm:text-base leading-7 text-slate-600">
+                    {faq.a}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* --- FINAL CONVERSION FOOTER BANNER --- */}
         <section className="bg-gradient-to-br from-blue-700 to-blue-900 text-white py-16 sm:py-20 text-center relative overflow-hidden">

@@ -4,7 +4,7 @@ import MetaTags from "@/components/seo/MetaTags";
 export async function generateMetadata() {
   return {
     alternates: {
-      canonical: "https://ownadz.com/services/social-media-marketing",
+      canonical: "https://www.ownadz.com/services/social-media-marketing",
     },
   };
 }
@@ -141,12 +141,7 @@ export default function SocialMediaMarketingPage() {
                 >
                   Book a Complimentary Consultation
                 </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex justify-center items-center border border-slate-700 bg-slate-900/50 backdrop-blur px-8 py-4 rounded-xl font-semibold hover:bg-slate-800 transition text-center text-sm sm:text-base"
-                >
-                  Request a Custom Strategy
-                </Link>
+
               </div>
 
               {/* Highlighting Content Bullets Inline */}
@@ -208,19 +203,7 @@ export default function SocialMediaMarketingPage() {
                 </Link>
               </div>
               
-              <div className="border-t border-slate-100 pt-4">
-                <span className="text-[10px] font-bold text-amber-500 uppercase tracking-wider block mb-1">Tailormade Architecture</span>
-                <h3 className="text-base font-bold text-slate-950">Custom Niche Blueprint</h3>
-                <p className="mt-1 text-slate-600 text-xs leading-relaxed">
-                  We match your specific sector challenges, customer behavior maps, and ROI targets precisely.
-                </p>
-                <Link
-                  href="/contact"
-                  className="mt-3 inline-flex w-full justify-center rounded-xl bg-slate-950 px-5 py-3 font-semibold text-white hover:bg-slate-800 transition text-sm"
-                >
-                  Request a Strategy
-                </Link>
-              </div>
+     
             </div>
           </div>
         </section>

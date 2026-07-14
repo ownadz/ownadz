@@ -3,8 +3,11 @@ import MetaTags from "@/components/seo/MetaTags";
 
 export async function generateMetadata() {
   return {
+    title: "Web Development Services | Custom Website Development | OwnAdz",
+    description: "Build fast, secure, and SEO-friendly websites with OwnAdz Web Development Services. We create custom business websites, eCommerce stores, and scalable web applications that drive growth.",
+    keywords: "web development services, website development company, custom web development, ecommerce website development, responsive web design, wordpress development, business website development, web application development, SEO friendly website, OwnAdz",
     alternates: {
-      canonical: "https://ownadz.com/services/web-development",
+      canonical: "https://www.ownadz.com/services/web-development",
     },
   };
 }
@@ -75,12 +78,65 @@ const CONTENT = {
 };
 
 export default function WebDevelopmentPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What web development services does OwnAdz offer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OwnAdz provides custom website development, eCommerce development, WordPress development, CMS solutions, and web application development."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will my website be mobile-friendly?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, every website is fully responsive and optimized for desktops, tablets, and mobile devices."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are your websites SEO-friendly?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we build SEO-friendly websites with fast loading speed, clean code, structured data, and optimized architecture."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to develop a website?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Project timelines vary based on requirements, but most business websites are completed within 2 to 8 weeks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why choose OwnAdz for web development?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OwnAdz delivers secure, scalable, user-friendly, and conversion-focused websites tailored to your business goals."
+        }
+      }
+    ]
+  };
+
   return (
     <>
       {/* Search Engine Optimization Injection */}
       <MetaTags 
-        title={`${CONTENT.title} | Ownadz`} 
-        description={CONTENT.description} 
+        title="Web Development Services | Custom Website Development | OwnAdz" 
+        description="Build fast, secure, and SEO-friendly websites with OwnAdz Web Development Services. We create custom business websites, eCommerce stores, and scalable web applications that drive growth." 
+      />
+
+      {/* Structured Schema Markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       <main className="min-h-screen bg-[#fafbfc] text-slate-900 font-sans antialiased selection:bg-blue-500 selection:text-white">
@@ -108,12 +164,7 @@ export default function WebDevelopmentPage() {
                 >
                   Get a Free Consultation
                 </Link>
-                <Link
-                  href="/pages/what-we-do"
-                  className="inline-flex justify-center items-center border border-slate-700 bg-slate-900/50 backdrop-blur px-8 py-4 rounded-xl font-semibold hover:bg-slate-800 transition text-center text-sm sm:text-base"
-                >
-                  Learn More
-                </Link>
+
               </div>
 
               {/* Highlighting Content Bullets Inline */}
@@ -287,34 +338,34 @@ export default function WebDevelopmentPage() {
         </section>
 
         {/* --- FAQ ACCORDION SECTION --- */}
-         <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-  <h2 className="text-2xl sm:text-3xl font-black text-slate-950 text-center mb-10 sm:mb-12 tracking-tight">
-    Frequently Asked Questions
-  </h2>
+        <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-950 text-center mb-10 sm:mb-12 tracking-tight">
+            Frequently Asked Questions
+          </h2>
 
-  <div className="space-y-5">
-    {CONTENT.faqs.map((faq, index) => (
-      <div
-        key={index}
-        className="group rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
-      >
-        <h3 className="flex items-start gap-3 text-base sm:text-lg font-bold text-slate-900 mb-4">
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white text-sm font-bold">
-            {index + 1}
-          </span>
+          <div className="space-y-5">
+            {CONTENT.faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="group rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
+              >
+                <h3 className="flex items-start gap-3 text-base sm:text-lg font-bold text-slate-900 mb-4">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white text-sm font-bold">
+                    {index + 1}
+                  </span>
 
-          <span>{faq.q}</span>
-        </h3>
+                  <span>{faq.q}</span>
+                </h3>
 
-        <div className="ml-11 border-l-4 border-blue-100 pl-5">
-          <p className="text-sm sm:text-base leading-7 text-slate-600">
-            {faq.a}
-          </p>
-        </div>
-      </div>
-    ))}
-  </div>
-</section>
+                <div className="ml-11 border-l-4 border-blue-100 pl-5">
+                  <p className="text-sm sm:text-base leading-7 text-slate-600">
+                    {faq.a}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* --- FINAL CONVERSION FOOTER BANNER --- */}
         <section className="bg-gradient-to-br from-blue-700 to-blue-900 text-white py-16 sm:py-20 text-center relative overflow-hidden">

@@ -144,24 +144,79 @@ const CONTENT = {
 
 export async function generateMetadata() {
   return {
+    title: "Performance Marketing Services | Maximize ROI | OwnAdz",
+    description: "Grow your business with OwnAdz Performance Marketing Services. Increase leads, sales, and ROI through data-driven Google Ads, Meta Ads, PPC, and conversion-focused campaigns.",
+    keywords: "performance marketing services, performance marketing agency, PPC management, Google Ads agency, Meta Ads agency, paid advertising, lead generation, conversion optimization, ROI marketing, digital advertising, paid media management, online marketing services, OwnAdz",
     alternates: {
-      canonical: "https://ownadz.com/services/performance-marketing",
+      canonical: "https://www.ownadz.com/services/performance-marketing",
     },
   };
 }
 
 export default function PerformanceMarketingPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is performance marketing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Performance marketing is a digital marketing strategy where businesses pay based on measurable results such as clicks, leads, conversions, or sales."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which platforms does OwnAdz use for performance marketing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OwnAdz manages campaigns across Google Ads, Meta Ads, LinkedIn Ads, YouTube, and other paid advertising platforms to maximize ROI."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you measure campaign success?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We track ROAS, CPA, conversion rate, lead quality, revenue, and customer acquisition cost."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can performance marketing help generate more leads?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. It targets high-intent audiences to generate qualified leads and improve conversions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why choose OwnAdz for performance marketing services?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OwnAdz provides customized strategies, transparent reporting, continuous optimization, and measurable ROI."
+        }
+      }
+    ]
+  };
+
   return (
     <>
       {/* Search Engine Optimization Injection */}
       <MetaTags 
-        title={`${CONTENT.title} | Ownadz`} 
-        description={CONTENT.description} 
+        title="Performance Marketing Services | Maximize ROI | OwnAdz" 
+        description="Grow your business with OwnAdz Performance Marketing Services. Increase leads, sales, and ROI through data-driven Google Ads, Meta Ads, PPC, and conversion-focused campaigns." 
+      />
+
+      {/* Structured Schema Markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       <main className="min-h-screen bg-[#fafbfc] text-slate-900 font-sans antialiased selection:bg-blue-600 selection:text-white">
 
-        
         {/* --- HERO SECTION --- */}
         <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white py-16 sm:py-24 lg:py-32">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.14),transparent_50%)]" />
@@ -185,12 +240,7 @@ export default function PerformanceMarketingPage() {
                 >
                   Get a Free Consultation
                 </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex justify-center items-center border border-slate-700 bg-slate-900/50 backdrop-blur px-8 py-4 rounded-xl font-semibold hover:bg-slate-800 transition text-center text-sm sm:text-base"
-                >
-                  Request Architecture Setup
-                </Link>
+
               </div>
 
               {/* Highlighting Content Bullets Inline */}
@@ -454,34 +504,34 @@ export default function PerformanceMarketingPage() {
         </section>
 
         {/* --- FAQ ACCORDION SECTION --- */}
-          <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-  <h2 className="text-2xl sm:text-3xl font-black text-slate-950 text-center mb-10 sm:mb-12 tracking-tight">
-    Frequently Asked Questions
-  </h2>
+        <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-950 text-center mb-10 sm:mb-12 tracking-tight">
+            Frequently Asked Questions
+          </h2>
 
-  <div className="space-y-5">
-    {CONTENT.faqs.map((faq, index) => (
-      <div
-        key={index}
-        className="group rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
-      >
-        <h3 className="flex items-start gap-3 text-base sm:text-lg font-bold text-slate-900 mb-4">
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white text-sm font-bold">
-            {index + 1}
-          </span>
+          <div className="space-y-5">
+            {CONTENT.faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="group rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
+              >
+                <h3 className="flex items-start gap-3 text-base sm:text-lg font-bold text-slate-900 mb-4">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white text-sm font-bold">
+                    {index + 1}
+                  </span>
 
-          <span>{faq.q}</span>
-        </h3>
+                  <span>{faq.q}</span>
+                </h3>
 
-        <div className="ml-11 border-l-4 border-blue-100 pl-5">
-          <p className="text-sm sm:text-base leading-7 text-slate-600">
-            {faq.a}
-          </p>
-        </div>
-      </div>
-    ))}
-  </div>
-</section>
+                <div className="ml-11 border-l-4 border-blue-100 pl-5">
+                  <p className="text-sm sm:text-base leading-7 text-slate-600">
+                    {faq.a}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* --- FINAL CONVERSION FOOTER BANNER --- */}
         <section className="bg-gradient-to-br from-blue-700 to-blue-900 text-white py-16 sm:py-20 text-center relative overflow-hidden">

@@ -4,7 +4,7 @@ import MetaTags from "@/components/seo/MetaTags";
 export async function generateMetadata() {
   return {
     alternates: {
-      canonical: "https://ownadz.com/services/influencer-marketing",
+      canonical: "https://www.ownadz.com/services/influencer-marketing",
     },
   };
 }

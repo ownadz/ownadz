@@ -17,7 +17,7 @@ const CONTENT = {
 export async function generateMetadata() {
   return {
     alternates: {
-      canonical: "https://ownadz.com/services/digital-marketing",
+      canonical: "https://www.ownadz.com/services/digital-marketing",
     },
   };
 }

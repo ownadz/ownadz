@@ -3,8 +3,11 @@ import MetaTags from "@/components/seo/MetaTags";
 
 export async function generateMetadata() {
   return {
+    title: "SEO Services Company | Boost Organic Traffic | OwnAdz",
+    description: "Improve your Google rankings with OwnAdz SEO Services. We provide technical SEO, on-page SEO, off-page SEO, local SEO, content optimization, and measurable organic growth.",
+    keywords: "SEO services, SEO company, SEO agency, technical SEO, on-page SEO, off-page SEO, local SEO, enterprise SEO, keyword research, link building, organic traffic, OwnAdz",
     alternates: {
-      canonical: "https://ownadz.com/services/seo-service",
+      canonical: "https://www.ownadz.com/services/seo-service",
     },
   };
 }
@@ -145,12 +148,65 @@ const CONTENT = {
 };
 
 export default function SeoServicesPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are SEO services?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SEO services improve your website visibility in search engines through technical, on-page, off-page, and content optimization."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does SEO take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most websites start seeing improvements within 3 to 6 months depending on competition and website health."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide local SEO?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, OwnAdz offers local SEO to improve visibility in Google Search and Maps."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is included in SEO?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Keyword research, technical SEO, content optimization, link building, reporting, and continuous optimization."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why choose OwnAdz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OwnAdz delivers data-driven SEO strategies focused on long-term rankings, qualified traffic, and measurable ROI."
+        }
+      }
+    ]
+  };
+
   return (
     <>
       {/* Search Engine Optimization Injection */}
       <MetaTags 
-        title={`${CONTENT.title} | Ownadz`} 
-        description={CONTENT.description} 
+        title="SEO Services Company | Boost Organic Traffic | OwnAdz" 
+        description="Improve your Google rankings with OwnAdz SEO Services. We provide technical SEO, on-page SEO, off-page SEO, local SEO, content optimization, and measurable organic growth." 
+      />
+
+      {/* Structured Schema Markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       <main className="min-h-screen bg-[#fafbfc] text-slate-900 font-sans antialiased selection:bg-blue-600 selection:text-white">
@@ -178,12 +234,7 @@ export default function SeoServicesPage() {
                 >
                   Get Your Free SEO Audit
                 </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex justify-center items-center border border-slate-700 bg-slate-900/50 backdrop-blur px-8 py-4 rounded-xl font-semibold hover:bg-slate-800 transition text-center text-sm sm:text-base"
-                >
-                  Explore AI Search Optimization
-                </Link>
+
               </div>
 
               {/* Highlighting Content Bullets Inline */}
@@ -414,33 +465,33 @@ export default function SeoServicesPage() {
 
         {/* --- FAQ ACCORDION SECTION --- */}
         <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-  <h2 className="text-2xl sm:text-3xl font-black text-slate-950 text-center mb-10 sm:mb-12 tracking-tight">
-    Frequently Asked Questions
-  </h2>
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-950 text-center mb-10 sm:mb-12 tracking-tight">
+            Frequently Asked Questions
+          </h2>
 
-  <div className="space-y-5">
-    {CONTENT.faqs.map((faq, index) => (
-      <div
-        key={index}
-        className="group rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
-      >
-        <h3 className="flex items-start gap-3 text-base sm:text-lg font-bold text-slate-900 mb-4">
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white text-sm font-bold">
-            {index + 1}
-          </span>
+          <div className="space-y-5">
+            {CONTENT.faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="group rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
+              >
+                <h3 className="flex items-start gap-3 text-base sm:text-lg font-bold text-slate-900 mb-4">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white text-sm font-bold">
+                    {index + 1}
+                  </span>
 
-          <span>{faq.q}</span>
-        </h3>
+                  <span>{faq.q}</span>
+                </h3>
 
-        <div className="ml-11 border-l-4 border-blue-100 pl-5">
-          <p className="text-sm sm:text-base leading-7 text-slate-600">
-            {faq.a}
-          </p>
-        </div>
-      </div>
-    ))}
-  </div>
-</section>
+                <div className="ml-11 border-l-4 border-blue-100 pl-5">
+                  <p className="text-sm sm:text-base leading-7 text-slate-600">
+                    {faq.a}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* --- FINAL CONVERSION FOOTER BANNER --- */}
         <section className="bg-gradient-to-br from-blue-700 to-blue-900 text-white py-16 sm:py-20 text-center relative overflow-hidden">
