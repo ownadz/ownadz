@@ -7,7 +7,7 @@ export async function generateMetadata() {
     description: "Grow your business with OwnAdz Affiliate Marketing Services. Partner with trusted affiliates, increase sales, generate quality leads, and maximize ROI with performance-based campaigns.",
     keywords: "affiliate marketing services, affiliate marketing agency, performance marketing, affiliate program management, CPA marketing, CPL marketing, CPS marketing, affiliate network, lead generation, performance advertising, digital marketing agency, affiliate campaign management, ROI marketing, online affiliate marketing, OwnAdz",
     alternates: {
-      canonical: "https://www.ownadz.com/services/affiliate-marketing/",
+      canonical: "https://www.ownadz.com/services/affiliate-marketing",
     },
   };
 }
