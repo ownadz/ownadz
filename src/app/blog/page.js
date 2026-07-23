@@ -1,126 +1,182 @@
 import Link from "next/link";
-import { getPosts } from "@/services/postService";
-import { getImagePreview } from "@/services/storageService";
-import { FaRegCalendarAlt } from "react-icons/fa";
 
-export default async function BlogPage() {
-  const response = await getPosts();
-  // Safe extraction of document loops directly matching your system keys
-  const posts = response?.documents || [];
-
+export default function BlogPage() {
   return (
     <div className="bg-white">
-      
-    <section className="relative overflow-hidden bg-[#121212] py-10 lg:py-18 text-white">
-  {/* Background Subtle Mesh / Glow Effects */}
-  <div className="absolute -left-10 -top-10 h-72 w-72 rounded-full bg-[#ffbd59]/10 blur-3xl animate-pulse z-0" />
-  <div className="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-[#ffbd59]/5 blur-3xl z-0" />
-  
-  {/* FIXED IMAGE OVERLAY CONTAINER */}
-  <div 
-    className="absolute inset-0 opacity-15 bg-cover bg-center mix-blend-overlay pointer-events-none z-0 bg-[url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1415&auto=format&fit=crop')]"
-  />
+      {/* HERO SECTION */}
+      <section className="relative overflow-hidden bg-[#121212] py-10 lg:py-18 text-white">
+        {/* Background Subtle Mesh / Glow Effects */}
+        <div className="absolute -left-10 -top-10 h-72 w-72 rounded-full bg-[#ffbd59]/10 blur-3xl animate-pulse z-0" />
+        <div className="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-[#ffbd59]/5 blur-3xl z-0" />
 
-  <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center md:text-left">
-    <div className="max-w-3xl">
+        {/* FIXED IMAGE OVERLAY CONTAINER */}
+        <div className="absolute inset-0 opacity-15 bg-cover bg-center mix-blend-overlay pointer-events-none z-0 bg-[url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1415&auto=format&fit=crop')]" />
 
-      <h1 className="text-5xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.05]">
-        {/* Insights & <br /> */}
-        <span className="text-[#ffbd59] bg-white/5 border border-white/10 px-4 py-0.5 inline-block rounded-2xl mt-2">
-         Blog
-        </span>
-      </h1>
-      <p className="mt-6 text-lg sm:text-xl text-white/70 max-w-3xl font-medium leading-8">
-        Explore expert articles, tips and tricks, industry updates, motivational stories, and many other intriguing aspects related to technology, business, marketing, development, artificial intelligence, lifestyle, and many other industries.
-      </p>
-    </div>
-  </div>
-</section>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center md:text-left">
+          <div className="max-w-3xl">
+            <h1 className="text-5xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.05]">
+              <span className="text-[#ffbd59] bg-white/5 border border-white/10 px-4 py-0.5 inline-block rounded-2xl mt-2">
+                Blog
+              </span>
+            </h1>
+            <p className="mt-6 text-lg sm:text-xl text-white/70 max-w-3xl font-medium leading-8">
+              Explore expert articles, tips and tricks, industry updates, motivational stories, and many other intriguing aspects related to technology, business, marketing, development, artificial intelligence, lifestyle, and many other industries.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* MAIN CONTENT CONTAINER */}
-      <div className="py-20 lg:py-24">
-        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+      <div className="py-12 lg:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
-          <div className="mb-12 border-b border-slate-100 pb-6 flex items-center justify-between">
-            <h2 className="text-2xl font-black tracking-tight text-slate-900">
-              Latest Articles ({posts.length})
-            </h2>
-            <span className="h-1 flex-1 bg-slate-50 mx-6 rounded-full hidden sm:block" />
+          {/* 2-COLUMN LAYOUT */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            
+            {/* LEFT COLUMN: STATIC BLOG ARTICLE */}
+            <div className="lg:col-span-8 flex flex-col gap-10">
+              <article className="pb-8">
+                
+                {/* Article Title (H2) */}
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111827] tracking-tight leading-tight mb-3">
+                  10 Signs Your Business Needs Digital Marketing Services
+                </h2>
+
+                {/* Metadata Line */}
+                <p className="text-sm sm:text-base text-slate-700 mb-6 leading-relaxed">
+                  Posted on{" "}
+                  <span className="underline decoration-slate-400 underline-offset-4 font-medium">
+                    July 23, 2026
+                  </span>{" "}
+                  by{" "}
+                  <span className="underline decoration-slate-400 underline-offset-4 font-medium text-slate-900">
+                    Innovative Digital Marketing — Leading Digital Agency
+                  </span>
+                </p>
+
+                {/* Image + Excerpt Row Layout */}
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-start">
+                  
+                  {/* Blog Featured Thumbnail Image */}
+                  <div className="sm:col-span-5 rounded-lg overflow-hidden border border-slate-200 shadow-sm bg-slate-100">
+                    <img
+                      src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1415&auto=format&fit=crop"
+                      alt="10 Signs Your Business Needs Digital Marketing Services"
+                      className="w-full h-52 sm:h-48 object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+
+                  {/* Static Provided Content */}
+                  <div className="sm:col-span-7 flex flex-col justify-between h-full">
+                    <p className="text-slate-800 text-base sm:text-[1.05rem] leading-relaxed mb-6 font-normal">
+                      The highly competitive web environment demands much more than building a website for business today. Consumers who purchase goods on the web first do some research about various firms, compare their products, and have some communication with different firms before buying anything. Not having Digital Marketing Services can be a drawback for your firm online.
+                    </p>
+
+                    <div>
+                      <Link
+                        href="/blog/10-signs-your-business-needs-digital-marketing-services"
+                        className="inline-flex items-center justify-center bg-[#ffbd59] hover:bg-black text-black hover:text-[#ffbd59] font-bold text-sm tracking-wider uppercase px-6 py-3 rounded-md shadow-md hover:shadow-lg transition-all border border-[#ffbd59] hover:border-black active:scale-[0.98]"
+                      >
+                        CONTINUE READING &rarr;
+                      </Link>
+                    </div>
+                  </div>
+
+                </div>
+              </article>
+            </div>
+
+            {/* RIGHT COLUMN: SIDEBAR */}
+            <div className="lg:col-span-4 space-y-10 lg:sticky lg:top-8">
+              
+              {/* SECTION 1: LEAVE A COMMENT FORM (Image 1 Reference) */}
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+                <h3 className="text-2xl font-black text-[#0f172a] mb-6">
+                  Leave a Comment
+                </h3>
+
+                <form className="space-y-4">
+                  <div>
+                    <textarea
+                      rows={4}
+                      placeholder="Write your comment..."
+                      className="w-full rounded-xl bg-[#f1f5f9]/70 border border-slate-100 p-4 text-slate-800 placeholder-slate-400 focus:bg-white focus:border-black focus:outline-none focus:ring-2 focus:ring-[#ffbd59]/30 transition-all text-sm resize-none"
+                    />
+                  </div>
+
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      className="w-full rounded-xl bg-[#f1f5f9]/70 border border-slate-100 px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:border-black focus:outline-none focus:ring-2 focus:ring-[#ffbd59]/30 transition-all text-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      className="w-full rounded-xl bg-[#f1f5f9]/70 border border-slate-100 px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:border-black focus:outline-none focus:ring-2 focus:ring-[#ffbd59]/30 transition-all text-sm"
+                    />
+                  </div>
+
+                  <button
+                    type="button"
+                    className="w-full mt-2 bg-[#ffbd59] hover:bg-black text-black hover:text-[#ffbd59] font-bold text-sm tracking-wide py-3 px-6 rounded-xl transition-all shadow-md border border-[#ffbd59] hover:border-black active:scale-[0.98]"
+                  >
+                    Post Comment
+                  </button>
+                </form>
+              </div>
+
+              {/* SECTION 2: OUR LATEST BLOG SIDEBAR (Image 2 Reference) */}
+              <div className="space-y-4">
+                
+                {/* Dark Banner Header */}
+                <div className="bg-[#121212] text-[#ffbd59] text-center py-3.5 px-6 rounded-xl shadow-sm border border-[#ffbd59]/20">
+                  <h3 className="text-2xl font-black tracking-wide">
+                    Our Latest Blog
+                  </h3>
+                </div>
+
+                {/* Light Sidebar Card Box Container */}
+                <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 space-y-6">
+                  
+                  {/* Article Card 1 */}
+                  <div className="group cursor-pointer">
+                    <div className="rounded-xl overflow-hidden mb-3 border border-slate-200 shadow-sm bg-white">
+                      <img
+                        src="https://images.unsplash.com/photo-1571721795195-a2ca2d3370a9?q=80&w=800&auto=format&fit=crop"
+                        alt="Best SEO Agency in Delhi"
+                        className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <h4 className="text-lg font-bold text-slate-900 group-hover:text-black transition-colors leading-snug underline decoration-slate-900/30 group-hover:decoration-[#ffbd59] underline-offset-2">
+                      Best SEO Agency in Delhi — Innovative Digital Marketing
+                    </h4>
+                  </div>
+
+                  {/* Article Card 2 */}
+                  <div className="group cursor-pointer">
+                    <div className="rounded-xl overflow-hidden mb-3 border border-slate-200 shadow-sm bg-white">
+                      <img
+                        src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop"
+                        alt="Why Every Business Needs a Conversion-Optimized Website"
+                        className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <h4 className="text-lg font-bold text-slate-900 group-hover:text-black transition-colors leading-snug underline decoration-slate-900/30 group-hover:decoration-[#ffbd59] underline-offset-2">
+                      Why Every Business Needs a Conversion-Optimized Website in 2026
+                    </h4>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
           </div>
 
-          {/* Dynamic Card Layout Container */}
-          {posts.length === 0 ? (
-            <div className="text-center py-16 bg-slate-50 rounded-3xl border border-dashed border-slate-200">
-              <p className="text-slate-500 font-medium">No blog posts available at the moment.</p>
-            </div>
-          ) : (
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post) => (
-                <div
-                  key={post.$id}
-                  className="group flex flex-col overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-[#ffbd59] hover:shadow-xl hover:shadow-[#ffbd59]/5"
-                >
-                  
-                  {/* Image Wrapper Block - Standardizes varied sizes instantly */}
-                  {post.blog_image && (
-                    <div className="relative h-56 w-full overflow-hidden bg-slate-900">
-                      <img
-                        src={getImagePreview(post.blog_image)}
-                        alt={post.title || "Blog Post Image"}
-                        className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                      {post.blog_publish && (
-                        <span className="absolute left-4 top-4 rounded-xl bg-black px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-[#ffbd59] shadow-md">
-                          {post.blog_publish}
-                        </span>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Card Context Body details */}
-                  <div className="flex flex-1 flex-col p-6">
-                    
-                    {/* Meta Details Row */}
-                    <div className="flex flex-wrap items-center gap-3 mb-4 text-xs font-bold text-slate-400">
-                      <div className="flex items-center gap-1.5 rounded-lg bg-slate-50 px-2.5 py-1.5 border border-slate-100">
-                        <FaRegCalendarAlt className="text-[#ffbd59] h-3.5 w-3.5" />
-                        <span className="text-slate-600">{post.blog_date || "Recent"}</span>
-                      </div>
-                    </div>
-
-                    {/* Heading Title Link */}
-                    <h2 className="text-xl font-black tracking-tight text-slate-900 line-clamp-2 mb-4 group-hover:text-black min-h-[56px] leading-tight">
-                      <Link href={`/blog/${post.slug}`} className="hover:underline decoration-[#ffbd59] decoration-2 underline-offset-4">
-                        {post.blog_Heading}
-                      </Link>
-                    </h2>
-
-                    {/* Read More Bottom Call To Action Button Link */}
-                    <div className="mt-auto pt-4 border-t border-slate-50">
-                      <Link
-                        href={`/blog/${post.slug}`}
-                        className="inline-flex h-11 items-center justify-center rounded-xl bg-slate-50 px-5 text-sm font-bold text-slate-900 border border-slate-100 transition-all duration-300 hover:bg-black hover:text-[#ffbd59] hover:border-black active:scale-[0.98]"
-                      >
-                        Read More
-                        <svg 
-                          className="ml-2 h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" 
-                          fill="none" 
-                          viewBox="0 0 24 24" 
-                          stroke="currentColor" 
-                          strokeWidth="2.5"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
-                      </Link>
-                    </div>
-
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-          
         </div>
       </div>
     </div>

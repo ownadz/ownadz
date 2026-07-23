@@ -4,10 +4,12 @@ import { useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import logo from "@/assets/ownadz-transparent-logo.png";
+import ConsultationModal from "@/components/common/ConsultationModal";
 
 export default function Header({ logoUrl, mainPages = [] }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [consultationModalOpen, setConsultationModalOpen] = useState(false);
   const pathname = usePathname();
 
   const hideHeader =
@@ -58,6 +60,7 @@ export default function Header({ logoUrl, mainPages = [] }) {
     ].includes(pathname);
 
   return (
+    <>
     <header className="sticky top-0 z-40 bg-white backdrop-blur-md border-b border-slate-100 transition-all duration-300">
       <div className="mx-auto flex max-w-[1280px] items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         
@@ -154,12 +157,13 @@ export default function Header({ logoUrl, mainPages = [] }) {
 
         {/* Action Callouts */}
         <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href="/contact"
+          <button
+            type="button"
+            onClick={() => setConsultationModalOpen(true)}
             className="rounded-full border border-slate-900 bg-slate-900 px-5 py-2.5 text-base font-bold text-white transition-all duration-200 hover:bg-slate-800 hover:shadow-md active:scale-[0.98]"
           >
             Book Free Consultation
-          </Link>
+          </button>
         </div>
 
         {/* Interactive Hamburger Icon Controls */}
@@ -252,17 +256,27 @@ export default function Header({ logoUrl, mainPages = [] }) {
           })}
 
           <div className="pt-2">
-            <Link
-              key="mobile-cta"
-              href="/contact"
-              className="block rounded-xl bg-slate-900 px-4 py-3.5 text-center text-sm font-bold text-white transition hover:bg-slate-800"
-              onClick={() => setMobileOpen(false)}
+            <button
+              type="button"
+              onClick={() => {
+                setConsultationModalOpen(true);
+                setMobileOpen(false);
+              }}
+              className="block w-full rounded-xl bg-slate-900 px-4 py-3.5 text-center text-sm font-bold text-white transition hover:bg-slate-800"
             >
               Book Free Consultation
-            </Link>
+            </button>
           </div>
         </div>
       </div>
+
     </header>
+
+      {/* Consultation Modal - rendered outside header to avoid stacking context issues */}
+      <ConsultationModal
+        isOpen={consultationModalOpen}
+        onClose={() => setConsultationModalOpen(false)}
+      />
+    </>
   );
 }

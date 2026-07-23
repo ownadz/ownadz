@@ -99,4 +99,19 @@ body {
   line-height: 1.7;
 }
 
+/* Consultation Modal Animation */
+@keyframes consultation-modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.animate-consultation-modal-in {
+  animation: consultation-modal-in 0.3s ease-out;
+}
+
 
