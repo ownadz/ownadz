@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 import Header from "@/components/layout/Header";
@@ -64,11 +65,15 @@ export default async function RootLayout({ children }) {
 
 
         {/* Google Ads Base File */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18250008046"></script>
+        <Script 
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18250008046" 
+          strategy="afterInteractive"
+        />
         
         {/* Google Ads Initialization String */}
-
-        <script
+        <Script
+          id="google-ads-init"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -80,7 +85,9 @@ export default async function RootLayout({ children }) {
         />
 
         {/* Hardcoded GTM Container (GTM-T76BVHT7) */}
-        <script
+        <Script
+          id="gtm-container"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
@@ -93,7 +100,11 @@ export default async function RootLayout({ children }) {
 
         {/* Dynamic Admin Dashboard GTM Input */}
         {gtmHead ? (
-          <script dangerouslySetInnerHTML={{ __html: gtmHead }} />
+          <Script
+            id="dynamic-gtm"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{ __html: gtmHead }}
+          />
         ) : null}
       </head>
       

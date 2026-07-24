@@ -1,4 +1,5 @@
 import Link from "next/link";
+import blogHeroImg from "@/assets/seo-services-blog-img.jpeg";
 
 export default function BlogPage() {
   return (
@@ -60,7 +61,7 @@ export default function BlogPage() {
                   {/* Blog Featured Thumbnail Image */}
                   <div className="sm:col-span-5 rounded-lg overflow-hidden border border-slate-200 shadow-sm bg-slate-100">
                     <img
-                      src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1415&auto=format&fit=crop"
+                     src={blogHeroImg.src}
                       alt="10 Signs Your Business Needs Digital Marketing Services"
                       className="w-full h-52 sm:h-48 object-cover hover:scale-105 transition-transform duration-500"
                     />
@@ -142,19 +143,7 @@ export default function BlogPage() {
                 {/* Light Sidebar Card Box Container */}
                 <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 space-y-6">
                   
-                  {/* Article Card 1 */}
-                  <div className="group cursor-pointer">
-                    <div className="rounded-xl overflow-hidden mb-3 border border-slate-200 shadow-sm bg-white">
-                      <img
-                        src="https://images.unsplash.com/photo-1571721795195-a2ca2d3370a9?q=80&w=800&auto=format&fit=crop"
-                        alt="Best SEO Agency in Delhi"
-                        className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                    <h4 className="text-lg font-bold text-slate-900 group-hover:text-black transition-colors leading-snug underline decoration-slate-900/30 group-hover:decoration-[#ffbd59] underline-offset-2">
-                      Best SEO Agency in Delhi — Innovative Digital Marketing
-                    </h4>
-                  </div>
+
 
                   {/* Article Card 2 */}
                   <div className="group cursor-pointer">

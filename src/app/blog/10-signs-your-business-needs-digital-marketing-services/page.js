@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { 
   FaRegCalendarAlt, 
@@ -5,127 +8,43 @@ import {
   FaFolder, 
   FaCheck, 
   FaExclamationTriangle, 
-  FaRocket, 
   FaLightbulb,
   FaArrowRight,
-  FaQuestionCircle
+  FaQuestionCircle,
+  FaFacebookF, 
+  FaLinkedinIn, 
+  FaChevronDown, 
+  FaChevronUp, 
+  FaList, 
+  FaPlus, 
+  FaTimes,
+  FaShareAlt,
+  FaCheckSquare
 } from "react-icons/fa";
-import ConsultationModalWrapper from "./ConsultationModalWrapper";
+import { FaXTwitter } from "react-icons/fa6";
+import blogHeroImg from "@/assets/seo-services-blog-img.jpeg";
 
-// NEXT.JS METADATA CONFIGURATION (SEO META TAGS)
-export async function generateMetadata() {
-  return {
-    title: "10 Signs Your Business Needs Digital Marketing Services | OwnAdz",
-    description: "Discover 10 critical warning signs that indicate your business needs professional Digital Marketing Services to increase website traffic, lead generation, and overall revenue.",
-    keywords: "Digital Marketing Services, SEO Services, Lead Generation Services, PPC Advertising, Social Media Marketing, OwnAdz Digital Agency",
-    robots: {
-      index: true,
-      follow: true,
-    },
-    alternates: {
-      canonical: "https://www.ownadz.com/blog/10-signs-your-business-needs-digital-marketing-services",
-    },
-    openGraph: {
-      title: "10 Signs Your Business Needs Digital Marketing Services | OwnAdz",
-      description: "Discover 10 critical warning signs that indicate your business needs professional Digital Marketing Services to increase website traffic, lead generation, and overall revenue.",
-      url: "https://www.ownadz.com/blog/10-signs-your-business-needs-digital-marketing-services",
-      siteName: "OwnAdz Digital Agency",
-      images: [
-        {
-          url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1415&auto=format&fit=crop",
-          width: 1200,
-          height: 630,
-          alt: "10 Signs Your Business Needs Digital Marketing Services",
-        },
-      ],
-      locale: "en_US",
-      type: "article",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "10 Signs Your Business Needs Digital Marketing Services | OwnAdz",
-      description: "Discover 10 critical warning signs that indicate your business needs professional Digital Marketing Services to increase website traffic, lead generation, and overall revenue.",
-      images: ["https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1415&auto=format&fit=crop"],
-    },
-  };
-}
 
-export default function BlogDetailPage() {
-  // 1. FAQ SCHEMA (JSON-LD)
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What are digital marketing services?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Digital Marketing Services include SEO, PPC advertising, social media marketing, content marketing, email marketing, website optimization, and lead generation strategies that help businesses grow online."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How do I know if my business needs digital marketing services?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "If your website receives low traffic, generates few leads, ranks poorly on Google, has weak social media engagement, or your sales have stalled, it's time to invest in professional Digital Marketing Services."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Which digital marketing service delivers the fastest results?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "PPC advertising delivers the fastest results by driving immediate traffic, while SEO and content marketing provide sustainable long-term growth."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is SEO better than paid advertising?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "SEO builds long-term organic visibility, while paid advertising generates instant traffic. Combining both strategies usually delivers the best business results."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How long does digital marketing take to show results?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "PPC campaigns can produce results within days, while SEO and content marketing generally take three to six months to achieve sustainable growth."
-        }
-      }
-    ]
+export default function BlogDetailClient({ faqSchema }) {
+  // Category Collapsible State
+  const [isCategoryOpen, setIsCategoryOpen] = useState(true);
+
+  // FAQ Accordion State
+  const [openFaq, setOpenFaq] = useState(0);
+
+  const toggleFaq = (index) => {
+    setOpenFaq(openFaq === index ? null : index);
   };
 
-  // 2. BLOGPOSTING ARTICLE SCHEMA (JSON-LD)
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "10 Signs Your Business Needs Digital Marketing Services",
-    "description": "Discover 10 critical warning signs that indicate your business needs professional Digital Marketing Services to increase website traffic, lead generation, and overall revenue.",
-    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1415&auto=format&fit=crop",
-    "datePublished": "2026-07-23",
-    "dateModified": "2026-07-23",
-    "author": {
-      "@type": "Organization",
-      "name": "Ownadz Digital Agency",
-      "url": "https://www.ownadz.com"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Ownadz Digital Agency",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://www.ownadz.com/logo.png"
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://www.ownadz.com/blog/10-signs-your-business-needs-digital-marketing-services"
-    }
-  };
+  const tocItems = [
+    { id: "what-is-digital-marketing", label: "What Are Digital Marketing Services?" },
+    { id: "10-signs-checklist", label: "10 Warning Signs Your Business Needs Digital Marketing" },
+    { id: "transform-your-business", label: "How Digital Marketing Services Transform Your Business" },
+    { id: "in-house-vs-agency", label: "In-House Marketing vs. Professional Agency" },
+    { id: "why-choose-ownadz", label: "Why Businesses Choose Ownadz Digital Agency" },
+    { id: "conclusion", label: "Conclusion & Final Thoughts" },
+    { id: "faqs", label: "Frequently Asked Questions" },
+  ];
 
   const signsList = [
     {
@@ -251,494 +170,467 @@ export default function BlogDetailPage() {
   ];
 
   return (
-    <>
-      {/* INJECT STRUCTURED SCHEMA MARKUP FOR CRAWLERS */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
+    <div className="ownadz-blog-container bg-white text-slate-800 font-sans antialiased selection:bg-[#ffbd59] selection:text-black pb-20">
+      
+      {/* HEADER CONTENT WRAPPER */}
+      <header className="ownadz-[#ffffff] text-slate-900 pt-4 border-b border-slate-100">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          
+          {/* Breadcrumb Navigation */}
+          <nav className="ownadz-breadcrumbs text-xs sm:text-sm text-slate-500 flex flex-wrap items-center gap-2 mb-6">
+            <Link href="/" className="hover:text-black transition-colors">Home</Link>
+            <span className="text-slate-300">/</span>
+            <Link href="/blog" className="hover:text-black transition-colors">Blog</Link>
+            <span className="text-slate-300">/</span>
+            <span className="text-slate-900 ">SEO & Services</span>
+            <span className="text-slate-300">/</span>
+            <span className="text-slate-900 font-semibold">10 Signs Your Business Needs Digital Marketing Services</span>
+          </nav>
 
-      <div className="bg-white text-slate-900 font-sans antialiased selection:bg-[#ffbd59] selection:text-black">
-        
-        {/* HERO SECTION BANNER */}
-        <section className="relative overflow-hidden bg-[#121212] py-14 sm:py-20 lg:py-24 text-white">
-          {/* Glow Effects */}
-          <div className="absolute -left-10 -top-10 h-80 w-80 rounded-full bg-[#ffbd59]/15 blur-3xl animate-pulse z-0" />
-          <div className="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-[#ffbd59]/10 blur-3xl z-0" />
+          
 
-          {/* Background Overlay */}
-          <div className="absolute inset-0 opacity-20 bg-cover bg-center mix-blend-overlay pointer-events-none z-0 bg-[url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1415&auto=format&fit=crop')]" />
+        </div>
+      </header>
 
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl">
-              {/* Tag Category */}
-              <span className="text-[#ffbd59] bg-[#ffbd59]/10 border border-[#ffbd59]/30 px-4 py-1.5 inline-block rounded-full text-xs sm:text-sm font-bold uppercase tracking-widest mb-6">
-                Digital Marketing Strategy
+      {/* MAIN LAYOUT CONTAINER */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          
+          {/* LEFT COLUMN: ARTICLE CONTENT */}
+          <main className="lg:col-span-8 flex flex-col gap-8">
+            <div className="max-w-4xl space-y-4">
+            <span className="ownadz-category-tag inline-block bg-[#ffbd59]/20 text-slate-950 font-extrabold text-xs uppercase tracking-wider px-3.5 py-1 rounded-md border border-[#ffbd59]/40">
+              Strategy Guide
+            </span>
+
+            <h1 className="ownadz-main-title text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight leading-tight">
+              10 Signs Your Business Needs Digital Marketing Services
+            </h1>
+
+            {/* Meta Attributes Panel */}
+            <div className="ownadz-meta-bar flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-100 text-xs sm:text-sm text-slate-600">
+              <div className="flex flex-wrap items-center gap-6">
+                <div className="flex items-center gap-2">
+                  <FaUser className="text-[#ffbd59]" size={14} />
+                  <span className="font-semibold text-slate-900">Ownadz Digital Agency</span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <FaRegCalendarAlt className="text-[#ffbd59]" size={14} />
+                  <time dateTime="2026-07-23" className="font-medium text-slate-700">July 23, 2026</time>
+                </div>
+              </div>
+
+              {/* Social Share Bar */}
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-slate-400 font-semibold mr-1 flex items-center gap-1">
+                  <FaShareAlt size={10} /> Share
+                </span>
+                <button aria-label="Share on Facebook" className="w-7 h-7 rounded-full bg-slate-100 hover:bg-[#1877f2] hover:text-white text-slate-600 flex items-center justify-center transition-colors">
+                  <FaFacebookF size={11} />
+                </button>
+                <button aria-label="Share on X" className="w-7 h-7 rounded-full bg-slate-100 hover:bg-black hover:text-white text-slate-600 flex items-center justify-center transition-colors">
+                  <FaXTwitter size={11} />
+                </button>
+                <a href="https://www.linkedin.com/company/ownadz" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" className="w-7 h-7 rounded-full bg-slate-100 hover:bg-[#0a66c2] hover:text-white text-slate-600 flex items-center justify-center transition-colors">
+                  <FaLinkedinIn size={11} />
+                </a>
+              </div>
+            </div>
+
+          </div>
+            {/* FEATURED BANNER IMAGE */}
+            <div className="ownadz-hero-image rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-slate-50">
+              <img
+                src={blogHeroImg.src}
+                alt="10 Signs Your Business Needs Digital Marketing Services"
+                title="10 Signs Your Business Needs Digital Marketing Services"
+                className="w-full h-auto max-h-[520px] object-cover"
+                loading="eager"
+              />
+            </div>
+
+            {/* TABLE OF CONTENTS */}
+            <nav className="ownadz-toc bg-slate-50 rounded-2xl p-6 border border-slate-200/80">
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-200">
+                <div className="flex items-center gap-2.5">
+                  <FaList className="text-slate-700" size={15} />
+                  <h3 className="text-lg font-bold text-slate-950">Table of Contents</h3>
+                </div>
+              </div>
+              <ul className="grid sm:grid-cols-2 gap-2 text-xs sm:text-sm font-medium">
+                {tocItems.map((item, idx) => (
+                  <li key={idx}>
+                    <a href={`#${item.id}`} className="text-slate-700 hover:text-[#0284c7] transition-colors flex items-center gap-2">
+                      <span className="text-[#ffbd59] font-bold">•</span>
+                      <span className="truncate">{item.label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            {/* SECTION 1: INTRO CONTENT */}
+            <section className="ownadz-article-section space-y-4 text-slate-700 text-base sm:text-lg leading-relaxed">
+              <p>
+                The highly competitive web environment demands much more than building a website for business today. Consumers who purchase goods on the web first do some research about various firms, compare their products, and have some communication with different firms before buying anything. <strong>Not having Digital Marketing Services can be a drawback for your firm online.</strong>
+              </p>
+              <p>
+                Many entrepreneurs become aware of the importance of Digital Marketing Services once they start experiencing low website traffic, falling sales, or seeing their competitors dominating online searches. A proper digital marketing strategy will benefit a business in increasing its presence and growing sustainably.
+              </p>
+              <p className="p-4 rounded-xl bg-amber-500/10 border-l-4 border-[#ffbd59] text-slate-900 font-medium text-base">
+                For both startups, small businesses, and even big enterprises, utilizing Digital Marketing Services would be beneficial to grow their brand awareness, lead generation, and customer interactions.
+              </p>
+            </section>
+
+            {/* SECTION 2: WHAT ARE DIGITAL MARKETING SERVICES */}
+            <section id="what-is-digital-marketing" className="ownadz-article-section space-y-4 pt-4 border-t border-slate-100">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
+                What Are Digital Marketing Services?
+              </h2>
+              <p className="text-slate-700 leading-relaxed text-base sm:text-lg">
+                Digital Marketing Services refer to professional services offered by companies to market their products or services digitally through modern online channels rather than traditional advertisements.
+              </p>
+
+              {/* Clean List Grid */}
+              <div className="grid sm:grid-cols-2 gap-3 pt-2">
+                {[
+                  { title: "SEO Services", desc: "Improve your organic search engine rankings and attract searchers." },
+                  { title: "Social Media Marketing", desc: "Connect with hyper-targeted audiences on Facebook, Instagram, LinkedIn & X." },
+                  { title: "PPC Advertising", desc: "Generate immediate, high-intent traffic through paid search ads." },
+                  { title: "Content Marketing", desc: "Educate buyers, solve problems, and build strong brand authority." },
+                  { title: "Lead Generation & Analytics", desc: "Convert web visitors into real revenue with tracking & optimization." },
+                ].map((service, idx) => (
+                  <div key={idx} className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+                    <div className="font-bold text-slate-950 text-sm sm:text-base mb-1 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#ffbd59]" />
+                      {service.title}
+                    </div>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-4">
+                      {service.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* SECTION 3: 10 WARNING SIGNS */}
+            <section id="10-signs-checklist" className="ownadz-article-section space-y-6 pt-4 border-t border-slate-100">
+              <div className="flex items-center gap-3">
+                <FaExclamationTriangle className="text-[#ffbd59] text-2xl shrink-0" />
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
+                  10 Warning Signs Your Business Needs Help
+                </h2>
+              </div>
+
+              {/* 10 Signs List */}
+              <div className="space-y-6">
+                {signsList.map((sign, index) => (
+                  <div 
+                    key={index}
+                    className="ownadz-sign-item p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm font-black text-black bg-[#ffbd59] px-2.5 py-1 rounded-md">
+                        {sign.num}
+                      </span>
+                      <h3 className="text-lg sm:text-xl font-bold text-slate-950">
+                        {sign.title}
+                      </h3>
+                    </div>
+
+                    <div className="space-y-2 text-slate-700 text-sm sm:text-base leading-relaxed pl-1">
+                      {sign.desc.map((p, pIdx) => (
+                        <p key={pIdx}>{p}</p>
+                      ))}
+
+                      {sign.reasons && (
+                        <div className="my-3 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm">
+                          <span className="font-bold text-slate-900 block mb-2">Primary Contributing Factors:</span>
+                          <ul className="grid sm:grid-cols-2 gap-1.5 list-disc pl-4 text-slate-700">
+                            {sign.reasons.map((r, rIdx) => (
+                              <li key={rIdx}>{r}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {sign.checklist && (
+                        <div className="grid sm:grid-cols-2 gap-2 my-3">
+                          {sign.checklist.map((item, cIdx) => (
+                            <div key={cIdx} className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 font-medium">
+                              <FaCheck className="text-emerald-600 shrink-0" size={12} />
+                              {item}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {sign.conclusion && (
+                        <p className="font-medium text-slate-900 pt-2 border-t border-slate-100">
+                          {sign.conclusion}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* SECTION 4: TRANSFORMATION & BENEFITS */}
+            <section id="transform-your-business" className="ownadz-article-section space-y-4 pt-4 border-t border-slate-100">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
+                How Digital Marketing Services Transform Your Business
+              </h2>
+              <p className="text-slate-700 leading-relaxed text-base sm:text-lg">
+                Selecting the appropriate services yields a profound, measurable impact on your ability to attract, engage, and convert high-intent customers over the long term.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-3 pt-2">
+                {[
+                  "Increased web traffic via SEO services",
+                  "Higher quality leads via Lead Generation",
+                  "Better search engine rankings in Google",
+                  "Deeper relationships via social channels",
+                  "Instant sales acceleration via PPC",
+                  "More credible brand via content authority",
+                  "Improved conversions via UX optimization",
+                  "Measurable ROI through data analytics"
+                ].map((benefit, bIdx) => (
+                  <div key={bIdx} className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-800">
+                    <FaCheckSquare className="text-emerald-600 shrink-0" />
+                    <span>{benefit}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* SECTION 5: IN-HOUSE VS AGENCY COMPARISON TABLE */}
+            <section id="in-house-vs-agency" className="ownadz-article-section space-y-4 pt-4 border-t border-slate-100">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
+                In-House Marketing vs. Professional Agency
+              </h2>
+
+              <div className="overflow-x-auto rounded-xl border border-slate-200 shadow-sm mt-4">
+                <table className="w-full text-left border-collapse text-xs sm:text-sm">
+                  <thead>
+                    <tr className="bg-slate-100 text-slate-950">
+                      <th className="p-3.5 font-bold border-b border-slate-200">Feature</th>
+                      <th className="p-3.5 font-bold border-b border-slate-200">In-House Team</th>
+                      <th className="p-3.5 font-bold border-b border-slate-200 text-[#0284c7]">Digital Marketing Agency</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-200 bg-white">
+                    {[
+                      { f: "Cost", in: "High hiring & training costs", ag: "Cost-effective monthly plans" },
+                      { f: "Expertise", in: "Limited internal skill sets", ag: "Specialists across all channels" },
+                      { f: "Tools", in: "Additional software expenses", ag: "Access to premium marketing tools" },
+                      { f: "Scalability", in: "Difficult to expand quickly", ag: "Easily scales with business growth" },
+                      { f: "Time to Results", in: "Longer learning curve", ag: "Faster campaign execution" },
+                      { f: "ROI", in: "Depends on internal experience", ag: "Proven strategies with clear metrics" },
+                    ].map((row, rIdx) => (
+                      <tr key={rIdx} className="hover:bg-slate-50/80 transition-colors">
+                        <td className="p-3.5 font-bold text-slate-900 bg-slate-50/50">{row.f}</td>
+                        <td className="p-3.5 text-slate-600">{row.in}</td>
+                        <td className="p-3.5 font-semibold text-slate-900 bg-amber-500/5">{row.ag}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            {/* SECTION 6: WHY CHOOSE OWNADZ CTA CARD */}
+            <section id="why-choose-ownadz" className="ownadz-cta bg-slate-900 text-white rounded-2xl p-8 sm:p-10 relative overflow-hidden space-y-4">
+              <span className="text-[#ffbd59] font-bold text-xs uppercase tracking-widest bg-white/10 px-3 py-1 rounded-md inline-block">
+                Your Growth Partner
               </span>
+              <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                Why Businesses Choose Ownadz Digital Agency
+              </h2>
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+                Ownadz does not offer generic template solutions. Instead, we design customized, performance-driven marketing campaigns tailored directly to your specific business ecosystem and growth milestones.
+              </p>
 
-              {/* Main Title */}
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight sm:leading-[1.12]">
-                10 Signs Your Business Needs <span className="text-[#ffbd59]">Digital Marketing</span> Services
-              </h1>
+              <div className="pt-2">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center bg-[#ffbd59] hover:bg-white text-black font-extrabold text-xs sm:text-sm tracking-wider uppercase px-6 py-3.5 rounded-xl transition-all gap-2"
+                >
+                  Get Custom Solution <FaArrowRight />
+                </Link>
+              </div>
+            </section>
 
-              {/* Meta Items Row */}
-              <div className="mt-8 flex flex-wrap items-center gap-4 sm:gap-8 text-xs sm:text-sm text-slate-300 pt-6 border-t border-white/10">
-                <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-lg bg-white/5 border border-white/10 text-[#ffbd59]">
-                    <FaUser aria-hidden="true" />
-                  </div>
-                  <div>
-                    <span className="block text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Author</span>
-                    <span className="font-semibold text-white">Ownadz Digital Agency</span>
-                  </div>
-                </div>
+            {/* SECTION 7: CONCLUSION */}
+            <section id="conclusion" className="ownadz-article-section space-y-3 pt-4 border-t border-slate-100">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
+                Conclusion & Final Thoughts
+              </h2>
+              <p className="text-slate-700 leading-relaxed text-base sm:text-lg">
+                Not heeding the warning signs mentioned above will certainly put a cap on your business’s competitive edge in the current market environment. Low web traffic, low lead generation, poor search ranking, lack of engagement on social media platforms, poor results from your advertising efforts, and lack of growth all point to the need to look for an alternative marketing strategy.
+              </p>
+            </section>
 
-                <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-lg bg-white/5 border border-white/10 text-[#ffbd59]">
-                    <FaRegCalendarAlt aria-hidden="true" />
-                  </div>
-                  <div>
-                    <span className="block text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Published</span>
-                    <time dateTime="2026-07-23" className="font-semibold text-white">July 23, 2026</time>
-                  </div>
-                </div>
+            {/* SECTION 8: FREQUENTLY ASKED QUESTIONS */}
+            <section id="faqs" className="ownadz-article-section space-y-4 pt-4 border-t border-slate-100">
+              <div className="flex items-center gap-2.5">
+                <FaQuestionCircle className="text-[#ffbd59] text-xl shrink-0" />
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
+                  Frequently Asked Questions (FAQs)
+                </h2>
+              </div>
 
-                <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-lg bg-white/5 border border-white/10 text-[#ffbd59]">
-                    <FaFolder aria-hidden="true" />
-                  </div>
-                  <div>
-                    <span className="block text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Category</span>
-                    <span className="font-semibold text-white">Services & Strategy</span>
-                  </div>
+              <div className="space-y-3 pt-2">
+                {faqSchema?.mainEntity?.length > 0 ? faqSchema.mainEntity.map((faq, fIdx) => {
+                  const isOpen = openFaq === fIdx;
+                  return (
+                    <div key={fIdx} className="bg-slate-50 rounded-xl border border-slate-200 overflow-hidden transition-all">
+                      <button
+                        type="button"
+                        onClick={() => toggleFaq(fIdx)}
+                        className="w-full text-left p-4 font-bold text-slate-950 text-sm sm:text-base flex items-center justify-between gap-4 hover:bg-slate-100/60 transition-colors"
+                      >
+                        <span>{faq.name}</span>
+                        <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${isOpen ? 'bg-[#ffbd59] text-black' : 'bg-slate-200 text-slate-600'}`}>
+                          {isOpen ? <FaTimes size={10} /> : <FaPlus size={10} />}
+                        </div>
+                      </button>
+                      {isOpen && (
+                        <div className="px-4 pb-4 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200/60 bg-white">
+                          {faq.acceptedAnswer.text}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }) : null}
+              </div>
+            </section>
+
+            {/* AUTHOR BIO CARD */}
+            <div className="ownadz-author-bio p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center sm:items-start gap-5">
+              <img
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=250&auto=format&fit=crop"
+                alt="Sarvesh Bagla"
+                className="w-20 h-20 rounded-full object-cover border-2 border-[#ffbd59] shrink-0"
+              />
+              <div className="space-y-1.5 text-center sm:text-left">
+                <h3 className="text-base font-extrabold text-slate-950">Sarvesh Bagla</h3>
+                <p className="text-xs font-bold text-[#0284c7]">Founder and CEO - Ownadz</p>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Sarvesh Bagla is an enterprise SEO expert and industry leader who has driven transformational digital growth for top global brands.
+                </p>
+                <div className="pt-1">
+                  <a href="https://www.linkedin.com/company/ownadz" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0a66c2] hover:underline">
+                    <FaLinkedinIn size={12} /> LinkedIn Profile
+                  </a>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* MAIN LAYOUT CONTAINER */}
-        <div className="py-12 lg:py-20 bg-slate-50/50">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          </main>
+
+          {/* RIGHT SIDEBAR CONTAINER */}
+          <aside className="lg:col-span-4 space-y-6  lg:top-6">
             
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+         
+
+            {/* 2. REQUEST A CALL BACK FORM */}
+            <div className="ownadz-sidebar-box bg-slate-50 rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+              <h3 className="text-lg font-extrabold text-slate-950">Request a Call back Now</h3>
               
-              {/* LEFT COLUMN: MAIN ARTICLE DETAILED CONTENT */}
-              <main className="lg:col-span-8 flex flex-col gap-10">
-                
-                {/* Featured Banner Block with Glass Badge */}
-                <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-900 group">
-                  <img
-                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1415&auto=format&fit=crop"
-                    alt="10 Signs Your Business Needs Digital Marketing Services Growth Strategy Dashboard"
-                    title="10 Signs Your Business Needs Digital Marketing Services"
-                    className="w-full h-auto max-h-[440px] object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
-                    loading="eager"
+              <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Name *"
+                    required
+                    className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#0284c7] transition"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-                  <div className="absolute bottom-6 left-6 right-6 p-4 sm:p-6 rounded-2xl bg-slate-950/80 backdrop-blur-md border border-white/10 text-white">
-                    <div className="flex items-center gap-3 text-[#ffbd59] font-bold text-xs sm:text-sm mb-1 uppercase tracking-wider">
-                      <FaLightbulb aria-hidden="true" /> Key Insight
-                    </div>
-                    <p className="text-xs sm:text-sm text-slate-200 font-medium">
-                      Without a structured digital marketing presence, your website operates like an unadvertised store in a hidden alley.
-                    </p>
-                  </div>
                 </div>
 
-                {/* SECTION: INTRO CONTENT CARD */}
-                <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-sm relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#ffbd59]/10 rounded-bl-full pointer-events-none" />
-                  
-                  <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight mb-6 flex items-center gap-3">
-                    <span className="p-2 rounded-xl bg-black text-[#ffbd59] text-base"><FaRocket aria-hidden="true" /></span>
-                    Why Modern Businesses Require Digital Marketing
-                  </h2>
-
-                  <div className="space-y-4 text-slate-700 text-base sm:text-lg leading-relaxed">
-                    <p>
-                      The highly competitive web environment demands much more than building a website for business today. Consumers who purchase goods on the web first do some research about various firms, compare their products, and have some communication with different firms before buying anything. <strong className="text-slate-900">Not having Digital Marketing Services can be a drawback for your firm online.</strong>
-                    </p>
-                    <p>
-                      Many entrepreneurs become aware of the importance of Digital Marketing Services once they start experiencing low website traffic, falling sales, or seeing their competitors dominating online searches. A proper digital marketing strategy will benefit a business in increasing its presence and growing sustainably.
-                    </p>
-                    <p className="p-4 rounded-2xl bg-amber-500/10 border-l-4 border-[#ffbd59] text-slate-900 font-medium text-base">
-                      For both startups, small businesses, and even big enterprises, utilizing Digital Marketing Services would be beneficial to grow their brand awareness, lead generation, and customer interactions.
-                    </p>
-                  </div>
-                </section>
-
-                {/* SECTION: WHAT ARE DIGITAL MARKETING SERVICES */}
-                <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-sm">
-                  <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight mb-4">
-                    What Are Digital Marketing Services?
-                  </h2>
-                  <p className="text-slate-600 text-base sm:text-lg mb-8 leading-relaxed">
-                    Digital Marketing Services refer to professional services offered by companies to market their products or services digitally through modern online channels rather than traditional advertisements.
-                  </p>
-
-                  {/* Core Services Grid */}
-                  <div className="grid sm:grid-cols-2 gap-4 mb-8">
-                    {[
-                      { title: "SEO Services", desc: "Improve your organic search engine rankings and attract searchers." },
-                      { title: "Social Media Marketing", desc: "Connect with hyper-targeted audiences on Facebook, Instagram, LinkedIn & X." },
-                      { title: "PPC Advertising", desc: "Generate immediate, high-intent traffic through paid search ads." },
-                      { title: "Content Marketing", desc: "Educate buyers, solve problems, and build strong brand authority." },
-                      { title: "Lead Generation & Analytics", desc: "Convert web visitors into real revenue with tracking & optimization." },
-                    ].map((service, idx) => (
-                      <div key={idx} className="p-5 rounded-2xl bg-slate-50 border border-slate-200/60 hover:border-[#ffbd59] transition-all group">
-                        <div className="flex items-center gap-3 font-bold text-slate-900 text-base mb-2">
-                          <span className="h-2 w-2 rounded-full bg-[#ffbd59] group-hover:scale-150 transition-transform" />
-                          {service.title}
-                        </div>
-                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-5">
-                          {service.desc}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="bg-[#121212] text-white p-6 rounded-2xl border border-white/10 flex flex-col sm:flex-row items-center gap-6">
-                    <div className="p-4 rounded-2xl bg-[#ffbd59] text-black shrink-0 text-2xl font-black">
-                      ROI
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-white mb-1">Maximized Marketing Return</h3>
-                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        Through professional digital marketing agencies, businesses get access to the right knowledge, tools, and strategies that yield predictable and high returns on investment.
-                      </p>
-                    </div>
-                  </div>
-                </section>
-
-                {/* SECTION: 10 WARNING SIGNS */}
-                <section className="space-y-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-3 rounded-2xl bg-[#121212] text-[#ffbd59] text-xl">
-                      <FaExclamationTriangle aria-hidden="true" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-bold uppercase tracking-widest text-[#ffbd59] block">Diagnosis Checklist</span>
-                      <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
-                        10 Warning Signs Your Business Needs Help
-                      </h2>
-                    </div>
-                  </div>
-
-                  {/* Card Iteration Loop */}
-                  <div className="space-y-6">
-                    {signsList.map((sign, index) => (
-                      <div 
-                        key={index}
-                        className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm hover:shadow-md transition-all relative overflow-hidden group"
-                      >
-                        {/* Top Bar Accent */}
-                        <div className="absolute top-0 left-0 right-0 h-1.5 bg-slate-100 group-hover:bg-[#ffbd59] transition-colors" />
-
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
-                          <div className="flex items-center gap-4">
-                            <span className="text-3xl sm:text-4xl font-black text-[#ffbd59] bg-[#ffbd59]/10 h-12 w-12 sm:h-14 sm:w-14 rounded-2xl flex items-center justify-center shrink-0">
-                              {sign.num}
-                            </span>
-                            <div>
-                              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
-                                {sign.tagline}
-                              </span>
-                              <h3 className="text-xl sm:text-2xl font-black text-slate-900 leading-snug">
-                                {sign.title}
-                              </h3>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Content Paragraphs */}
-                        <div className="space-y-3 text-slate-700 text-base leading-relaxed">
-                          {sign.desc.map((p, pIdx) => (
-                            <p key={pIdx}>{p}</p>
-                          ))}
-
-                          {/* List Highlight Box */}
-                          {sign.reasons && (
-                            <div className="my-4 p-5 rounded-2xl bg-amber-500/10 border border-amber-500/20">
-                              <span className="font-bold text-slate-900 text-sm block mb-3">Primary Contributing Factors:</span>
-                              <div className="grid sm:grid-cols-2 gap-2">
-                                {sign.reasons.map((r, rIdx) => (
-                                  <div key={rIdx} className="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-800">
-                                    <span className="h-1.5 w-1.5 rounded-full bg-[#ffbd59]" />
-                                    {r}
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-
-                          {/* Checklist Box */}
-                          {sign.checklist && (
-                            <div className="grid sm:grid-cols-2 gap-3 my-4">
-                              {sign.checklist.map((item, cIdx) => (
-                                <div key={cIdx} className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200/60 font-semibold text-xs sm:text-sm text-slate-900">
-                                  <FaCheck className="text-[#ffbd59] shrink-0" aria-hidden="true" />
-                                  {item}
-                                </div>
-                              ))}
-                            </div>
-                          )}
-
-                          {/* Conclusion snippet */}
-                          {sign.conclusion && (
-                            <p className="font-medium text-slate-900 pt-2 border-t border-slate-100 mt-3">
-                              {sign.conclusion}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-
-                {/* SECTION: TRANSFORMATION & BENEFITS */}
-                <section className="bg-[#121212] text-white rounded-3xl p-6 sm:p-10 border border-white/10 relative overflow-hidden">
-                  <div className="absolute -right-10 -bottom-10 h-64 w-64 rounded-full bg-[#ffbd59]/10 blur-3xl" />
-
-                  <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-4">
-                    How Digital Marketing Services Transform Your Business
-                  </h2>
-                  <p className="text-slate-300 text-base sm:text-lg mb-8 leading-relaxed">
-                    Selecting the appropriate services yields a profound, measurable impact on your ability to attract, engage, and convert high-intent customers over the long term.
-                  </p>
-
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {[
-                      "Increased web traffic via SEO services",
-                      "Higher quality leads via Lead Generation",
-                      "Better search engine rankings in Google",
-                      "Deeper relationships via social channels",
-                      "Instant sales acceleration via PPC",
-                      "More credible brand via content authority",
-                      "Improved conversions via UX optimization",
-                      "Measurable ROI through data analytics"
-                    ].map((benefit, bIdx) => (
-                      <div key={bIdx} className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3">
-                        <div className="h-7 w-7 rounded-lg bg-[#ffbd59] text-black font-black text-xs flex items-center justify-center shrink-0">
-                          ✓
-                        </div>
-                        <span className="text-xs sm:text-sm font-semibold text-slate-200">{benefit}</span>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-
-                {/* SECTION: IN-HOUSE VS AGENCY COMPARISON TABLE */}
-                <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-sm">
-                  <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight mb-2">
-                    In-House Marketing vs. Professional Agency
-                  </h2>
-                  <p className="text-slate-600 text-sm sm:text-base mb-6">
-                    Compare the strategic advantages of partnering with a specialized agency versus building an internal department.
-                  </p>
-
-                  <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm">
-                    <table className="w-full text-left border-collapse text-xs sm:text-sm">
-                      <thead>
-                        <tr className="bg-[#121212] text-[#ffbd59]">
-                          <th className="p-4 font-bold border-b border-slate-800 uppercase tracking-wider">Feature</th>
-                          <th className="p-4 font-bold border-b border-slate-800 uppercase tracking-wider text-slate-300">In-House Team</th>
-                          <th className="p-4 font-bold border-b border-slate-800 uppercase tracking-wider text-[#ffbd59]">Digital Marketing Agency</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-200 bg-white">
-                        {[
-                          { f: "Cost", in: "High hiring & training costs", ag: "Cost-effective monthly plans" },
-                          { f: "Expertise", in: "Limited internal skill sets", ag: "Specialists across all channels" },
-                          { f: "Tools", in: "Additional software expenses", ag: "Access to premium marketing tools" },
-                          { f: "Scalability", in: "Difficult to expand quickly", ag: "Easily scales with business growth" },
-                          { f: "Time to Results", in: "Longer learning curve", ag: "Faster campaign execution" },
-                          { f: "ROI", in: "Depends on internal experience", ag: "Proven strategies with clear metrics" },
-                        ].map((row, rIdx) => (
-                          <tr key={rIdx} className="hover:bg-slate-50 transition-colors">
-                            <td className="p-4 font-bold text-slate-900 bg-slate-50/50">{row.f}</td>
-                            <td className="p-4 text-slate-600">{row.in}</td>
-                            <td className="p-4 font-semibold text-slate-900 bg-[#ffbd59]/5">{row.ag}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </section>
-
-                {/* SECTION: WHY CHOOSE OWNADZ CTA CARD */}
-                <section className="bg-gradient-to-br from-[#121212] via-slate-900 to-black text-white rounded-3xl p-8 sm:p-12 border border-[#ffbd59]/30 relative overflow-hidden shadow-2xl">
-                  <div className="relative z-10 space-y-6">
-                    <span className="text-[#ffbd59] font-bold text-xs uppercase tracking-widest bg-[#ffbd59]/10 border border-[#ffbd59]/20 px-3.5 py-1 rounded-full inline-block">
-                      Your Growth Partner
-                    </span>
-                    <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-                      Why Businesses Choose <span className="text-[#ffbd59]">Ownadz Digital Agency</span>
-                    </h2>
-                    <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
-                      Ownadz does not offer generic template solutions. Instead, we design customized, performance-driven marketing campaigns tailored directly to your specific business ecosystem and growth milestones.
-                    </p>
-
-                    <div className="pt-4 flex flex-col sm:flex-row gap-4">
-                      <Link
-                        href="/contact"
-                        className="inline-flex items-center justify-center bg-[#ffbd59] hover:bg-white text-black font-black text-sm tracking-wider uppercase px-8 py-4 rounded-xl shadow-lg transition-all border border-[#ffbd59] active:scale-[0.98] gap-2"
-                      >
-                        Get Custom Solution <FaArrowRight aria-hidden="true" />
-                      </Link>
-                    </div>
-                  </div>
-                </section>
-
-                {/* SECTION: FREQUENTLY ASKED QUESTIONS */}
-                <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-sm">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2.5 rounded-xl bg-[#ffbd59]/10 text-black font-bold text-lg">
-                      <FaQuestionCircle aria-hidden="true" />
-                    </div>
-                    <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
-                      Frequently Asked Questions (FAQs)
-                    </h2>
-                  </div>
-
-                  <div className="space-y-4">
-                    {faqSchema.mainEntity.map((faq, fIdx) => (
-                      <div key={fIdx} className="rounded-2xl border border-slate-200/80 bg-slate-50/50 p-5 hover:border-[#ffbd59]/50 transition-all">
-                        <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-2">
-                          {faq.name}
-                        </h3>
-                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                          {faq.acceptedAnswer.text}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-
-              </main>
-
-              {/* RIGHT COLUMN: STICKY SIDEBAR (BOOK CONSULTATION + LEAVE A COMMENT + OUR LATEST BLOG) */}
-              <aside className="lg:col-span-4 space-y-8 lg:sticky lg:top-8">
-                
-                {/* SECTION 0: BOOK FREE CONSULTATION CTA */}
-                <div className="bg-[#121212] rounded-3xl border border-[#ffbd59]/20 shadow-sm p-6 sm:p-8 text-center">
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#ffbd59]/10 mb-4">
-                    <svg className="w-7 h-7 text-[#ffbd59]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                      <line x1="9" y1="10" x2="15" y2="10" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-black text-white mb-2">
-                    Need Expert Guidance?
-                  </h3>
-                  <p className="text-sm text-slate-400 mb-6 leading-relaxed">
-                    Get a free consultation call with our digital marketing experts to grow your business online.
-                  </p>
-                  <ConsultationModalWrapper variant="primary" className="w-full justify-center" />
+                <div>
+                  <input
+                    type="email"
+                    placeholder="Email Id *"
+                    required
+                    className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#0284c7] transition"
+                  />
                 </div>
 
-                {/* SECTION 1: LEAVE A COMMENT FORM */}
-                <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 sm:p-8">
-                  <h3 className="text-2xl font-black text-[#0f172a] mb-6">
-                    Leave a Comment
-                  </h3>
-
-                  <form className="space-y-4">
-                    <div>
-                      <textarea
-                        rows={4}
-                        placeholder="Write your comment..."
-                        aria-label="Write your comment"
-                        className="w-full rounded-xl bg-[#f1f5f9]/70 border border-slate-200 p-4 text-slate-800 placeholder-slate-400 focus:bg-white focus:border-black focus:outline-none focus:ring-2 focus:ring-[#ffbd59]/30 transition-all text-sm resize-none"
-                      />
-                    </div>
-
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="Name"
-                        aria-label="Name"
-                        className="w-full rounded-xl bg-[#f1f5f9]/70 border border-slate-200 px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:border-black focus:outline-none focus:ring-2 focus:ring-[#ffbd59]/30 transition-all text-sm"
-                      />
-                    </div>
-
-                    <div>
-                      <input
-                        type="email"
-                        placeholder="Email"
-                        aria-label="Email"
-                        className="w-full rounded-xl bg-[#f1f5f9]/70 border border-slate-200 px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:border-black focus:outline-none focus:ring-2 focus:ring-[#ffbd59]/30 transition-all text-sm"
-                      />
-                    </div>
-
-                    <button
-                      type="button"
-                      className="w-full mt-2 bg-[#ffbd59] hover:bg-black text-black hover:text-[#ffbd59] font-bold text-sm tracking-wide py-3.5 px-6 rounded-xl transition-all shadow-md border border-[#ffbd59] hover:border-black active:scale-[0.98]"
-                    >
-                      Post Comment
-                    </button>
-                  </form>
+                <div>
+                  <input
+                    type="tel"
+                    placeholder="Mobile No*"
+                    required
+                    className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#0284c7] transition"
+                  />
                 </div>
 
-                {/* SECTION 2: OUR LATEST BLOG SIDEBAR */}
-                <div className="space-y-4">
-                  
-                  {/* Dark Banner Header */}
-                  <div className="bg-[#121212] text-[#ffbd59] text-center py-3.5 px-6 rounded-2xl shadow-sm border border-[#ffbd59]/20">
-                    <h3 className="text-xl font-black tracking-wide">
-                      Our Latest Blog
-                    </h3>
-                  </div>
-
-                  {/* Light Sidebar Card Box Container */}
-                  <div className="bg-slate-50 border border-slate-200/80 rounded-3xl p-4 sm:p-5 space-y-6">
-                    
-                    {/* Article Card 1 */}
-                    <Link href="/blog/best-seo-agency-in-delhi" className="group block">
-                      <div className="rounded-2xl overflow-hidden mb-3 border border-slate-200 shadow-sm bg-white">
-                        <img
-                          src="https://images.unsplash.com/photo-1571721795195-a2ca2d3370a9?q=80&w=800&auto=format&fit=crop"
-                          alt="Best SEO Agency in Delhi Innovative Digital Marketing Strategy"
-                          title="Best SEO Agency in Delhi"
-                          className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-500"
-                          loading="lazy"
-                        />
-                      </div>
-                      <h4 className="text-sm font-bold text-slate-900 group-hover:text-black transition-colors leading-snug underline decoration-slate-900/30 group-hover:decoration-[#ffbd59] underline-offset-2">
-                        Best SEO Agency in Delhi — Innovative Digital Marketing
-                      </h4>
-                    </Link>
-
-                    {/* Article Card 2 */}
-                    <Link href="/blog/why-every-business-needs-a-website" className="group block">
-                      <div className="rounded-2xl overflow-hidden mb-3 border border-slate-200 shadow-sm bg-white">
-                        <img
-                          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop"
-                          alt="Why Every Business Needs a Conversion-Optimized Website in 2026"
-                          title="Why Every Business Needs a Conversion-Optimized Website"
-                          className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-500"
-                          loading="lazy"
-                        />
-                      </div>
-                      <h4 className="text-sm font-bold text-slate-900 group-hover:text-black transition-colors leading-snug underline decoration-slate-900/30 group-hover:decoration-[#ffbd59] underline-offset-2">
-                        Why Every Business Needs a Conversion-Optimized Website in 2026
-                      </h4>
-                    </Link>
-
-                  </div>
+                <div>
+                  <select className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-600 focus:outline-none focus:border-[#0284c7] transition appearance-none cursor-pointer">
+                    <option value="">Choose Services</option>
+                    <option value="seo">SEO Services</option>
+                    <option value="ppc">PPC Advertising</option>
+                    <option value="social">Social Media Marketing</option>
+                    <option value="content">Content Marketing</option>
+                  </select>
                 </div>
 
-              </aside>
+                <div>
+                  <textarea
+                    rows={3}
+                    placeholder="Type Your Message"
+                    className="w-full bg-white border border-slate-200 rounded-xl p-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#0284c7] transition resize-none"
+                  />
+                </div>
 
+                <div className="flex items-start gap-2 pt-0.5">
+                  <input type="checkbox" id="terms" required className="mt-1 rounded border-slate-300 text-[#0284c7]" />
+                  <label htmlFor="terms" className="text-[11px] text-slate-600 leading-tight">
+                    By registering here, I agree to Terms of Service and Privacy Policy.
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-[#ffbd59] hover:bg-slate-950 text-black hover:text-[#ffbd59] font-extrabold text-xs uppercase tracking-wider py-3 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 border border-[#ffbd59] hover:border-slate-950"
+                >
+                  Submit Now <FaArrowRight size={10} />
+                </button>
+              </form>
             </div>
 
-          </div>
+            {/* 3. LATEST BLOG SIDEBAR */}
+            <div className="ownadz-sidebar-box space-y-3">
+              <div className="bg-slate-900 text-[#ffbd59] text-center py-3 px-4 rounded-xl shadow-sm">
+                <h3 className="text-base font-extrabold uppercase tracking-wider">
+                  Our Latest Blog
+                </h3>
+              </div>
+
+              <div className="bg-white border border-slate-200 rounded-2xl p-4 space-y-4 shadow-sm">
+                <Link href="/blog/why-every-business-needs-a-website" className="group block">
+                  <div className="rounded-xl overflow-hidden mb-2.5 border border-slate-200 bg-slate-50">
+                    <img
+                      src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop"
+                      alt="Why Every Business Needs a Conversion-Optimized Website in 2026"
+                      title="Why Every Business Needs a Conversion-Optimized Website"
+                      className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#0284c7] transition-colors leading-snug">
+                    Why Every Business Needs a Conversion-Optimized Website in 2026
+                  </h4>
+                </Link>
+              </div>
+            </div>
+
+          </aside>
+
         </div>
       </div>
-    </>
+    </div>
   );
 }
