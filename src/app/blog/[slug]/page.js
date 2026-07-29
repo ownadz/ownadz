@@ -1,22 +1,23 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getPostBySlug } from "@/lib/wordpress";
 
 export const revalidate = 60;
 
-export default async function BlogDetails({ params }) {
+export default async function Page({ params }) {
+  const { slug } = await params;
 
-  const post = await getPostBySlug(params.slug);
+  console.log("Slug:", slug);
 
-  if (!post) return notFound();
+  const post = await getPostBySlug(slug);
 
-  const image =
-    post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+  console.log("Post:", post);
+
+  if (!post) {
+    notFound();
+  }
 
   return (
-
-    <article className="max-w-5xl mx-auto py-20 px-5">
-
+    <main className="max-w-4xl mx-auto py-20">
       <h1
         className="text-5xl font-bold mb-8"
         dangerouslySetInnerHTML={{
@@ -24,30 +25,14 @@ export default async function BlogDetails({ params }) {
         }}
       />
 
-      {image && (
-
-        <Image
-          src={image}
-          width={1200}
-          height={700}
-          alt={post.title.rendered}
-          className="rounded-3xl mb-10"
-        />
-
-      )}
-
       <div
-        className="prose prose-lg max-w-none"
         dangerouslySetInnerHTML={{
           __html: post.content.rendered,
         }}
       />
-
-    </article>
-
+    </main>
   );
 }
-
 
 
 

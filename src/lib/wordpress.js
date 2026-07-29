@@ -14,16 +14,14 @@ export async function getPosts() {
 }
 
 export async function getPostBySlug(slug) {
-  const res = await fetch(
-    `${API}/posts?slug=${slug}&_embed`,
-    {
-      next: {
-        revalidate: 60,
-      },
-    }
-  );
+  const res = await fetch(`${API}/posts?slug=${slug}&_embed`, {
+    cache: "no-store",
+  });
 
   const posts = await res.json();
+
+  console.log("Slug:", slug);
+  console.log("Posts:", posts);
 
   return posts.length ? posts[0] : null;
 }
