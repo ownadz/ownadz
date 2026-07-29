@@ -1,5 +1,6 @@
 import Link from "next/link";
 import MetaTags from "@/components/seo/MetaTags";
+import aboutBannerImg from "@/assets/about-banner-img.jpg";
 
 // Comprehensive About Page Content Object
 const CONTENT = {
@@ -42,45 +43,85 @@ export default function AboutPage() {
       <main className="min-h-screen bg-[#fafbfc] text-slate-900 font-sans antialiased selection:bg-blue-600 selection:text-white">
         
         {/* --- DESIGN VARIATION: SPLIT ASYMMETRIC HERO CONTAINER --- */}
-        <section className="relative overflow-hidden bg-slate-950 text-white border-b border-slate-900">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(59,130,246,0.08),transparent_40%)]" />
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20 lg:py-32 relative z-10">
-            <div className="grid lg:grid-cols-12 gap-12 items-center">
-              
-              <div className="lg:col-span-7 space-y-6">
-                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full inline-block">
-                  {CONTENT.subTitle}
-                </span>
-                <h1 className="text-3xl sm:text-5xl lg:text-5xl font-black tracking-tight leading-[1.1] text-white">
-                  {CONTENT.title}
-                </h1>
-                <p className="text-slate-300 text-base sm:text-lg lg:text-xl leading-relaxed max-w-xl">
-                  {CONTENT.description}
-                </p>
-                <p className="text-slate-400 text-xs sm:text-sm max-w-lg leading-relaxed">
-                  If you have been searching for a pristine way of promoting your business, becoming successful, and earning real profits, then you can trust us to turn your core ideas into scalable brands and high-performing marketing campaigns.
-                </p>
-              </div>
+        <section className="relative ">
 
-              {/* Asymmetric Design Accent Box */}
-              <div className="lg:col-span-5 relative">
-                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-blue-600 to-amber-400 opacity-20 blur-xl" />
-                <div className="relative bg-slate-900/80 border border-slate-800 p-8 rounded-2xl space-y-6 backdrop-blur">
-                  <div className="space-y-2">
-                    <span className="text-3xl font-black text-blue-500 block">01</span>
-                    <h3 className="font-bold text-slate-100 text-sm sm:text-base">Creative Infrastructure</h3>
-                  </div>
-                  <div className="space-y-2">
-                    <span className="text-3xl font-black text-amber-400 block">100%</span>
-                    <h3 className="font-bold text-slate-100 text-sm sm:text-base">Performance Strategy Alignment</h3>
-                  </div>
-                </div>
-              </div>
+  {/* Background Image */}
+  <div
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style={{
+    backgroundImage: `url(${aboutBannerImg.src})`,
+  }}
+  />
 
-            </div>
+  {/* Dark Overlay */}
+  <div className="absolute inset-0 " />
+
+  {/* Optional Gradient Effect */}
+  <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/70 to-slate-950/90" />
+
+  {/* Optional Blue Glow */}
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,.18),transparent_45%)]" />
+
+  {/* Content */}
+  <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20 lg:py-32 relative z-10">
+    <div className="grid lg:grid-cols-12 gap-12 items-center">
+
+      {/* Left Content */}
+      <div className="lg:col-span-7 space-y-6">
+
+        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-400/20 px-4 py-2 rounded-full inline-block backdrop-blur-md">
+          {CONTENT.subTitle}
+        </span>
+
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
+          {CONTENT.title}
+        </h1>
+
+        <p className="text-slate-200 text-lg leading-relaxed max-w-xl">
+          {CONTENT.description}
+        </p>
+
+        <p className="text-slate-300 text-sm max-w-lg leading-relaxed">
+          If you have been searching for a pristine way of promoting your business,
+          becoming successful, and earning real profits, then you can trust us to
+          turn your core ideas into scalable brands and high-performing marketing campaigns.
+        </p>
+
+      </div>
+
+      {/* Right Card */}
+      <div className="lg:col-span-5 relative">
+
+        <div className="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-blue-600 via-blue-500 to-amber-400 opacity-30 blur-2xl" />
+
+        <div className="relative bg-slate-900/50 backdrop-blur-xl border border-white/10 p-10 rounded-3xl">
+
+          <div className="space-y-2 mb-10">
+            <span className="text-5xl font-black text-blue-500">01</span>
+
+            <h3 className="font-bold text-xl text-white">
+              Creative Infrastructure
+            </h3>
           </div>
-        </section>
 
+          <div className="space-y-2">
+            <span className="text-5xl font-black text-amber-400">
+              100%
+            </span>
+
+            <h3 className="font-bold text-xl text-white">
+              Performance Strategy Alignment
+            </h3>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</section>
         {/* --- EDITORIAL SECTOR: THE FOUNDER'S STORY & PHILOSOPHY --- */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 lg:py-24">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
