@@ -1,0 +1,35 @@
+# ======================================================
+# .env.local — Required Environment Variables
+# ======================================================
+# Copy this whole block into your .env.local file
+# and replace the placeholder values with your actual IDs
+# ======================================================
+
+# APPWRITE — Core
+NEXT_PUBLIC_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1
+NEXT_PUBLIC_APPWRITE_PROJECT_ID=your_appwrite_project_id
+NEXT_PUBLIC_APPWRITE_DATABASE_ID=your_database_id
+NEXT_PUBLIC_BUCKET_ID=your_bucket_id
+
+# COLLECTIONS — Posts
+NEXT_PUBLIC_POSTS_COLLECTION_ID=your_posts_collection_id
+
+# COLLECTIONS — Categories (create this collection first)
+NEXT_PUBLIC_CATEGORIES_COLLECTION_ID=your_categories_collection_id
+
+# COLLECTIONS — Other (keep existing values)
+NEXT_PUBLIC_PAGES_COLLECTION_ID=your_pages_collection_id
+NEXT_PUBLIC_SERVICES_COLLECTION_ID=your_services_collection_id
+NEXT_PUBLIC_LEADS_COLLECTION_ID=your_leads_collection_id
+NEXT_PUBLIC_SETTINGS_COLLECTION_ID=your_settings_collection_id
+NEXT_PUBLIC_SEO_COLLECTION_ID=your_seo_collection_id
+NEXT_PUBLIC_HOMEPAGE_COLLECTION_ID=your_homepage_collection_id
+NEXT_PUBLIC_HOMEPAGE_FAQS_COLLECTION_ID=your_homepage_faqs_collection_id
+NEXT_PUBLIC_HOMEPAGE_SERVICES_COLLECTION_ID=your_homepage_services_collection_id
+NEXT_PUBLIC_HOMEPAGE_BRANDS_COLLECTION_ID=your_homepage_brands_collection_id
+NEXT_PUBLIC_HOMEPAGE_FEATURES_COLLECTION_ID=your_homepage_features_collection_id
+NEXT_PUBLIC_HOMEPAGE_WHY_CHOOSE_COLLECTION_ID=your_homepage_why_choose_collection_id
+NEXT_PUBLIC_HOMEPAGE_RESULTS_COLLECTION_ID=your_homepage_results_collection_id
+NEXT_PUBLIC_HOMEPAGE_PROCESS_COLLECTION_ID=your_homepage_process_collection_id
+NEXT_PUBLIC_HOMEPAGE_CTA_COLLECTION_ID=your_homepage_cta_collection_id
+NEXT_PUBLIC_HOMEPAGE_CONTACT_COLLECTION_ID=your_homepage_contact_collection_id

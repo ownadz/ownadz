@@ -2,7 +2,21 @@ import { databases } from "@/lib/appwrite/client";
 import { APPWRITE_CONFIG } from "@/lib/appwrite/config";
 import { ID } from "appwrite";
 import { Query } from "appwrite";
-import { unstable_noStore as noStore } from "next/cache";
+
+const toPlainObject = (value) => {
+  if (value === null || value === undefined) return value;
+
+  try {
+    return JSON.parse(JSON.stringify(value));
+  } catch (error) {
+    return value;
+  }
+};
+
+// NOTE: These functions intentionally avoid `unstable_noStore()` from
+// "next/cache" because they are also called from client components
+// (e.g. the admin Post Editor). Server components that need fresh data
+// should declare `export const dynamic = "force-dynamic"`.
 
 export const createCategory = async (data) => {
   return await databases.createDocument(
@@ -13,23 +27,27 @@ export const createCategory = async (data) => {
   );
 };
 
-export const getCategories = async () => {
-  noStore();
-  return await databases.listDocuments(
-
+export const getCategories = async (queries = []) => {
+  const response = await databases.listDocuments(
     APPWRITE_CONFIG.databaseId,
-    APPWRITE_CONFIG.categoriesCollectionId
+    APPWRITE_CONFIG.categoriesCollectionId,
+    queries
   );
+
+  return {
+    ...response,
+    documents: (response.documents || []).map((doc) => toPlainObject(doc)),
+  };
 };
 
 export const getCategory = async (id) => {
-  noStore();
-  return await databases.getDocument(
-
+  const document = await databases.getDocument(
     APPWRITE_CONFIG.databaseId,
     APPWRITE_CONFIG.categoriesCollectionId,
     id
   );
+
+  return toPlainObject(document);
 };
 
 export const updateCategory = async (
@@ -55,8 +73,6 @@ export const deleteCategory = async (id) => {
 export const getCategoryBySlug = async (
   slug
 ) => {
-  noStore();
-
   const response =
 
     await databases.listDocuments(
@@ -70,8 +86,5 @@ export const getCategoryBySlug = async (
       ]
     );
 
-  return (
-    response.documents[0] ||
-    null
-  );
+  return toPlainObject(response.documents[0] || null);
 };

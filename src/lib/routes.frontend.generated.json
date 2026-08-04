@@ -16,12 +16,12 @@
     "displayRoute": "/blog"
   },
   {
-    "href": "/blog/[slug]",
-    "displayRoute": "/blog/:slug"
+    "href": "/blog/[category]",
+    "displayRoute": "/blog/:category"
   },
   {
-    "href": "/blog/10-signs-your-business-needs-digital-marketing-services",
-    "displayRoute": "/blog/10-signs-your-business-needs-digital-marketing-services"
+    "href": "/blog/[category]/[slug]",
+    "displayRoute": "/blog/:category/:slug"
   },
   {
     "href": "/categories/[slug]",

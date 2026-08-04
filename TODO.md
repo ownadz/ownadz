@@ -1,12 +1,22 @@
-# TODO
+# TODO — Fix React Hydration Mismatch Warning
 
-## Plan for adding fav icon on every page
+## Root Cause
+The `formatDate` helper uses `toLocaleDateString("en-US", ...)` without a fixed
+timezone. Date-only strings (e.g. `"2025-01-01"`) are parsed as UTC midnight,
+so the server (UTC) renders one day and a browser in a timezone behind UTC
+renders the previous day → hydration mismatch → `emitPendingHydrationWarnings`.
 
-- [x] Verify current metadata/head handling (root layout uses `<head>` in `src/app/layout.js`; favicons added there).
-- [x] Add favicon links in `src/app/layout.js` `<head>` pointing to `/favicon.png`.
-- [x] Ensure runtime asset exists: `public/favicon.png`.
-- [x] Build/test: `npm run build` succeeds.
+## Steps
 
-## Note
-- Request “remove only services page” clarified: favicon should stay on **all pages** (including `/services/*`).
+- [x] 1. Add a timezone-stable `formatDate` helper to `src/utils/blog.js`
+      (uses `timeZone: "UTC"`, supports `short` month option).
+- [x] 2. `src/components/blog/RelatedPostsCarousel.js` — use shared `formatDate`.
+- [x] 3. `src/components/blog/BlogSidebar.js` — use shared `formatDate`.
+- [x] 4. `src/app/blog/[category]/[slug]/page.js` — use shared `formatDate`.
+- [x] 5. `src/app/blog/[slug]/page.js` — use shared `formatDate`.
+- [x] 6. `src/components/blog/BlogCard.js` — use shared `formatDate` (`short`).
+- [x] 7. `src/app/categories/[slug]/page.js` — use shared `formatDate`.
+
+## Followup
+- Run `npm run dev` and verify no hydration warning in the browser console.
 

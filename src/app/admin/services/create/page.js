@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import MediaLibraryPicker from "@/components/admin/MediaLibraryPicker";
 import { createService } from "@/services/serviceService";
-import { uploadImage } from "@/services/storageService";
 
 export default function CreateServicePage() {
 
@@ -23,7 +23,7 @@ const [whyChooseOpen, setWhyChooseOpen] =
   const [slug, setSlug] = useState("");
   const [content, setContent] = useState("");
 
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState("");
 
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
@@ -31,7 +31,7 @@ const [whyChooseOpen, setWhyChooseOpen] =
 
 
 const [service_banner_img, setServiceBannerImg] =
-  useState(null);
+  useState("");
 
 const [service_banner_alt, setServiceBannerAlt] =
   useState("");
@@ -87,7 +87,7 @@ const [service_about_para5, setServiceAboutPara5] =
   useState("");
 
 const [service_about_card_image1, setServiceAboutCardImage1] =
-  useState(null);
+  useState("");
 
 const [service_about_cardtitle1, setServiceAboutCardTitle1] =
   useState("");
@@ -96,7 +96,7 @@ const [Service_about_carddes1, setServiceAboutCardDes1] =
   useState("");
 
 const [service_about_card_image2, setServiceAboutCardImage2] =
-  useState(null);
+  useState("");
 
 const [service_about_cardtitle2, setServiceAboutCardTitle2] =
   useState("");
@@ -105,7 +105,7 @@ const [Service_about_carddes2, setServiceAboutCardDes2] =
   useState("");
 
 const [service_about_card_image3, setServiceAboutCardImage3] =
-  useState(null);
+  useState("");
 
 const [service_about_cardtitle3, setServiceAboutCardTitle3] =
   useState("");
@@ -301,54 +301,11 @@ const [Service_about_carddes3, setServiceAboutCardDes3] =
   e.preventDefault();
 
   try {
-    let featuredImageId = "";
-    let bannerImageId = "";
-
-    let aboutCardImage1Id = "";
-    let aboutCardImage2Id = "";
-    let aboutCardImage3Id = "";
-
-    // Featured Image
-    if (image) {
-      const uploadedFile = await uploadImage(image);
-      featuredImageId = uploadedFile.$id;
-    }
-
-    // Banner Image
-    if (service_banner_img) {
-      const uploadedFile = await uploadImage(
-        service_banner_img
-      );
-
-      bannerImageId = uploadedFile.$id;
-    }
-
-    // About Card Image 1
-    if (service_about_card_image1) {
-      const uploadedFile = await uploadImage(
-        service_about_card_image1
-      );
-
-      aboutCardImage1Id = uploadedFile.$id;
-    }
-
-    // About Card Image 2
-    if (service_about_card_image2) {
-      const uploadedFile = await uploadImage(
-        service_about_card_image2
-      );
-
-      aboutCardImage2Id = uploadedFile.$id;
-    }
-
-    // About Card Image 3
-    if (service_about_card_image3) {
-      const uploadedFile = await uploadImage(
-        service_about_card_image3
-      );
-
-      aboutCardImage3Id = uploadedFile.$id;
-    }
+    const featuredImageId = image || "";
+    const bannerImageId = service_banner_img || "";
+    const aboutCardImage1Id = service_about_card_image1 || "";
+    const aboutCardImage2Id = service_about_card_image2 || "";
+    const aboutCardImage3Id = service_about_card_image3 || "";
 
     await createService({
       title,
@@ -614,38 +571,14 @@ service_process_des4,
                     Banner Image
                   </h3>
 
-                  <input
-                    type="file"
-                    onChange={(e) =>
-                      setServiceBannerImg(
-                        e.target.files[0]
-                      )
-                    }
-                    className="w-full border p-3 rounded-xl"
-                  />
-
-                  <input
-                    type="text"
-                    value={service_banner_alt}
-                    onChange={(e) =>
-                      setServiceBannerAlt(
-                        e.target.value
-                      )
-                    }
-                    placeholder="Banner Alt"
-                    className="w-full border p-3 rounded-xl"
-                  />
-
-                  <input
-                    type="text"
-                    value={service_banner_img_title}
-                    onChange={(e) =>
-                      setServiceBannerImgTitle(
-                        e.target.value
-                      )
-                    }
-                    placeholder="Banner Image Title"
-                    className="w-full border p-3 rounded-xl"
+                  <MediaLibraryPicker
+                    label="Banner image"
+                    value={service_banner_img}
+                    onChange={setServiceBannerImg}
+                    altValue={service_banner_alt}
+                    onAltChange={setServiceBannerAlt}
+                    titleValue={service_banner_img_title}
+                    onTitleChange={setServiceBannerImgTitle}
                   />
 
                 </div>
@@ -881,14 +814,10 @@ service_process_des4,
         {/* Card 1 */}
         <div className="border rounded-xl p-4 space-y-3">
 
-          <input
-            type="file"
-            onChange={(e) =>
-              setServiceAboutCardImage1(
-                e.target.files[0]
-              )
-            }
-            className="w-full border p-3 rounded-xl"
+          <MediaLibraryPicker
+            label="Card 1 image"
+            value={service_about_card_image1}
+            onChange={setServiceAboutCardImage1}
           />
 
           <input
@@ -918,14 +847,10 @@ service_process_des4,
         {/* Card 2 */}
         <div className="border rounded-xl p-4 space-y-3">
 
-          <input
-            type="file"
-            onChange={(e) =>
-              setServiceAboutCardImage2(
-                e.target.files[0]
-              )
-            }
-            className="w-full border p-3 rounded-xl"
+          <MediaLibraryPicker
+            label="Card 2 image"
+            value={service_about_card_image2}
+            onChange={setServiceAboutCardImage2}
           />
 
           <input
@@ -955,14 +880,10 @@ service_process_des4,
         {/* Card 3 */}
         <div className="border rounded-xl p-4 space-y-3">
 
-          <input
-            type="file"
-            onChange={(e) =>
-              setServiceAboutCardImage3(
-                e.target.files[0]
-              )
-            }
-            className="w-full border p-3 rounded-xl"
+          <MediaLibraryPicker
+            label="Card 3 image"
+            value={service_about_card_image3}
+            onChange={setServiceAboutCardImage3}
           />
 
           <input

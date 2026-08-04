@@ -3,9 +3,11 @@
 import { useState } from "react";
 
 import { saveHomepage } from "@/services/homepageService";
+import MediaLibraryPicker from "@/components/admin/MediaLibraryPicker";
 import { storage } from "@/lib/appwrite";
 import { ID } from "appwrite";
 import { uploadFile } from "@/lib/appwrite/uploadFile";
+import { getImagePreview } from "@/services/storageService";
 
 const emptyStr = "";
 
@@ -642,39 +644,53 @@ export default function HomepageForm({
       let android512Url = homepage?.home_android_icon_512 || "";
 
       // Perform upload and convert storage File ID to complete renderable view URLs
-      if (home_fav_icon) {
+      if (home_fav_icon && typeof home_fav_icon !== "string") {
         const uploaded = await uploadFile(home_fav_icon);
         favIconUrl = `${APPWRITE_ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${uploaded.$id}/view?project=${APPWRITE_PROJECT_ID}`;
+      } else if (typeof home_fav_icon === "string" && home_fav_icon.trim()) {
+        favIconUrl = home_fav_icon;
       }
 
-      if (home_favicon_16x16) {
+      if (home_favicon_16x16 && typeof home_favicon_16x16 !== "string") {
         const uploaded = await uploadFile(home_favicon_16x16);
         favicon16Url = `${APPWRITE_ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${uploaded.$id}/view?project=${APPWRITE_PROJECT_ID}`;
+      } else if (typeof home_favicon_16x16 === "string" && home_favicon_16x16.trim()) {
+        favicon16Url = home_favicon_16x16;
       }
 
-      if (home_favicon_32x32) {
+      if (home_favicon_32x32 && typeof home_favicon_32x32 !== "string") {
         const uploaded = await uploadFile(home_favicon_32x32);
         favicon32Url = `${APPWRITE_ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${uploaded.$id}/view?project=${APPWRITE_PROJECT_ID}`;
+      } else if (typeof home_favicon_32x32 === "string" && home_favicon_32x32.trim()) {
+        favicon32Url = home_favicon_32x32;
       }
 
-      if (home_favicon_48x48) {
+      if (home_favicon_48x48 && typeof home_favicon_48x48 !== "string") {
         const uploaded = await uploadFile(home_favicon_48x48);
         favicon48Url = `${APPWRITE_ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${uploaded.$id}/view?project=${APPWRITE_PROJECT_ID}`;
+      } else if (typeof home_favicon_48x48 === "string" && home_favicon_48x48.trim()) {
+        favicon48Url = home_favicon_48x48;
       }
 
-      if (home_apple_touch_icon) {
+      if (home_apple_touch_icon && typeof home_apple_touch_icon !== "string") {
         const uploaded = await uploadFile(home_apple_touch_icon);
         appleTouchUrl = `${APPWRITE_ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${uploaded.$id}/view?project=${APPWRITE_PROJECT_ID}`;
+      } else if (typeof home_apple_touch_icon === "string" && home_apple_touch_icon.trim()) {
+        appleTouchUrl = home_apple_touch_icon;
       }
 
-      if (home_android_icon_192) {
+      if (home_android_icon_192 && typeof home_android_icon_192 !== "string") {
         const uploaded = await uploadFile(home_android_icon_192);
         android192Url = `${APPWRITE_ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${uploaded.$id}/view?project=${APPWRITE_PROJECT_ID}`;
+      } else if (typeof home_android_icon_192 === "string" && home_android_icon_192.trim()) {
+        android192Url = home_android_icon_192;
       }
 
-      if (home_android_icon_512) {
+      if (home_android_icon_512 && typeof home_android_icon_512 !== "string") {
         const uploaded = await uploadFile(home_android_icon_512);
         android512Url = `${APPWRITE_ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${uploaded.$id}/view?project=${APPWRITE_PROJECT_ID}`;
+      } else if (typeof home_android_icon_512 === "string" && home_android_icon_512.trim()) {
+        android512Url = home_android_icon_512;
       }
 
       // Save payload directly with complete absolute Appwrite View URL strings 
@@ -1164,22 +1180,48 @@ export default function HomepageForm({
                         Brand Logo {index + 1}
                       </label>
 
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) =>
-                          uploadTrustedImage(e.target.files?.[0], index + 1)
-                        }
-                        className="w-full border p-3 rounded-xl"
-                      />
+                      <MediaLibraryPicker
+                        label={`Brand logo ${index + 1}`}
+                        modal={true}
+                        triggerLabel="Select brand logo"
+                        value={typeof image === "string" && /^https?:\/\//.test(image) ? image : image || ""}
+                        onChange={(fileId) => {
+                          if (!fileId) {
+                            switch (index + 1) {
+                              case 1: setHomeTrustedImage1(""); break;
+                              case 2: setHomeTrustedImage2(""); break;
+                              case 3: setHomeTrustedImage3(""); break;
+                              case 4: setHomeTrustedImage4(""); break;
+                              case 5: setHomeTrustedImage5(""); break;
+                              case 6: setHomeTrustedImage6(""); break;
+                            }
+                            return;
+                          }
 
-                      {image && (
-                        <img
-                          src={image}
-                          alt={`Brand Logo ${index + 1}`}
-                          className="h-20 w-auto object-contain border rounded-lg p-2"
-                        />
-                      )}
+                          if (typeof fileId === "string" && /^https?:\/\//.test(fileId)) {
+                            const nextValue = fileId;
+                            switch (index + 1) {
+                              case 1: setHomeTrustedImage1(nextValue); break;
+                              case 2: setHomeTrustedImage2(nextValue); break;
+                              case 3: setHomeTrustedImage3(nextValue); break;
+                              case 4: setHomeTrustedImage4(nextValue); break;
+                              case 5: setHomeTrustedImage5(nextValue); break;
+                              case 6: setHomeTrustedImage6(nextValue); break;
+                            }
+                            return;
+                          }
+
+                          const nextValue = getImagePreview(fileId);
+                          switch (index + 1) {
+                            case 1: setHomeTrustedImage1(nextValue); break;
+                            case 2: setHomeTrustedImage2(nextValue); break;
+                            case 3: setHomeTrustedImage3(nextValue); break;
+                            case 4: setHomeTrustedImage4(nextValue); break;
+                            case 5: setHomeTrustedImage5(nextValue); break;
+                            case 6: setHomeTrustedImage6(nextValue); break;
+                          }
+                        }}
+                      />
 
                       <input
                         type="text"
@@ -2078,11 +2120,10 @@ export default function HomepageForm({
           >
             Fav Icon
           </label>
-
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setHomeFavIcon(e.target.files[0])}
+          <MediaLibraryPicker
+            label="Fav icon"
+            value={typeof home_fav_icon === "string" ? home_fav_icon : home_fav_icon || ""}
+            onChange={(fileId) => setHomeFavIcon(fileId ? getImagePreview(fileId) : "")}
           />
 
           <label
@@ -2091,10 +2132,10 @@ export default function HomepageForm({
           >
             Fav Icon 16
           </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setHomeFavicon16(e.target.files[0])}
+          <MediaLibraryPicker
+            label="Fav icon 16"
+            value={typeof home_favicon_16x16 === "string" ? home_favicon_16x16 : home_favicon_16x16 || ""}
+            onChange={(fileId) => setHomeFavicon16(fileId ? getImagePreview(fileId) : "")}
           />
 
           <label
@@ -2103,10 +2144,10 @@ export default function HomepageForm({
           >
             Fav Icon 32 x 32
           </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setHomeFavicon32(e.target.files[0])}
+          <MediaLibraryPicker
+            label="Fav icon 32"
+            value={typeof home_favicon_32x32 === "string" ? home_favicon_32x32 : home_favicon_32x32 || ""}
+            onChange={(fileId) => setHomeFavicon32(fileId ? getImagePreview(fileId) : "")}
           />
           <label
             htmlFor="home-fav-icon"
@@ -2114,10 +2155,10 @@ export default function HomepageForm({
           >
             Fav Icon 48 x 48
           </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setHomeFavicon48(e.target.files[0])}
+          <MediaLibraryPicker
+            label="Fav icon 48"
+            value={typeof home_favicon_48x48 === "string" ? home_favicon_48x48 : home_favicon_48x48 || ""}
+            onChange={(fileId) => setHomeFavicon48(fileId ? getImagePreview(fileId) : "")}
           />
 
           <label
@@ -2126,10 +2167,10 @@ export default function HomepageForm({
           >
             Fav Icon AppleTouchIcon
           </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setHomeAppleTouchIcon(e.target.files[0])}
+          <MediaLibraryPicker
+            label="Apple touch icon"
+            value={typeof home_apple_touch_icon === "string" ? home_apple_touch_icon : home_apple_touch_icon || ""}
+            onChange={(fileId) => setHomeAppleTouchIcon(fileId ? getImagePreview(fileId) : "")}
           />
           <label
             htmlFor="home-fav-icon"
@@ -2137,10 +2178,10 @@ export default function HomepageForm({
           >
             Fav Icon Android192
           </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setHomeAndroidIcon192(e.target.files[0])}
+          <MediaLibraryPicker
+            label="Android 192 icon"
+            value={typeof home_android_icon_192 === "string" ? home_android_icon_192 : home_android_icon_192 || ""}
+            onChange={(fileId) => setHomeAndroidIcon192(fileId ? getImagePreview(fileId) : "")}
           />
           <label
             htmlFor="home-fav-icon"
@@ -2148,10 +2189,10 @@ export default function HomepageForm({
           >
             Fav Icon Android512
           </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setHomeAndroidIcon512(e.target.files[0])}
+          <MediaLibraryPicker
+            label="Android 512 icon"
+            value={typeof home_android_icon_512 === "string" ? home_android_icon_512 : home_android_icon_512 || ""}
+            onChange={(fileId) => setHomeAndroidIcon512(fileId ? getImagePreview(fileId) : "")}
           />
         </div>
       )}

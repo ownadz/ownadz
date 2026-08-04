@@ -5,15 +5,15 @@ const nextConfig = {
   // generateStaticParams(), which is hard to guarantee.
   output: 'standalone',
 
-  images: {
+images: {
     unoptimized: true,
-  },
     remotePatterns: [
       {
         protocol: "https",
         hostname: "blog.ownadz.com",
       },
     ],
+  },
 };
 
 

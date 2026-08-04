@@ -3,6 +3,16 @@ import { APPWRITE_CONFIG } from "@/lib/appwrite/config";
 import { ID, Query } from "appwrite";
 import { unstable_noStore as noStore } from "next/cache";
 
+const toPlainObject = (value) => {
+  if (value === null || value === undefined) return value;
+
+  try {
+    return JSON.parse(JSON.stringify(value));
+  } catch (error) {
+    return value;
+  }
+};
+
 export const createPage = async (data) => {
   return await databases.createDocument(
     APPWRITE_CONFIG.databaseId,
@@ -14,10 +24,15 @@ export const createPage = async (data) => {
 
 export const getPages = async () => {
   noStore();
-  return await databases.listDocuments(
+  const response = await databases.listDocuments(
     APPWRITE_CONFIG.databaseId,
     APPWRITE_CONFIG.pagesCollectionId
   );
+
+  return {
+    ...response,
+    documents: (response.documents || []).map((doc) => toPlainObject(doc)),
+  };
 };
 
 export const getPage = async (id) => {
@@ -25,11 +40,13 @@ export const getPage = async (id) => {
     return null;
   }
 
-  return await databases.getDocument(
+  const page = await databases.getDocument(
     APPWRITE_CONFIG.databaseId,
     APPWRITE_CONFIG.pagesCollectionId,
     id
   );
+
+  return toPlainObject(page);
 };
 
 export const updatePage = async (
@@ -61,7 +78,7 @@ export const getPageBySlug = async (slug) => {
     ]
   );
 
-  return response.documents[0] || null;
+  return toPlainObject(response.documents[0] || null);
 };
 export const getPagesCount = async () => {
   const response = await databases.listDocuments(

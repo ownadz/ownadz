@@ -3,6 +3,16 @@ import { APPWRITE_CONFIG } from "@/lib/appwrite/config";
 import { ID } from "appwrite";
 import { unstable_noStore as noStore } from "next/cache";
 
+const toPlainObject = (value) => {
+  if (value === null || value === undefined) return value;
+
+  try {
+    return JSON.parse(JSON.stringify(value));
+  } catch (error) {
+    return value;
+  }
+};
+
 export const createService = async (data) => {
   return await databases.createDocument(
     APPWRITE_CONFIG.databaseId,
@@ -14,19 +24,26 @@ export const createService = async (data) => {
 
 export const getServices = async () => {
   noStore();
-  return await databases.listDocuments(
+  const response = await databases.listDocuments(
     APPWRITE_CONFIG.databaseId,
     APPWRITE_CONFIG.servicesCollectionId
   );
+
+  return {
+    ...response,
+    documents: (response.documents || []).map((doc) => toPlainObject(doc)),
+  };
 };
 
 export const getService = async (id) => {
   noStore();
-  return await databases.getDocument(
+  const service = await databases.getDocument(
     APPWRITE_CONFIG.databaseId,
     APPWRITE_CONFIG.servicesCollectionId,
     id
   );
+
+  return toPlainObject(service);
 };
 
 export const getServiceBySlug = async (slug) => {
@@ -36,7 +53,8 @@ export const getServiceBySlug = async (slug) => {
     APPWRITE_CONFIG.servicesCollectionId
   );
 
-  return response.documents.find((item) => item.slug === slug);
+  const item = response.documents.find((doc) => doc.slug === slug);
+  return toPlainObject(item || null);
 };
 
 export const updateService = async (id, data) => {

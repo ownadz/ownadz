@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Poppins, Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
@@ -19,20 +19,53 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export async function generateMetadata() {
   try {
     const seo = await getSEO();
 
     return {
+      metadataBase: new URL("https://www.ownadz.com"),
       title: seo?.siteTitle || "Ownadz",
       description: seo?.siteDescription || "Ownadz Website",
       keywords: seo?.keywords || "",
-      robots: seo?.robots || "index,follow",
+      robots: seo?.robots || "index, follow",
+      alternates: {
+        canonical: "https://www.ownadz.com",
+      },
+      openGraph: {
+        title: seo?.siteTitle || "Ownadz",
+        description: seo?.siteDescription || "Ownadz Website",
+        url: "https://www.ownadz.com",
+        siteName: "Ownadz",
+        type: "website",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: seo?.siteTitle || "Ownadz",
+        description: seo?.siteDescription || "Ownadz Website",
+      },
     };
   } catch (error) {
     return {
+      metadataBase: new URL("https://www.ownadz.com"),
       title: "Ownadz",
       description: "Ownadz Website",
+      alternates: {
+        canonical: "https://www.ownadz.com",
+      },
     };
   }
 }
@@ -52,9 +85,9 @@ export default async function RootLayout({ children }) {
   const gtmNoScript = settings?.google_tag_manager_noscript || "";
 
   return (
-    <html
+<html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
         {/* Favicons (applies to all pages) */}
